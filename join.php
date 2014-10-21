@@ -2,36 +2,56 @@
 session_start();
 require_once('config.php');
 if ($_POST) {
-    if (isset($_POST['user_id']) && isset($_POST['user_pass'])) {
+    if (isset($_POST['user_id']) && isset($_POST['user_pass']) && isset($_POST['user_pass_twice']) &&
+        isset($_POST['user_name']) && isset($_POST['user_email'])
+    ) {
         $conn = mysql_connect($db_host, $db_user, $db_pass) or die('<h1>Cannot connect to database!</h1>');
         mysql_query('set names utf8');
         mysql_select_db('weirdorithm', $conn);
 
         $user_id = mysql_real_escape_string($_POST['user_id']);
         $user_pass = mysql_real_escape_string($_POST['user_pass']);
+        $user_pass_twice = mysql_real_escape_string($_POST['user_pass_twice']);
+        $user_name = mysql_real_escape_string($_POST['user_name']);
+        $user_email = mysql_real_escape_string($_POST['user_email']);
 
-        $user_pass_hash = hash('sha512', $user_pass);
+        $is_valid = true;
+        if ($user_pass == $user_pass_twice) {
+            $result = mysql_query("SELECT user_id FROM users WHERE user_id='$user_id'");
+            // 해당하는 ID가 있는 경우 처리
+            if (mysql_num_rows($result) > 0) {
+                $is_valid = false;
+                $reason = "이미 존재하는 아이디입니다.";
+            }
 
-        $result = mysql_query("SELECT * FROM users WHERE user_id='$user_id' AND user_pass='$user_pass_hash'");
+            if ($is_valid == true) {
+                $result = mysql_query("SELECT user_email FROM users WHERE user_email='$user_email'");
+                // 해당하는 이메일이 있는 경우 처리
+                if (mysql_num_rows($result) > 0) {
+                    $is_valid = false;
+                    $reason = "이미 존재하는 이메일입니다.";
+                }
+            }
+        } else {
+            $is_valid = false;
+            $reason = "비밀번호를 다시 입력하세요.";
+        }
 
-        $row = mysql_fetch_assoc($result);
-        if ($row != false) {
-            $_SESSION['user_id'] = htmlspecialchars($row['user_id']);
-            $_SESSION['user_name'] = htmlspecialchars($row['user_name']);
-            $_SESSION['user_email'] = htmlspecialchars($row['user_email']);
+        // 모든 조건을 통과하였으면
+        if ($is_valid == true) {
+            $password_hash = hash('sha512', $user_pass);
+            mysql_query("INSERT INTO users VALUES(NULL, '$user_id', '$password_hash', '$user_name', '$user_email')");
+            echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
+            exit;
         }
     }
-}
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
-    echo "<meta http-equiv='refresh' content='0; url=/'>";
-    exit;
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>:: Weirdorithm Login ::</title>
+    <title>:: Join ::</title>
     <style>
         table a:link {
             color: #666;
@@ -149,25 +169,35 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
 </head>
 <body>
 <?php
-if ($_SERVER['HTTP_REFERER'] == "http://weirdorithm.youngminz.kr/join.php") {
-    echo "회원가입이 정상적으로 처리되었습니다. <br />" .
-        "회원가입 하신 아이디로 로그인 해 주세요!";
+if ($is_valid === false) {
+    echo "오류: " . $reason . '<br />';
 }
 ?>
-<form action="login.php" method="post">
+<form action="join.php" method="post">
     <table cellspacing="0">
         <tr>
             <th>ID:</th>
-            <td><label><input type="text" name="user_id"/></label></td>
+            <td><label><input type="text" name="user_id" value="<?= $user_id ?>"/></label></td>
         </tr>
         <tr>
             <th>Password:</th>
-            <td><label><input type="text" name="user_pass"/></label></td>
+            <td><label><input type="password" name="user_pass"/></label></td>
+        </tr>
+        <tr>
+            <th>Password Again:</th>
+            <td><label><input type="password" name="user_pass_twice"/></label></td>
+        </tr>
+        <tr>
+            <th>Name:</th>
+            <td><label><input type="text" name="user_name"/ value="<?= $user_name ?>"></label></td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td><label><input type="email" name="user_email" value="<?= $user_email ?>"/></label></td>
         </tr>
         <tr>
             <td colspan="2">
                 <input type="submit" value="전송">
-                <a href="join.php">회원가입</a>
             </td>
         </tr>
     </table>
