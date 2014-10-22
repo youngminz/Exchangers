@@ -3,7 +3,7 @@ require_once('config.php');
 session_start();
 if ($_POST) {
     if (isset($_POST['user_id']) && isset($_POST['user_pass']) && isset($_POST['user_pass_twice']) &&
-        isset($_POST['user_name']) && isset($_POST['user_email'])
+        isset($_POST['user_nickname']) && isset($_POST['user_email'])
     ) {
         $conn = new mysqli($db_host, $db_user, $db_pass, $db_name) or die('<h1>Cannot connect to database!</h1>');
         $conn->set_charset('utf8');
@@ -11,7 +11,7 @@ if ($_POST) {
         $user_id = $_POST['user_id'];
         $user_pass = $_POST['user_pass'];
         $user_pass_twice = $_POST['user_pass_twice'];
-        $user_name = $_POST['user_name'];
+        $user_nickname = $_POST['user_nickname'];
         $user_email = $_POST['user_email'];
 
         $is_valid = true;
@@ -55,7 +55,7 @@ if ($_POST) {
         if ($is_valid == true) {
             $password_hash = hash('sha512', $user_pass);
             if ($stmt = $conn->prepare("INSERT INTO users VALUES(NULL, ?, ?, ?, ?)")) {
-                $stmt->bind_param('ssss', $user_id, $password_hash, $user_name, $user_email);
+                $stmt->bind_param('ssss', $user_id, $password_hash, $user_nickname, $user_email);
                 $stmt->execute();
                 $stmt->close();
             }
@@ -96,7 +96,7 @@ if ($is_valid === false) {
         </tr>
         <tr>
             <th>Name:</th>
-            <td><label><input type="text" name="user_name"/ value="<?= $user_name ?>"></label></td>
+            <td><label><input type="text" name="user_name"/ value="<?= $user_nickname ?>"></label></td>
         </tr>
         <tr>
             <th>Email:</th>

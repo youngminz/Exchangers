@@ -31,7 +31,7 @@ if ($_POST) {
             $stmt->fetch();
 
             $_SESSION['user_id'] = htmlspecialchars($info['user_id']);
-            $_SESSION['user_name'] = htmlspecialchars($info['user_name']);
+            $_SESSION['user_nickname'] = htmlspecialchars($info['user_nickname']);
             $_SESSION['user_email'] = htmlspecialchars($info['user_email']);
         }
 
@@ -40,7 +40,7 @@ if ($_POST) {
     }
 }
 
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_name']) && isset($_SESSION['user_email'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_nickname']) && isset($_SESSION['user_email'])) {
     echo "<meta http-equiv='refresh' content='0; url=/'>";
     exit;
 }

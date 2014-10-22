@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_nickname'])) {
     echo "<meta http-equiv='refresh' content='0; url=login.php'>";
     exit;
 }
@@ -13,7 +13,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_name'])) {
 </head>
 <body>
 ID: <?= $_SESSION['user_id'] ?><br/>
-이름: <?= $_SESSION['user_name'] ?><br/>
+닉네임: <?= $_SESSION['user_nickname'] ?><br/>
 email: <?= $_SESSION['user_email'] ?>
 <a href="logout.php">로그아웃</a>
 </body>
