@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once('config.php');
+session_start();
 if ($_POST) {
     if (isset($_POST['user_id']) && isset($_POST['user_pass']) && isset($_POST['user_pass_twice']) &&
         isset($_POST['user_name']) && isset($_POST['user_email'])
