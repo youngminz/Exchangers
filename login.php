@@ -1,6 +1,17 @@
 <?php
-session_start();
 require_once('config.php');
+session_start();
+
+function bind_array($stmt, &$row)
+{
+    $md = $stmt->result_metadata();
+    $params = array();
+    while ($field = $md->fetch_field()) {
+        $params[] = &$row[$field->name];
+    }
+    call_user_func_array(array($stmt, 'bind_result'), $params);
+}
+
 if ($_POST) {
     if (isset($_POST['user_id']) && isset($_POST['user_pass'])) {
         $conn = new mysqli($db_host, $db_user, $db_pass, $db_name) or die('<h1>Cannot connect to database!</h1>');
@@ -16,12 +27,12 @@ if ($_POST) {
         $stmt->store_result();
 
         if ($stmt->num_rows != 0) {
-            $stmt->bind_result($col1, $col2, $col3, $col4, $col5);
+            bind_array($stmt, $info);
             $stmt->fetch();
 
-            $_SESSION['user_id'] = htmlspecialchars($col2);
-            $_SESSION['user_name'] = htmlspecialchars($col4);
-            $_SESSION['user_email'] = htmlspecialchars($col5);
+            $_SESSION['user_id'] = htmlspecialchars($info['user_id']);
+            $_SESSION['user_name'] = htmlspecialchars($info['user_name']);
+            $_SESSION['user_email'] = htmlspecialchars($info['user_email']);
         }
 
         $stmt->free_result();

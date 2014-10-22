@@ -15,8 +15,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_name'])) {
 ID: <?= $_SESSION['user_id'] ?><br/>
 이름: <?= $_SESSION['user_name'] ?><br/>
 email: <?= $_SESSION['user_email'] ?>
-<form action="logout.php">
-    <input type="submit" value="로그아웃" style="display: inline">
-</form>
+<a href="logout.php">로그아웃</a>
 </body>
 </html>
