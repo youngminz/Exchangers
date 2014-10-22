@@ -3,26 +3,31 @@ session_start();
 require_once('config.php');
 if ($_POST) {
     if (isset($_POST['user_id']) && isset($_POST['user_pass'])) {
-        $conn = mysql_connect($db_host, $db_user, $db_pass) or die('<h1>Cannot connect to database!</h1>');
-        mysql_query('set names utf8');
-        mysql_select_db('weirdorithm', $conn);
+        $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name) or die('<h1>Cannot connect to database!</h1>');
+        $conn->set_charset('utf8');
 
-        $user_id = mysql_real_escape_string($_POST['user_id']);
-        $user_pass = mysql_real_escape_string($_POST['user_pass']);
-
+        $user_id = $_POST['user_id'];
+        $user_pass = $_POST['user_pass'];
         $user_pass_hash = hash('sha512', $user_pass);
 
-        $result = mysql_query("SELECT * FROM users WHERE user_id='$user_id' AND user_pass='$user_pass_hash'");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE user_id=? AND user_pass=?");
+        $stmt->bind_param('ss', $user_id, $user_pass_hash);
+        $stmt->execute();
+        $stmt->store_result();
 
-        $row = mysql_fetch_assoc($result);
-        if ($row != false) {
-            $_SESSION['user_id'] = htmlspecialchars($row['user_id']);
-            $_SESSION['user_name'] = htmlspecialchars($row['user_name']);
-            $_SESSION['user_email'] = htmlspecialchars($row['user_email']);
+        if ($stmt->num_rows != 0) {
+            $stmt->bind_result($col1, $col2, $col3, $col4, $col5);
+            $stmt->fetch();
+
+            $_SESSION['user_id'] = htmlspecialchars($col2);
+            $_SESSION['user_name'] = htmlspecialchars($col4);
+            $_SESSION['user_email'] = htmlspecialchars($col5);
         }
+
+        $stmt->close();
     }
 }
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_name'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_name']) && isset($_SESSION['user_email'])) {
     echo "<meta http-equiv='refresh' content='0; url=/'>";
     exit;
 }
@@ -162,7 +167,7 @@ if ($_SERVER['HTTP_REFERER'] == "http://weirdorithm.youngminz.kr/join.php") {
         </tr>
         <tr>
             <th>Password:</th>
-            <td><label><input type="text" name="user_pass"/></label></td>
+            <td><label><input type="password" name="user_pass"/></label></td>
         </tr>
         <tr>
             <td colspan="2">
