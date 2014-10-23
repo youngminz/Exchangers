@@ -63,7 +63,7 @@ if ($_POST) {
         // 모든 조건을 통과하였으면
         if ($is_valid === true) {
             $password_hash = hash('sha512', $user_pass);
-            if ($stmt = $conn->prepare("INSERT INTO users VALUES(NULL, ?, ?, ?, ?)")) {
+            if ($stmt = $conn->prepare("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT)")) {
                 $stmt->bind_param('ssss', $user_id, $password_hash, $user_nickname, $user_email);
                 $stmt->execute();
                 $stmt->close();
