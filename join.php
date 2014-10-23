@@ -1,11 +1,20 @@
 <?php
 require_once('config.php');
 session_start();
+$is_valid = true;
+$user_id = '';
+$user_nickname = '';
+$user_email = '';
+
 if ($_POST) {
     if (isset($_POST['user_id']) && isset($_POST['user_pass']) && isset($_POST['user_pass_twice']) &&
         isset($_POST['user_nickname']) && isset($_POST['user_email'])
     ) {
-        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name) or die('<h1>Cannot connect to database!</h1>');
+        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+        if ($conn->connect_errno) {
+            echo "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>";
+            exit();
+        }
         $conn->set_charset('utf8');
 
         $user_id = $_POST['user_id'];
@@ -52,7 +61,7 @@ if ($_POST) {
         }
 
         // 모든 조건을 통과하였으면
-        if ($is_valid == true) {
+        if ($is_valid === true) {
             $password_hash = hash('sha512', $user_pass);
             if ($stmt = $conn->prepare("INSERT INTO users VALUES(NULL, ?, ?, ?, ?)")) {
                 $stmt->bind_param('ssss', $user_id, $password_hash, $user_nickname, $user_email);
@@ -96,7 +105,7 @@ if ($is_valid === false) {
         </tr>
         <tr>
             <th>Name:</th>
-            <td><label><input type="text" name="user_name"/ value="<?= $user_nickname ?>"></label></td>
+            <td><label><input type="text" name="user_nickname"/ value="<?= $user_nickname ?>"></label></td>
         </tr>
         <tr>
             <th>Email:</th>

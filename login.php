@@ -12,9 +12,28 @@ function bind_array($stmt, &$row)
     call_user_func_array(array($stmt, 'bind_result'), $params);
 }
 
+$info = false;
+$error = false;
+
+$reason_info = '';
+$reason_error = '';
+
+if (strpos($_SERVER['HTTP_REFERER'], "weirdorithm.youngminz.kr/join.php") !== false) {
+    $info = true;
+    $reason_info = "회원가입이 정상적으로 처리되었습니다. <br />" .
+        "회원가입 하신 아이디로 로그인 해 주세요! <br />";
+}
+if (strpos($_SERVER['HTTP_REFERER'], 'weirdorithm.youngminz.kr/logout.php') !== false) {
+    $info = true;
+    $reason_info = "성공적으로 로그아웃되었습니다! <br />";
+}
+
 if ($_POST) {
-    if (isset($_POST['ID'])) {
-        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name) or die('<h1>Cannot connect to database!</h1>');
+    if (isset($_POST['user_id']) && isset($_POST['user_pass'])) {
+        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+        if ($conn->connect_errno) {
+            echo "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>";
+        }
         $conn->set_charset('utf8');
 
         $user_id = $_POST['user_id'];
@@ -34,6 +53,9 @@ if ($_POST) {
             $_SESSION['user_id'] = htmlspecialchars($info['user_id']);
             $_SESSION['user_nickname'] = htmlspecialchars($info['user_nickname']);
             $_SESSION['user_email'] = htmlspecialchars($info['user_email']);
+        } else {
+            $error = true;
+            $reason_error = '아이디 혹은 패스워드가 올바르지 않습니다!';
         }
 
         $stmt->free_result();
@@ -55,12 +77,11 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_nickname']) && isset($_
 </head>
 <body>
 <?php
-if (strpos($_SERVER['HTTP_REFERER'], "weirdorithm.youngminz.kr/join.php") !== false) {
-    echo "회원가입이 정상적으로 처리되었습니다. <br />" .
-        "회원가입 하신 아이디로 로그인 해 주세요!";
+if ($info === true) {
+    echo $reason_info;
 }
-if (strpos($_SERVER['HTTP_REFERER'], 'weirdorithm.youngminz.kr/logout.php') !== false) {
-    echo "성공적으로 로그아웃되었습니다!";
+if ($error === true) {
+    echo $reason_error;
 }
 ?>
 <form action="login.php" method="post">
