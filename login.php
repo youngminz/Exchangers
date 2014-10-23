@@ -13,7 +13,7 @@ function bind_array($stmt, &$row)
 }
 
 if ($_POST) {
-    if (isset($_POST['user_id']) && isset($_POST['user_pass'])) {
+    if (isset($_POST['ID'])) {
         $conn = new mysqli($db_host, $db_user, $db_pass, $db_name) or die('<h1>Cannot connect to database!</h1>');
         $conn->set_charset('utf8');
 
@@ -30,6 +30,7 @@ if ($_POST) {
             bind_array($stmt, $info);
             $stmt->fetch();
 
+            $_SESSION['ID'] = htmlspecialchars($info['ID']);
             $_SESSION['user_id'] = htmlspecialchars($info['user_id']);
             $_SESSION['user_nickname'] = htmlspecialchars($info['user_nickname']);
             $_SESSION['user_email'] = htmlspecialchars($info['user_email']);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_nickname'])) {
+if (!isset($_SESSION['ID'])) {
     echo "<meta http-equiv='refresh' content='0; url=login.php'>";
     exit;
 }
@@ -12,9 +12,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_nickname'])) {
     <title>:: Weirdorithm ::</title>
 </head>
 <body>
+유저 번호: <?= $_SESSION['ID'] ?><br/>
 ID: <?= $_SESSION['user_id'] ?><br/>
 닉네임: <?= $_SESSION['user_nickname'] ?><br/>
-email: <?= $_SESSION['user_email'] ?>
+email: <?= $_SESSION['user_email'] ?><br/>
 <a href="logout.php">로그아웃</a>
 </body>
 </html>
