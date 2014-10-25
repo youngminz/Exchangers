@@ -1,0 +1,63 @@
+/* Elemental tags */
+body {
+    margin: 0;
+    padding-top: 4rem;
+}
+
+/* Public-use classes */
+.container {
+    width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.right.right {
+    float: right;
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    height: 4rem;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.75);
+    border-bottom: 1px solid red;
+}
+
+nav h1 {
+    display: inline-block;
+    color: #f60;
+    font-size: 2rem;
+    line-height: 1em;
+    margin: 0.75em 0;
+}
+
+nav ul {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 1.25em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li {
+    display: inline-block;
+    float: left;
+}
+
+nav li a {
+    padding: calc(2rem - 0.5em) 1rem;
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+}
+
+nav li.logo {
+    color: #f60;
+    font-size: 2em;
+}
+
+
