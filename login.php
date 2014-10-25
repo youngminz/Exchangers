@@ -1,9 +1,8 @@
 <?php
-require_once('config.php');
 session_start();
+require_once('config.php');
 
-function bind_array($stmt, &$row)
-{
+function bind_array($stmt, &$row) {
     $md = $stmt->result_metadata();
     $params = array();
     while ($field = $md->fetch_field()) {
@@ -18,14 +17,16 @@ $error = false;
 $reason_info = '';
 $reason_error = '';
 
-if (strpos($_SERVER['HTTP_REFERER'], "weirdorithm.youngminz.kr/join.php") !== false) {
-    $info = true;
-    $reason_info = "회원가입이 정상적으로 처리되었습니다. <br />" .
-        "회원가입 하신 아이디로 로그인 해 주세요! <br />";
-}
-if (strpos($_SERVER['HTTP_REFERER'], 'weirdorithm.youngminz.kr/logout.php') !== false) {
-    $info = true;
-    $reason_info = "성공적으로 로그아웃되었습니다! <br />";
+if (isset($_SERVER['HTTP_REFERER'])) {
+    if (strpos($_SERVER['HTTP_REFERER'], "weirdorithm.youngminz.kr/join.php") !== false) {
+        $info = true;
+        $reason_info = "회원가입이 정상적으로 처리되었습니다. <br />" .
+            "회원가입 하신 아이디로 로그인 해 주세요! <br />";
+    }
+    if (strpos($_SERVER['HTTP_REFERER'], 'weirdorithm.youngminz.kr/logout.php') !== false) {
+        $info = true;
+        $reason_info = "성공적으로 로그아웃되었습니다! <br />";
+    }
 }
 
 if ($_POST) {
