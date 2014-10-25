@@ -1,6 +1,6 @@
 <?php
-require_once('config.php');
 session_start();
+require_once('config.php');
 $is_valid = true;
 $user_id = '';
 $user_nickname = '';
