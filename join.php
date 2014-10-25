@@ -75,16 +75,9 @@ if ($_POST) {
         $conn->close();
     }
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>:: Join ::</title>
-    <link rel="stylesheet" href="style/table.css"/>
-</head>
-<body>
-<?php
+
+require_once('header.php');
+
 if ($is_valid === false) {
     echo "오류: " . $reason . '<br />';
 }
@@ -114,6 +107,7 @@ if ($is_valid === false) {
         <tr>
             <td colspan="2">
                 <input type="submit" value="전송">
+                <a href="/login.php">로그인</a>
             </td>
         </tr>
     </table>

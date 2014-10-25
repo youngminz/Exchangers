@@ -68,16 +68,9 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['user_nickname']) && isset($_
     echo "<meta http-equiv='refresh' content='0; url=/'>";
     exit;
 }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>:: Weirdorithm Login ::</title>
-    <link rel="stylesheet" href="style/table.css"/>
-</head>
-<body>
-<?php
+
+require_once('header.php');
+
 if ($info === true) {
     echo $reason_info;
 }
