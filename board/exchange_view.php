@@ -9,14 +9,12 @@ if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
 
 function recursive_comment($parent_article, $parent_id, $level) {
     $result = fetch_all_row("SELECT * FROM exchange_comment " . 
-                            "WHERE parent_article = ? AND (IF(ISNULL(?), parent_id IS NULL, parent_id = ?))", 
+                            "WHERE parent_article = ? " .
+                            "AND (IF(ISNULL(?), parent_id IS NULL, parent_id = ?))", 
                             "iii", $parent_article, $parent_id, $parent_id);
     if (count($result) > 0) {
         foreach ($result as $row) {
-            for ($i = 0; $i < ($level - 1) * 4; $i++) {
-                echo " ";
-            }
-            echo $row["content"] . "\n";
+            echo $row["content"];
             recursive_comment($parent_article, $row['ID'], $level + 1);
         }
     }
@@ -34,16 +32,11 @@ if ($question === false) {
     exit;
 }
 
-execute_query("UPDATE exchange_article SET board_hit = board_hit + 1 WHERE ID = ?", "i", $article_id);
+execute_query("UPDATE exchange_article SET board_hit = board_hit + 1 WHERE ID = ?", 
+              "i", $article_id);
 
+require_once('../header.php');
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset='utf-8'; />
-        <title>:: Show Article ::</title>
-    </head>
-    <body>
         질문: 
         <table>
             <tr>
@@ -52,7 +45,8 @@ execute_query("UPDATE exchange_article SET board_hit = board_hit + 1 WHERE ID = 
             </tr>
             <tr>
                 <th>글쓴이</th>
-                <td><?= fetch_first_row("SELECT user_nickname FROM users WHERE ID = ?", "i", $question['author'])['user_nickname'] ?></td>
+                <td><?= fetch_first_row("SELECT user_nickname FROM users WHERE ID = ?", "i", 
+                                        $question['author'])['user_nickname'] ?></td>
             </tr>
             <tr>
                 <th>글 내용</th>
@@ -77,7 +71,8 @@ execute_query("UPDATE exchange_article SET board_hit = board_hit + 1 WHERE ID = 
                     </tr>
                     <tr>
                         <th>글쓴이</th>
-                        <td><?= fetch_first_row("SELECT user_nickname FROM users WHERE ID = ?", "i", $answer_row['author'])['user_nickname'] ?></td>
+                        <td><?= fetch_first_row("SELECT user_nickname FROM users WHERE ID = ?", 
+                                                "i", $answer_row['author'])['user_nickname'] ?></td>
                     </tr>
                     <tr>
                         <th>글 내용</th>
