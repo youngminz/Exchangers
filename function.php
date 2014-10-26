@@ -193,12 +193,14 @@ function execute_query() {
     $stmt->execute();
     $stmt->store_result();
 
-    $stmt->close();
-    $conn->close();
     if ($stmt->errno) {
+        $stmt->close();
+        $conn->close();
         return false; // error: false
     }
     else {
+        $stmt->close();
+        $conn->close();
         return true; // success: true
     }
 }
