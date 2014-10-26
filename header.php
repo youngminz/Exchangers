@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="/style/core.css" />
   </head>
   <body>
@@ -18,7 +19,10 @@
           </li>
 <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
           <li class="right">
-            <a href="프로필 어딨음">Hi, <?= $_SESSION['user_nickname'] ?></a>
+            <a href="/logout.php">로그아웃</a>
+          </li>
+          <li class="right">
+            <a href="/profile.php"><?= $_SESSION['user_nickname'] ?></a>
           </li>
 <?php } else { ?>
           <li class="right">
