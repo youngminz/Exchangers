@@ -1,8 +1,8 @@
 <?php
-register_shutdown_function( "fatal_handler" );
+register_shutdown_function("fatal_handler");
 
-function format_error( $errno, $errstr, $errfile, $errline ) {
-    $trace = print_r( debug_backtrace( false ), true );
+function format_error($errno, $errstr, $errfile, $errline) {
+    $trace = print_r(debug_backtrace(false), true);
 
     $content  = "<table><thead bgcolor='#c8c8c8'><th>Item</th><th>Description</th></thead><tbody>";
     $content .= "<tr valign='top'><td><b>Error</b></td><td><pre>$errstr</pre></td></tr>";
@@ -23,13 +23,13 @@ function fatal_handler() {
 
     $error = error_get_last();
 
-    if( $error !== NULL) {
+    if ($error !== NULL) {
         $errno   = $error["type"];
         $errfile = $error["file"];
         $errline = $error["line"];
         $errstr  = $error["message"];
 
-        echo format_error( $errno, $errstr, $errfile, $errline);
+        echo format_error ($errno, $errstr, $errfile, $errline);
     }
 }
 
@@ -71,21 +71,7 @@ function fetch_first_row() {
     }
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
-        if ($args_count == 3) {
-            $stmt->bind_param($mode, $args[2]);
-        }
-        else if ($args_count == 4) {
-            $stmt->bind_param($mode, $args[2], $args[3]);
-        }
-        else if ($args_count == 5) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4]);
-        }
-        else if ($args_count == 6) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4], $args[5]);
-        }
-        else if ($args_count == 7) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4], $args[5], $args[6]);
-        }
+        call_user_func_array(array($stmt, "bind_param"), array_slice($args, 2));
     }
     $stmt->execute();
     $stmt->store_result();
@@ -123,21 +109,7 @@ function fetch_all_row() {
     }
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
-        if ($args_count == 3) {
-            $stmt->bind_param($mode, $args[2]);
-        }
-        else if ($args_count == 4) {
-            $stmt->bind_param($mode, $args[2], $args[3]);
-        }
-        else if ($args_count == 5) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4]);
-        }
-        else if ($args_count == 6) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4], $args[5]);
-        }
-        else if ($args_count == 7) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4], $args[5], $args[6]);
-        }
+        call_user_func_array(array($stmt, "bind_param"), array_slice($args, 2));
     }
     $stmt->execute();
     $stmt->store_result();
@@ -174,21 +146,7 @@ function execute_query() {
     }
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
-        if ($args_count == 3) {
-            $stmt->bind_param($mode, $args[2]);
-        }
-        else if ($args_count == 4) {
-            $stmt->bind_param($mode, $args[2], $args[3]);
-        }
-        else if ($args_count == 5) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4]);
-        }
-        else if ($args_count == 6) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4], $args[5]);
-        }
-        else if ($args_count == 7) {
-            $stmt->bind_param($mode, $args[2], $args[3], $args[4], $args[5], $args[6]);
-        }
+        call_user_func_array(array($stmt, "bind_param"), array_slice($args, 2));
     }
     $stmt->execute();
     $stmt->store_result();
