@@ -50,6 +50,14 @@ function clone_array($arr) {
     return $cloned_array;
 }
 
+// make values referenced.
+function make_values_referenced($arr) {
+    $refs = array();
+    foreach($arr as $key => $value)
+        $refs[$key] = &$arr[$key];
+    return $refs;
+}
+
 // First argument is sql query, second is bind_param mode, after third is parameters.
 // Return: success -> array, error -> false
 function fetch_first_row() {
@@ -71,7 +79,8 @@ function fetch_first_row() {
     }
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
-        call_user_func_array(array($stmt, "bind_param"), array_slice($args, 2));
+        $sliced = array_slice($args, 1);
+        call_user_func_array(array($stmt, "bind_param"), make_values_referenced($sliced));
     }
     $stmt->execute();
     $stmt->store_result();
@@ -109,7 +118,8 @@ function fetch_all_row() {
     }
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
-        call_user_func_array(array($stmt, "bind_param"), array_slice($args, 2));
+        $sliced = array_slice($args, 1);
+        call_user_func_array(array($stmt, "bind_param"), make_values_referenced($sliced));
     }
     $stmt->execute();
     $stmt->store_result();
@@ -146,7 +156,8 @@ function execute_query() {
     }
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
-        call_user_func_array(array($stmt, "bind_param"), array_slice($args, 2));
+        $sliced = array_slice($args, 1);
+        call_user_func_array(array($stmt, "bind_param"), make_values_referenced($sliced));
     }
     $stmt->execute();
     $stmt->store_result();
