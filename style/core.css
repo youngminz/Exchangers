@@ -3,7 +3,22 @@ body {
     margin: 0;
     padding-top: 4rem;
 }
-
+/* buttons */
+input[type="button"], input[type="submit"],
+input[type="file"]::-webkit-file-upload-button,
+button, .button {
+  padding: 0.5em 1em;
+  font: inherit;
+}
+/* input fields */
+input[type="email"], input[type="number"],
+input[type="password"], input[type="tel"],
+input[type="url"], input[type="text"],
+input:not([type]), .input-field {
+  padding: 0.5em 0.75em;
+  border: none;
+  border-bottom: 1px solid #f60;
+}
 /* Public-use classes */
 .container {
     width: 1024px;
@@ -60,4 +75,6 @@ nav li.logo {
     font-size: 2em;
 }
 
-
+nav li.right {
+  font-size: 0.75em;
+}
