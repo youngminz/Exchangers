@@ -1,85 +1,67 @@
 <?php
 session_start();
 require_once('config.php');
+require_once('function.php');
 $is_valid = true;
-$user_id = '';
-$user_nickname = '';
-$user_email = '';
+$user_id = "";
+$user_nickname = "";
+$user_email = "";
 
 if ($_POST) {
-    if (isset($_POST['user_id']) && isset($_POST['user_pass']) && isset($_POST['user_pass_twice']) &&
-        isset($_POST['user_nickname']) && isset($_POST['user_email'])
+    if (isset($_POST["user_id"]) && isset($_POST["user_pass"]) && isset($_POST["user_pass_twice"]) &&
+        isset($_POST["user_nickname"]) && isset($_POST["user_email"])
     ) {
         $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
         if ($conn->connect_errno) {
             echo "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>";
             exit();
         }
-        $conn->set_charset('utf8');
+        $conn->set_charset("utf8");
 
-        $user_id = $_POST['user_id'];
-        $user_pass = $_POST['user_pass'];
-        $user_pass_twice = $_POST['user_pass_twice'];
-        $user_nickname = $_POST['user_nickname'];
-        $user_email = $_POST['user_email'];
+        $user_id = $_POST["user_id"];
+        $user_pass = $_POST["user_pass"];
+        $user_pass_twice = $_POST["user_pass_twice"];
+        $user_nickname = $_POST["user_nickname"];
+        $user_email = $_POST["user_email"];
 
         $is_valid = true;
         if ($user_pass == $user_pass_twice) {
-            if ($stmt = $conn->prepare("SELECT user_id FROM users WHERE user_id=?")) {
-                $stmt->bind_param('s', $user_id);
-                $stmt->execute();
-                $stmt->store_result();
-
-                // 해당하는 ID가 있는 경우 처리
-                if ($stmt->num_rows != 0) {
-                    $is_valid = false;
-                    $reason = "이미 존재하는 아이디입니다.";
-                }
-
-                $stmt->free_result();
-                $stmt->close();
+            if (fetch_first_row("SELECT user_id FROM users WHERE user_id = ?", "s", $user_id) !== false) {
+                $is_vaild = false;
+                $reason = "이미 존재하는 아이디입니다. 다른 아이디를 사용해 주세요.";
             }
 
             if ($is_valid == true) {
-                $stmt = $conn->prepare("SELECT user_email FROM users WHERE user_email=?");
-                $stmt->bind_param('s', $user_email);
-                $stmt->execute();
-                $stmt->store_result();
-
-                // 해당하는 이메일이 있는 경우 처리
-                if ($stmt->num_rows != 0) {
-                    $is_valid = false;
-                    $reason = "이미 존재하는 이메일입니다.";
+                if (fetch_first_row("SELECT user_id FROM users WHERE user_email = ?", "s", $user_email) !== false) {
+                    $is_vaild = false;
+                    $reason = "다른 사용자가 사용 중인 이메일입니다. 다른 이메일을 사용해 주세요.";
                 }
-
-                $stmt->free_result();
-                $stmt->close();
             }
-        } else {
+        } 
+        else {
             $is_valid = false;
-            $reason = "비밀번호가 다릅니다. 비밀번호를 다시 입력하세요.";
+            $reason = "입력하신 두 개의 비밀번호가 다릅니다. 비밀번호를 다시 입력하세요.";
         }
 
-        // 모든 조건을 통과하였으면
         if ($is_valid === true) {
-            $password_hash = hash('sha512', $user_pass);
-            if ($stmt = $conn->prepare("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT)")) {
-                $stmt->bind_param('ssss', $user_id, $password_hash, $user_nickname, $user_email);
-                $stmt->execute();
-                $stmt->close();
+            if (execute_query("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT)", 
+                              "ssss", $user_id, hash('sha512', $user_pass), $user_nickname, $user_email)) == false) {
+                $is_vaild = false;
+                $reason = "DB 삽입 오류!"
             }
-            $conn->close();
-            echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
-            exit;
+            else {
+                echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
+                exit;
+            }
         }
         $conn->close();
     }
 }
 
-require_once('header.php');
+require_once("header.php");
 
 if ($is_valid === false) {
-    echo "오류: " . $reason . '<br />';
+    echo "오류: " . $reason . "<br />";
 }
 ?>
 <form action="join.php" method="post">
