@@ -17,6 +17,10 @@ if (isset($_GET['logout']) && $_GET['logout'] === 'done') {
     $info = true;
     $reason_info = "성공적으로 로그아웃되었습니다.";
 }
+if (isset($_GET['error']) && $_GET['session'] === 'expired') {
+    $error = true;
+    $reason_info = "세션이 만료되었습니다. 다시 로그인해주세요."
+}
 
 if ($_POST) {
     if (isset($_POST['user_id']) && isset($_POST['user_pass']) && 
