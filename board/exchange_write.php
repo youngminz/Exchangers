@@ -35,51 +35,46 @@ if ($_POST) {
 
 require_once("../header.php");
 ?>
-<div class="container">
+<div class="narrow-container">
   <h1>새 글 쓰기</h1>
 <?php if ($error === true) { ?>
   <div class="message message-error">
     <?= $reason ?>
   </div>
 <?php } ?>
-  <form action="/board/exchange_write.php" method="post">
-    <div id="title">
-      <label for="title">글 제목</label>
-      <input type="text" placeholder="제목을 입력하세요" name="title">
-    </div>
-    <div id="contents">
-      <label for="container"></label>
-      <textarea name="contents"></textarea>
-    </div>
-    <div id="language">
-      언어:
-      <select name="start_language">
-        <option value="">언어 선택</option>
-        <?php
-          $all_languages = fetch_all_row("SELECT * FROM language");
-          foreach ($all_languages as $language) {
-        ?>
-        <option value="<?= $language['lang_code'] ?>">
-          <?= $language['korean']; ?>
-        </option>
-        <?php } ?>
-      </select>
-      <label for="start_language">에서</label>
-      <select name="end_language">
-        <option value="">언어 선택</option>
-        <?php
-          $all_languages = fetch_all_row("SELECT * FROM language");
-          foreach ($all_languages as $language) {
-        ?>
-        <option value="<?= $language['lang_code'] ?>">
-          <?= $language['korean']; ?>
-        </option>
-        <?php } ?>
-      </select>
-      <label for="end_language">으로</label>
-    </div>
-    <div id="category">
-      <label for="category">카테고리 선택</label>
+  <form class="form-write" action="/board/exchange_write.php" method="post">
+    <input type="text" placeholder="글 제목" name="title" id="title" />
+    <textarea name="contents"></textarea>
+    <div class="form-line" style="float: left; width: 70%;">
+      <p class="form-line">
+        언어:
+        <select name="start_language">
+          <option value="">언어 선택</option>
+          <?php
+            $all_languages = fetch_all_row("SELECT * FROM language");
+            foreach ($all_languages as $language) {
+          ?>
+          <option value="<?= $language['lang_code'] ?>">
+            <?= $language['korean']; ?>
+          </option>
+          <?php } ?>
+        </select>
+        <label for="start_language">에서</label>
+        <select name="end_language">
+          <option value="">언어 선택</option>
+          <?php
+            $all_languages = fetch_all_row("SELECT * FROM language");
+            foreach ($all_languages as $language) {
+          ?>
+          <option value="<?= $language['lang_code'] ?>">
+            <?= $language['korean']; ?>
+          </option>
+          <?php } ?>
+        </select>
+        <label for="end_language">으로</label>
+      </p>
+      <p class="form-line">
+        <label for="category">카테고리 선택</label>
         <select name="category">
           <option value="">카테고리 선택</option>
           <?php
@@ -91,8 +86,12 @@ require_once("../header.php");
           </option>
           <?php } ?>
         </select>
-      </div>
-    <input type="submit" value="전송" class="button-primary" />
+      </p>
+    </div>
+    <p class="form-line" style="float: right; width: 30%;">
+      <a href="/board/exchange.php" class="button">목록으로</a>
+      <input type="submit" value="작성" class="button-primary" />
+    </p>
   </form>
 </div>
 </body>
