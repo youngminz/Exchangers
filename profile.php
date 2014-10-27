@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
-    echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
+    header('Location: /login.php?error=session');
     exit;
 }
 if (isset($_SERVER["id"])) {

@@ -4,7 +4,7 @@ require_once("../config.php");
 require_once("../function.php");
 
 if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
-    echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
+    header('Location: /login.php?error=session');
     exit;
 }
 if ($_POST) {
@@ -21,11 +21,7 @@ if ($_POST) {
         $result = execute_query($query, "siii", $_POST['contents'], $_SESSION['ID'], $_POST['parent_id'], $_POST['parent_article']);
         if ($result === false) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-            $json = array(
-                'status'  => 'error',
-                'message' => 'Error processing SQL query'
-            );
-            echo json_encode($json);
+            echo "<h1 style='color: red'>Error Processing SQL Query</h1>";
             exit;
         }
         else {
