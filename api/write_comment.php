@@ -2,15 +2,9 @@
 session_start();
 require_once("../config.php");
 require_once("../function.php");
-header('Content-Type: application/json');
 
 if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
-    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-    $json = array(
-        'status' => 'error',
-        'message' => 'Session user data not found'
-    );
-    echo json_encode($json);
+    echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
     exit;
 }
 if ($_POST) {
@@ -28,28 +22,27 @@ if ($_POST) {
         if ($result === false) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
             $json = array(
-                'status'  =>'error',
+                'status'  => 'error',
                 'message' => 'Error processing SQL query'
             );
             echo json_encode($json);
             exit;
         }
         else {
-            $json = array(
-                'status' => 'success'
-            );
-            echo json_encode($json);
+            // Success!
+            echo "<meta http-equiv='refresh' content='0; url=" . $_SERVER['HTTP_REFERER'] . "'>";
             exit;
         }
+    }
+    else {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+        echo "<h1 style='color: red'>Incorrect Parameter</h1>";
+        exit;
     }
 }
 else {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-    $json = array(
-        'status' => 'error',
-        'messange' => 'Incorrent parameters'
-    );
-    echo json_encode($json);
+    echo "<h1 style='color: red'>Incorrect Parameter</h1>";
     exit;
 }
 // post parameter: mode=exchange, parent_id, contents, parent_article, 
