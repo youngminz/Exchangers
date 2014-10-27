@@ -46,28 +46,24 @@ if (isset($_SESSION['ID'])) {
 require_once('header.php');
 ?>
 <div class="container">
-  <h1>로그인</h1>
-<?php if ($info === true) { ?>
-  <p class="message-success">
-    <?= $reason_info ?>
-  </p>
-<?php } if ($error === true) { ?>
-  <p class="message-error">
-    <?= $reason_error ?>
-  </p>
-<?php } ?>
   <form id="form-login" action="login.php" method="post">
+    <h1>로그인</h1>
+<?php if ($info === true) { ?>
+    <p class="message message-success"><?= $reason_info ?></p>
+<?php } if ($error === true) { ?>
+    <p class="message message-error"><?= $reason_error ?></p>
+<?php } ?>
     <p class="form-line">
-      <label for="user_id">ID</label>
-      <input type="text" name="user_id" />
+      <label for="user_id">ID</label><!--
+      --><input type="text" name="user_id" />
     </p>
     <p class="form-line">
-      <label for="user_pass">Password</label>
-      <input type="password" name="user_pass" />
+      <label for="user_pass">Password</label><!--
+      --><input type="password" name="user_pass" />
     </p>
     <p class="form-line">
-      <input type="submit" value="로그인">
-      <a href="join.php">회원가입</a>
+      <input type="submit" value="로그인" class="button button-primary" />
+      <a href="join.php" class="button">회원가입</a>
     </p>
   </form>
 </div>
