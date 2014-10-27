@@ -95,7 +95,7 @@ require_once("header.php");
       --><input type="email" name="user_email" required  />
     </p>
     <p class="form-line">
-      <input type="submit" value="회원가입" class="button button-primary" />
+      <input type="submit" value="회원가입" class="button button-primary right" />
       <a href="/login.php" class="button">로그인</a>
     </p>
   </form>
