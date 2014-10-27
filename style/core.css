@@ -32,6 +32,11 @@ input[type="url"], input[type="text"], input:not([type]), .input-field {
     height: 100%;
     margin: 0 auto;
 }
+.narrow-container {
+    width: 512px;
+    height: 100%;
+    margin: 0 auto;
+}
 
 .right.right {
     float: right;
@@ -128,7 +133,7 @@ nav .icon {
 }
 /* Login */
 #form-login {
-    width: 28rem;
+    width: 100%;
     margin: 0 auto;
 }
 

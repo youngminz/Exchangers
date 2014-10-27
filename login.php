@@ -45,7 +45,7 @@ if (isset($_SESSION['ID'])) {
 
 require_once('header.php');
 ?>
-<div class="container">
+<div class="narrow-container">
   <form id="form-login" action="login.php" method="post">
     <h1>로그인</h1>
 <?php if ($info === true) { ?>
