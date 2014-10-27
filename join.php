@@ -10,14 +10,7 @@ $user_email = "";
 if ($_POST) {
     if (isset($_POST["user_id"]) && isset($_POST["user_pass"]) && isset($_POST["user_pass_twice"]) &&
         isset($_POST["user_nickname"]) && isset($_POST["user_email"])
-    ) {
-        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
-        if ($conn->connect_errno) {
-            echo "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>";
-            exit();
-        }
-        $conn->set_charset("utf8");
-
+       ) {
         $user_id = $_POST["user_id"];
         $user_pass = $_POST["user_pass"];
         $user_pass_twice = $_POST["user_pass_twice"];
@@ -44,22 +37,21 @@ if ($_POST) {
         }
 
         if ($is_valid === true) {
-            if (execute_query("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT)", 
-                              "ssss", $user_id, hash('sha512', $user_pass), $user_nickname, $user_email)) == false) {
+            if (execute_query("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT)", "ssss", $user_id, hash('sha512', $user_pass), $user_nickname, $user_email) === false) {
                 $is_vaild = false;
-                $reason = "DB 삽입 오류!"
+                $reason = "DB 삽입 오류!";
             }
             else {
                 echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
                 exit;
             }
         }
-        $conn->close();
     }
 }
 
-require_once("header.php");
+//////////////////// HTML START ////////////////////
 
+require_once("header.php");
 if ($is_valid === false) {
     echo "오류: " . $reason . "<br />";
 }
@@ -89,7 +81,8 @@ if ($is_valid === false) {
         <tr>
             <td colspan="2">
                 <input type="submit" value="전송">
-                <a href="/login.php">로그인</a>
+                <input type="button" onclick="history.back();" value="뒤로 가기" />
+                <!--a href="/login.php">로그인</a-->
             </td>
         </tr>
     </table>
