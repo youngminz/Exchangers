@@ -3,7 +3,7 @@ session_start();
 require_once("../config.php");
 require_once("../function.php");
 if (!isset($_SESSION["ID"]) || empty($_SESSION["ID"])) {
-    echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
+    header('Location: /login.php?reason=session_expired');
     exit;
 }
 
@@ -36,64 +36,64 @@ if ($_POST) {
 require_once("../header.php");
 ?>
 <div class="container">
-    <?php
-        if ($error === true) {
-            echo $reason;
-        }
-    ?>
-    <form action="/board/exchange_write.php" method="post">
-        <div id="title">
-            <label for="title">글 제목</label>
-            <input type="text" placeholder="제목을 입력하세요" name="title">
-        </div>
-        <div id="contents">
-            <label for="container"></label>
-            <textarea name="contents"></textarea>
-        </div>
-        <div id="language">
-            언어:
-            <label for="start_language"></label>
-            <select name="start_language">
-                <option value="">언어 선택</option>
-                <?php
-                    $all_languages = fetch_all_row("SELECT * FROM language");
-                    foreach ($all_languages as $language) {
-                        echo "<option value=\"" . $language['lang_code'] . "\" >";
-                        echo $language['korean'];
-                        echo "</option>";
-                    }
-                ?>
-            </select>
-            =>
-            <label for="end_language"></label>
-            <select name="end_language">
-                <option value="">언어 선택</option>
-                <?php
-                    $all_languages = fetch_all_row("SELECT * FROM language");
-                    foreach ($all_languages as $language) {
-                        echo "<option value=\"" . $language['lang_code'] . "\" >";
-                        echo $language['korean'];
-                        echo "</option>";
-                    }
-                ?>
-            </select>
-        </div>
-        <div id="category">
-            <label for="category">카테고리 선택</label>
-            <select name="category">
-                <option value="">카테고리 선택</option>
-                <?php
-                    $all_categories = fetch_all_row("SELECT * FROM category");
-                    foreach ($all_categories as $category) {
-                        echo "<option value=\"" . $category['category_code'] . "\" >";
-                        echo $category['korean'];
-                        echo "</option>";
-                    }
-                ?>
-            </select>
-        </div>
-        <input type="submit" value="전송">
-    </form>
+  <h1>새 글 쓰기</h1>
+<?php if ($error === true) { ?>
+  <div class="message message-error">
+    <?= $reason ?>
+  </div>
+<?php } ?>
+  <form action="/board/exchange_write.php" method="post">
+    <div id="title">
+      <label for="title">글 제목</label>
+      <input type="text" placeholder="제목을 입력하세요" name="title">
+    </div>
+    <div id="contents">
+      <label for="container"></label>
+      <textarea name="contents"></textarea>
+    </div>
+    <div id="language">
+      언어:
+      <select name="start_language">
+        <option value="">언어 선택</option>
+        <?php
+          $all_languages = fetch_all_row("SELECT * FROM language");
+          foreach ($all_languages as $language) {
+        ?>
+        <option value="<?= $language['lang_code'] ?>">
+          <?= $language['korean']; ?>
+        </option>
+        <?php } ?>
+      </select>
+      <label for="start_language">에서</label>
+      <select name="end_language">
+        <option value="">언어 선택</option>
+        <?php
+          $all_languages = fetch_all_row("SELECT * FROM language");
+          foreach ($all_languages as $language) {
+        ?>
+        <option value="<?= $language['lang_code'] ?>">
+          <?= $language['korean']; ?>
+        </option>
+        <?php } ?>
+      </select>
+      <label for="end_language">으로</label>
+    </div>
+    <div id="category">
+      <label for="category">카테고리 선택</label>
+        <select name="category">
+          <option value="">카테고리 선택</option>
+          <?php
+            $all_categories = fetch_all_row("SELECT * FROM category");
+            foreach ($all_categories as $category) {
+          ?>
+          <option value="<?= $language['lang_code'] ?>">
+            <?= $language['korean']; ?>
+          </option>
+          <?php } ?>
+        </select>
+      </div>
+    <input type="submit" value="전송" class="button-primary" />
+  </form>
 </div>
 </body>
 </html>
