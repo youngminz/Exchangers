@@ -12,6 +12,7 @@ else {
 }
 require_once('header.php');
 ?>
+<img src="http://www.gravatar.com/avatar/<?= hash('md5', $_SESSION['user_email']) ?>?s=240&d=identicon" />
 닉네임: <?= $_SESSION['user_nickname'] ?><br/>
 email: <?= $_SESSION['user_email'] ?><br/>
 </body>
