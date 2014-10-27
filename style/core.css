@@ -8,20 +8,23 @@ body {
     padding-top: 4rem;
 }
 /* buttons */
-input[type="button"], input[type="submit"],
-input[type="file"]::-webkit-file-upload-button,
-button, .button {
-  padding: 0.5em 1em;
-  font: inherit;
+input[type="button"], input[type="submit"], input[type="file"]::-webkit-file-upload-button,
+button, .button.button {
+    display: inline-block;
+    padding: 0.5em 1em;
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    border-width: 0 0 0.1875em 0;
+    border-radius: 0.125em;
+    box-shadow: 0 0 0.125em rgba(0, 0, 0, 0.5);
 }
 /* input fields */
-input[type="email"], input[type="number"],
-input[type="password"], input[type="tel"],
-input[type="url"], input[type="text"],
-input:not([type]), .input-field {
-  padding: 0.5em 0.75em;
-  border: none;
-  border-bottom: 1px solid #f60;
+input[type="email"], input[type="number"], input[type="password"], input[type="tel"],
+input[type="url"], input[type="text"], input:not([type]), .input-field {
+    padding: 0.5em 0.75em;
+    border: none;
+    border-bottom: 1px solid #f60;
 }
 /* Public-use classes */
 .container {
@@ -32,6 +35,29 @@ input:not([type]), .input-field {
 
 .right.right {
     float: right;
+}
+/* Message boxes */
+.message {
+    padding: 1em;
+    border-radius: 0.125em;
+    box-shadow: 0 0 0.125em #000;
+    background-color: #ccc;
+}
+.message-success {
+    
+}
+.message-error {
+    ..
+}
+/* Buttons */
+.button {
+    background: #ccc;
+    border: solid #999;
+}
+
+.button-primary {
+    background: #f93;
+    border: solid #f60;
 }
 
 /* Navigation */
@@ -60,6 +86,7 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .nav li {
@@ -80,5 +107,27 @@ nav li.logo {
 }
 
 nav li.right {
-  font-size: 0.75em;
+    font-size: 0.75em;
+}
+
+/* Login */
+#form-login {
+    width: 28rem;
+    margin: 0 auto;
+}
+
+#form-login input[type="submit"] {
+    float: right;
+}
+
+#form-login input[type="email"], #form-login input[type="number"],
+#form-login input[type="password"], #form-login input[type="tel"],
+#form-login input[type="url"], #form-login input[type="text"], 
+#form-login input:not([type]), #form-login .input-field {
+    width: 60%;
+}
+.form-line label {
+    display: inline-block;
+    width: 40%;
+    font-weight: bold;
 }
