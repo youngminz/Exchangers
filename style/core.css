@@ -137,9 +137,9 @@ nav .icon {
 .form-list, .form-write {
     width: 100%;
 }
-/* form: login / signup */
+/* form: login / signup (list type form) */
 
-.form-list input[type="submit"] {
+#form-list input[type="submit"] {
     float: right;
 }
 

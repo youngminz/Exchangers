@@ -19,7 +19,7 @@ if (isset($_GET['logout']) && $_GET['logout'] === 'done') {
 }
 if (isset($_GET['error']) && $_GET['session'] === 'expired') {
     $error = true;
-    $reason_info = "세션이 만료되었습니다. 다시 로그인해주세요."
+    $reason_info = "세션이 만료되었습니다. 다시 로그인해주세요.";
 }
 
 if ($_POST) {
@@ -45,14 +45,14 @@ if ($_POST) {
 }
 
 if (isset($_SESSION['ID'])) {
-    echo "<meta http-equiv='refresh' content='0; url=/' />";
+    header('Location: /');
     exit;
 }
 
 require_once('header.php');
 ?>
 <div class="narrow-container">
-  <form id="form-login" action="login.php" method="post">
+  <form class="form-list" action="login.php" method="post">
     <h1>로그인</h1>
 <?php if ($info === true) { ?>
     <p class="message message-success"><?= $reason_info ?></p>
@@ -68,7 +68,7 @@ require_once('header.php');
       --><input type="password" name="user_pass" required />
     </p>
     <p class="form-line">
-      <input type="submit" value="로그인" class="button button-primary" />
+      <input type="submit" value="로그인" class="button button-primary right" />
       <a href="join.php" class="button">회원가입</a>
     </p>
   </form>
