@@ -29,7 +29,7 @@ function recursive_comment($parent_article, $parent_id, $level) {
                             "iii", $parent_article, $parent_id, $parent_id);
     if (count($result) > 0) {
         foreach ($result as $row) {
-            echo '<li style="margin-left: ' . $level . 'rem\">';
+            echo '<li style="margin-left: ' . $level . 'rem;">';
             echo $row["content"];
             echo " - <b>" . fetch_first_row("SELECT user_nickname " . 
                                             "FROM users WHERE ID = ?",
