@@ -29,18 +29,18 @@ function recursive_comment($parent_article, $parent_id, $level) {
                             "iii", $parent_article, $parent_id, $parent_id);
     if (count($result) > 0) {
         foreach ($result as $row) {
-            echo "<li style='margin-left: " . $level . "rem'>";
+            echo '<li style="margin-left: ' . $level . 'rem\">';
             echo $row["content"];
             echo " - <b>" . fetch_first_row("SELECT user_nickname " . 
                                             "FROM users WHERE ID = ?",
                                             "i", $row['author'])['user_nickname'] . "</b>";
-            echo "<form method='post' action='/board/write_comment.php'>";
-            echo "  <input type='text' name='contents' value=''>";
-            echo "  <input type='hidden' name='mode' value='exchange'>";
-            echo "  <input type='hidden' name='parent_id' value='" . $row['ID'] . "'>";
-            echo "  <input type='hidden' name='parent_article' value='$parent_article'>";
-            echo "</form>";
-            echo "</li>";
+            echo '<form method="post" action="/board/write_comment.php">';
+            echo '  <input type="text" name="contents" />';
+            echo '  <input type="hidden" name="mode" value="exchange" />';
+            echo '  <input type="hidden" name="parent_id" value="' . $row['ID'] . '" />';
+            echo '  <input type="hidden" name="parent_article" value="' . $parent_article . '" />';
+            echo '</form>';
+            echo '</li>';
             recursive_comment($parent_article, $row['ID'], $level + 1);
         }
     }
