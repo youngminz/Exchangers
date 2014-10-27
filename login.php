@@ -9,20 +9,18 @@ $error = false;
 $reason_info = '';
 $reason_error = '';
 
-
-if (isset($_SERVER['HTTP_REFERER'])) {
-    if (strpos($_SERVER['HTTP_REFERER'], $_SERVER['SERVER_NAME'] . "/join.php") !== false) {
-        $info = true;
-        $reason_info = "회원가입이 정상적으로 처리되었습니다. 가입하신 아이디로 로그인해주세요.";
-    }
-    if (strpos($_SERVER['HTTP_REFERER'], $_SERVER['SERVER_NAME'] . '/logout.php') !== false) {
-        $info = true;
-        $reason_info = "성공적으로 로그아웃되었습니다.";
-    }
+if (isset($_GET['join']) && $_GET['join'] === 'done') {
+    $info = true;
+    $reason_info = "회원가입이 정상적으로 처리되었습니다. 가입하신 아이디로 로그인해주세요.";
+}
+if (isset($_GET['logout']) && $_GET['logout'] === 'done') {
+    $info = true;
+    $reason_info = "성공적으로 로그아웃되었습니다.";
 }
 
 if ($_POST) {
-    if (isset($_POST['user_id']) && isset($_POST['user_pass'])) {
+    if (isset($_POST['user_id']) && isset($_POST['user_pass']) && 
+       !empty($_POST['user_id']) && !empty($_POST['user_pass'])) {
         $row = fetch_first_row('SELECT * FROM users WHERE user_id = ? AND user_pass = ?', 
                                'ss', $_POST['user_id'], hash('sha512', $_POST['user_pass']));
         if ($row === false) {
@@ -35,6 +33,10 @@ if ($_POST) {
             $_SESSION['user_nickname'] = htmlspecialchars($row['user_nickname']);
             $_SESSION['user_email'] = htmlspecialchars($row['user_email']);
         }
+    }
+    else {
+        $error = true;
+        $reason_error = "입력하지 않은 칸이 있습니다!";
     }
 }
 
@@ -55,11 +57,11 @@ require_once('header.php');
 <?php } ?>
     <p class="form-line">
       <label for="user_id">ID</label><!--
-      --><input type="text" name="user_id" />
+      --><input type="text" name="user_id" required />
     </p>
     <p class="form-line">
       <label for="user_pass">Password</label><!--
-      --><input type="password" name="user_pass" />
+      --><input type="password" name="user_pass" required />
     </p>
     <p class="form-line">
       <input type="submit" value="로그인" class="button button-primary" />
