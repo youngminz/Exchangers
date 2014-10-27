@@ -34,7 +34,7 @@ function recursive_comment($parent_article, $parent_id, $level) {
             echo " - <b>" . fetch_first_row("SELECT user_nickname " . 
                                             "FROM users WHERE ID = ?",
                                             "i", $row['author'])['user_nickname'] . "</b>";
-            echo "<form method='post' action='/api/write_comment.php'>";
+            echo "<form method='post' action='/board/write_comment.php'>";
             echo "  <input type='text' name='contents' value=''>";
             echo "  <input type='hidden' name='mode' value='exchange'>";
             echo "  <input type='hidden' name='parent_id' value='" . $row['ID'] . "'>";
