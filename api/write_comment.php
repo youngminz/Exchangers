@@ -20,8 +20,11 @@ if ($_POST) {
         !empty($_POST['contents']) && !empty($_POST['parent_article']) && 
         $_POST['mode'] === 'exchange'
        ) {
+        if ($_POST['parent_id'] == 'NULL') {
+            $_POST['parent_id'] = NULL;
+        }
         $query = "INSERT INTO exchange_comment VALUES (NULL, ?, DEFAULT, ?, 1, ?, ?)";
-        $result = execute_query($query, "sisi", $_POST['contents'], $_SESSION['ID'], $_POST['parent_id'], $_POST['parent_article']);
+        $result = execute_query($query, "siii", $_POST['contents'], $_SESSION['ID'], $_POST['parent_id'], $_POST['parent_article']);
         if ($result === false) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
             $json = array(
