@@ -29,13 +29,14 @@ function recursive_comment($parent_article, $parent_id, $level) {
                             "iii", $parent_article, $parent_id, $parent_id);
     
     if ($parent_id === NULL) {
-        echo '<form method="post" action="/board/write_comment.php">';
-        echo '  <input type="text" name="contents" />';
-        echo '  <input type="hidden" name="mode" value="exchange" />';
-        echo '  <input type="hidden" name="parent_id" value="NULL" />';
-        echo '  <input type="hidden" name="parent_article" value="' . $parent_article . '" />';
-        echo '</form>';
-        echo '</li>';
+      ?>
+<form method="post" action="/board/write_comment.php">
+  <input type="text" name="contents" />
+  <input type="hidden" name="mode" value="exchange" />
+  <input type="hidden" name="parent_id" value="NULL" />
+  <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
+</form>
+      <?php
     }
     if (count($result) > 0) {
         foreach ($result as $row) {
@@ -53,14 +54,15 @@ function recursive_comment($parent_article, $parent_id, $level) {
                 echo $row['author'];
             }
             else
-                echo "<i>[댓글 삭제되었습니다]</i>";
-            echo '<form method="post" action="/board/write_comment.php">';
-            echo '  <input type="text" name="contents" />';
-            echo '  <input type="hidden" name="mode" value="exchange" />';
-            echo '  <input type="hidden" name="parent_id" value="' . $row['ID'] . '" />';
-            echo '  <input type="hidden" name="parent_article" value="' . $parent_article . '" />';
-            echo '</form>';
-            echo '</li>';
+                echo "<i>[삭제된 댓글입니다]</i>";
+            ?>
+<form method="post" action="/board/write_comment.php">
+  <input type="text" name="contents" />
+  <input type="hidden" name="mode" value="exchange" />
+  <input type="hidden" name="parent_id" value="<?= $row['ID'] ?>" />
+  <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
+</form>
+            <?php
             recursive_comment($parent_article, $row['ID'], $level + 1);
         }
     }
@@ -73,13 +75,17 @@ require_once('../header.php');
 <main id="article-view">
   <h2><?= htmlspecialchars($question['board_title']) ?></h2>
   <aside>
-    <b><?= $question['date'] ?></b>에 올라옴<br />
-    <?= 0 ?> 조회
+    <section>
+      <b><?= $question['date'] ?></b>에 올라옴<br />
+      <b><?= 0 ?></b> 조회<br />
+      <b><?= "작성자 닉네임을 여기에" ?></b>
+    </section>
   </aside>
-  <div class="question-detail">
+  <div class="question">
     <div class="vote">
-      <a href="/board/exchange_vote.php?mode=exchange&type=up&article=<?= $question['ID'] ?>">Up vote(<?= $question['vote_up'] ?>)</a>
-      <a href="/board/exchange_vote.php?mode=exchange&type=down&article=<?= $question['ID'] ?>">Down vote(<?= $question['vote_down'] ?>)</a>
+      <a href="/board/exchange_vote.php?mode=exchange&type=up&article=<?= $question['ID'] ?>">^</a>
+      <br /><?= $question['vote_up'] + $question['vote_down'] ?><br />
+      <a href="/board/exchange_vote.php?mode=exchange&type=down&article=<?= $question['ID'] ?>">v</a>
     </div>
     <div class="content">
       <pre>
