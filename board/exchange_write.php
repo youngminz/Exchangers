@@ -16,9 +16,9 @@ if ($_POST) {
         !empty($_POST["end_language"]) && !empty($_POST["category"])) {
         $query_result = execute_query("INSERT INTO exchange_article " . 
                                       "VALUES (NULL, NULL, ?, ?, ?, ?, ?, DEFAULT, 0, 0, 0, ?)", 
-                                      "sssssi", $_POST["title"], $_POST["category"],
-                                      $_POST["start_language"], $_POST["end_language"], 
-                                      $_POST["contents"], $_SESSION["ID"]);
+                                      "sssssi", htmlspecialchars($_POST["title"]), htmlspecialchars($_POST["category"]),
+                                      htmlspecialchars($_POST["start_language"]), htmlspecialchars($_POST["end_language"]), 
+                                      htmlspecialchars($_POST["contents"]), $_SESSION["ID"]);
         if ($query_result === true) {
             header('Location: /board/exchange.php');  
             exit;

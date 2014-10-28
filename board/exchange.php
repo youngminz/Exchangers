@@ -42,20 +42,20 @@ require_once("../header.php"); ?>
       <div class="summary">
         <h3>
           <a href="/board/exchange_view.php?id=<?= $row["ID"] ?>">
-            <?= htmlspecialchars($row['board_title']) ?>
+            <?= $row['board_title'] ?>
           </a>
         </h3>
       </div>
       <div class="info">
-        <span><?= $row['category'] ?> 카테고리</span>, 
+        <span><?= fetch_first_row('SELECT * FROM category WHERE category_code = ?', 's', $row['category'])['korean'] ?> 카테고리</span>, 
         <span><?= fetch_first_row('SELECT * FROM language WHERE lang_code = ?',
                                   's', $row['lang_from'])['korean'] ?>에서
               <?= fetch_first_row('SELECT * FROM language WHERE lang_code = ?',
                                   's', $row['lang_to'])['korean'] ?>로
           </span>,
           <span><?= $row['date'] . '에' ?></span>,
-          <span><?= htmlspecialchars(fetch_first_row('SELECT * FROM users WHERE ID = ?',
-                                    'i', $row['author'])['user_nickname']) . '가' ?></span>
+          <span><?= fetch_first_row('SELECT * FROM users WHERE ID = ?',
+                                    'i', $row['author'])['user_nickname'] . '가' ?></span>
         </div>
       </div>
 <?php } ?>
