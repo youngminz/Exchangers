@@ -6,19 +6,17 @@ if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
     header('Location: /login.php?error=session');
     exit;
 }
-if ($_POST) {
-    if (isset($_POST['mode']) && isset($_POST['parent_id']) && 
-        isset($_POST['contents']) && isset($_POST['parent_article']) &&
-        !empty($_POST['mode']) && !empty($_POST['parent_id']) && 
-        !empty($_POST['contents']) && !empty($_POST['parent_article']) && 
-        $_POST['mode'] === 'exchange'
+if ($_GET) {
+    if (isset($_GET['type']) && isset($_GET['article']) && 
+        !empty($_GET['type']) && !empty($_GET['article'])
        ) {
-        if ($_POST['parent_id'] == 'NULL') {
-            $_POST['parent_id'] = NULL;
+        if ($_GET['type'] === 'up') {
+            $query = "UPDATE exchange_article SET vote_up = vote_up + 1 WHERE ID = ?";
         }
-        $query = "INSERT INTO exchange_comment VALUES (NULL, ?, DEFAULT, ?, 1, ?, ?)";
-        $result = execute_query($query, "siii", htmlspecialchars($_POST['contents']), 
-                                $_SESSION['ID'], $_POST['parent_id'], $_POST['parent_article']);
+        else {
+            $query = "UPDATE exchange_article SET vote_down = vote_down - 1 WHERE ID = ?";
+        }
+        $result = execute_query($query, "i", $_GET['article']);
         if ($result === false) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
             echo "<h1 style='color: red'>Error Processing SQL Query</h1>";

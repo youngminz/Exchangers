@@ -1,9 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
-    echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
+    header('Location: /login.php');
     exit;
 }
+
+//////////////////// HTML START ////////////////////
+
 require_once('header.php');
 ?>
 유저 번호: <?= $_SESSION['ID'] ?><br/>

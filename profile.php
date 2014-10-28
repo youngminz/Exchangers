@@ -10,6 +10,9 @@ if (isset($_SERVER["id"])) {
 else {
     $id = $_SESSION['ID'];
 }
+
+//////////////////// HTML START ////////////////////
+
 require_once('header.php');
 ?>
 <img src="http://www.gravatar.com/avatar/<?= hash('md5', $_SESSION['user_email']) ?>?s=240&d=identicon" />

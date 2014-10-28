@@ -17,7 +17,7 @@ if (isset($_GET['logout']) && $_GET['logout'] === 'done') {
     $info = true;
     $reason_info = "성공적으로 로그아웃되었습니다.";
 }
-if (isset($_GET['error']) && $_GET['session'] === 'expired') {
+if (isset($_GET['error']) && $_GET['error'] === 'session') {
     $error = true;
     $reason_info = "세션이 만료되었습니다. 다시 로그인해주세요.";
 }
@@ -48,6 +48,8 @@ if (isset($_SESSION['ID'])) {
     header('Location: /');
     exit;
 }
+
+//////////////////// HTML START ////////////////////
 
 require_once('header.php');
 ?>

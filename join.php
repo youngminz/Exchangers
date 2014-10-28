@@ -7,6 +7,10 @@ $user_id = "";
 $user_nickname = "";
 $user_email = "";
 
+function check_email($email) { 
+    return ereg("^[0-9a-zA-Z_-]+(\.[0-9a-zA-Z_-]+)*@[0-9a-zA-Z_-]+(\.[0-9a-zA-Z_-]+)+$", $email);
+} 
+
 if ($_POST) {
     if (isset($_POST["user_id"]) && isset($_POST["user_pass"]) && 
         isset($_POST["user_pass_twice"]) && isset($_POST["user_nickname"]) && 
@@ -14,11 +18,16 @@ if ($_POST) {
         !empty($_POST["user_pass_twice"]) && !empty($_POST["user_nickname"]) && 
         !empty($_POST["user_email"])
        ) {
-        $user_id = $_POST["user_id"];
-        $user_pass = $_POST["user_pass"];
-        $user_pass_twice = $_POST["user_pass_twice"];
-        $user_nickname = $_POST["user_nickname"];
-        $user_email = $_POST["user_email"];
+        $user_id = trim($_POST["user_id"]);
+        $user_pass = trim($_POST["user_pass"]);
+        $user_pass_twice = trim($_POST["user_pass_twice"]);
+        $user_nickname = trim($_POST["user_nickname"]);
+        $user_email = trim($_POST["user_email"]);
+        
+        if (ctype_alnum($user_id) === false || !filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
+            $is_vaild = false;
+            $reason = "허용되지 않는 문자가 들어가 있습니다.";
+        }
 
         $is_valid = true;
         if ($user_pass == $user_pass_twice) {
@@ -52,7 +61,8 @@ if ($_POST) {
                 $reason = "DB 삽입 오류!";
             }
             else {
-                echo "<meta http-equiv='refresh' content='0; url=/login.php'>";
+                // Success!
+                header('Location: /login.php?join=done');
                 exit;
             }
         }
@@ -68,8 +78,8 @@ if ($_POST) {
 require_once("header.php");
 ?>
 
-<div class="narrow-container">
-  <form class="form-list" action="login.php?join=done" method="post">
+<main class="narrow">
+  <form class="form-list" action="join.php" method="post">
     <h1>회원 가입</h1>
     <?php if ($is_valid === false) { ?>
       <p class="message message-error"><?= $reason ?></p>
@@ -87,8 +97,8 @@ require_once("header.php");
       --><input type="password" name="user_pass_twice" required  />
     </p>
     <p class="form-line">
-      <label for="user_nick">닉네임</label><!--
-      --><input type="text" name="user_nick" required  />
+      <label for="user_nickname">닉네임</label><!--
+      --><input type="text" name="user_nickname" required  />
     </p>
     <p class="form-line">
       <label for="user_email">e-mail</label><!--
@@ -96,10 +106,10 @@ require_once("header.php");
     </p>
     <p class="form-line">
       <input type="submit" value="회원가입" class="button button-primary right" />
-      <a href="/login.php" class="button">로그인</a>
+      <a href="/login.php" class="button">로그인으로 되돌아가기</a>
     </p>
   </form>
-</div>
+</main>
 
 </body>
 </html>

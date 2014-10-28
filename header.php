@@ -6,8 +6,8 @@ function href($uri){
     }
     return $r;
 }
+//////////////////// HTML START ////////////////////
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -16,12 +16,12 @@ function href($uri){
   </head>
   <body>
     <nav>
-      <div class="container">
+      <main>
         <ul class="nav">
           <li class="logo">
             <a <?= href("/") ?>>Weirdorithm</a>
           </li>
-<?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
+          <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
 
           <li>
             <a <?= href("/board/exchange.php") ?>>
@@ -41,7 +41,7 @@ function href($uri){
             </a>
           </li>
           <?php } ?>
-<?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
+          <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
           <li class="right">
             <a <?= href("/logout.php") ?>>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="icon">
@@ -53,14 +53,14 @@ function href($uri){
           <li class="right">
             <a <?= href("/profile.php") ?>><?= $_SESSION['user_nickname'] ?></a>
           </li>
-<?php } else { ?>
+          <?php } else { ?>
           <li class="right">
             <a <?= href("/join.php") ?>>회원가입</a>
           </li>
           <li class="right">
             <a <?= href("/login.php") ?>>로그인</a>
           </li>
-<?php } ?>
+          <?php } ?>
         </ul>
-      </div>
+      </main>
     </nav>
