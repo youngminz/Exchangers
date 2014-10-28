@@ -42,6 +42,9 @@ aside {
     width: 304px;
     float: right;
 }
+.left.left {
+    float: left;
+}
 .right.right {
     float: right;
 }
@@ -86,7 +89,7 @@ button, .button, .button-primary {
     width: 1.5em;
     height: 1.5em;
     vertical-align: middle;
-    pointer-events: none;
+    /* pointer-events: none; */
     display: block;
 }
 .icon-small {
@@ -201,18 +204,42 @@ nav .icon {
     padding-bottom: 0.25em;
     border-bottom: 0.0625em solid #999;
 }
-article .vote {
-    float: left;
-    text-align: center;
+article .left {
+    line-height: 2em;
+}
+.vote.vote {
     font-size: 1.25em;
-}
-article .vote + div {
-    margin-left: 3rem;
-}
-section.content {
-    min-height: 4rem;
+    line-height: 1em;
+    text-align: center;
 }
 .vote a:visited {
     color: #33f;
     fill: #33f;
+}
+
+article .left ~ section {
+    margin-left: 3rem;
+}
+section.content {
+    min-height: 6rem;
+}
+section.comment ul {
+    margin: 0;
+    padding: 0;
+}
+section.comment li {
+    list-style: none;
+    padding: 0.25em 0;
+    border-bottom: 1px solid #ccc;
+}
+section.comment input {
+    width: 90%;
+}
+input[id^='toggle-visible-comment'] + form {
+    height: 0;
+    transition: height 0.25s;
+    overflow: hidden;
+}
+input[id^='toggle-visible-comment']:checked + form {
+    height: 2em;
 }
