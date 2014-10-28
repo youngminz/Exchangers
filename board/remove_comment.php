@@ -28,11 +28,10 @@ if ($_GET) {
             else {
                 if ($row['author'] != $_SESSION['ID']) {
                     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-                    echo "<h1 style='color: red'>Session ID Not Match</h1>";
+                    echo "<h1 style='color: red'>ID Not Match</h1>";
                     exit;
                 }
                 else {
-                    var_dump($_GET);
                     execute_query('UPDATE exchange_comment SET visible = "0" WHERE ID = ?', 'i', $_GET['comment']);
                     header('Location: ' . $_SERVER['HTTP_REFERER']);
                 }
