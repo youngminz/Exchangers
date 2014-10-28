@@ -18,11 +18,11 @@ if ($_POST) {
         !empty($_POST["user_pass_twice"]) && !empty($_POST["user_nickname"]) && 
         !empty($_POST["user_email"])
        ) {
-        $user_id = trim($_POST["user_id"]);
+        $user_id = htmlspecialchars(trim($_POST["user_id"]));
         $user_pass = trim($_POST["user_pass"]);
         $user_pass_twice = trim($_POST["user_pass_twice"]);
-        $user_nickname = trim($_POST["user_nickname"]);
-        $user_email = trim($_POST["user_email"]);
+        $user_nickname = htmlspecialchars(trim($_POST["user_nickname"]));
+        $user_email = htmlspecialchars(trim($_POST["user_email"]));
         
         if (ctype_alnum($user_id) === false || !filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
             $is_vaild = false;

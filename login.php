@@ -26,16 +26,17 @@ if ($_POST) {
     if (isset($_POST['user_id']) && isset($_POST['user_pass']) && 
        !empty($_POST['user_id']) && !empty($_POST['user_pass'])) {
         $row = fetch_first_row('SELECT * FROM users WHERE user_id = ? AND user_pass = ?', 
-                               'ss', $_POST['user_id'], hash('sha512', $_POST['user_pass']));
+                               'ss', htmlspecialchars($_POST['user_id']),
+                               hash('sha512', $_POST['user_pass']));
         if ($row === false) {
             $error = true;
             $reason_error = "아이디 혹은 비밀번호가 일치하지 않습니다!";
         }
         else {
-            $_SESSION['ID'] = htmlspecialchars($row['ID']);
-            $_SESSION['user_id'] = htmlspecialchars($row['user_id']);
-            $_SESSION['user_nickname'] = htmlspecialchars($row['user_nickname']);
-            $_SESSION['user_email'] = htmlspecialchars($row['user_email']);
+            $_SESSION['ID'] = $row['ID'];
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['user_nickname'] = $row['user_nickname'];
+            $_SESSION['user_email'] = $row['user_email'];
         }
     }
     else {
@@ -53,7 +54,7 @@ if (isset($_SESSION['ID'])) {
 
 require_once('header.php');
 ?>
-<div class="narrow-container">
+<main class="narrow">
   <form class="form-list" action="login.php" method="post">
     <h1>로그인</h1>
 <?php if ($info === true) { ?>
@@ -74,6 +75,6 @@ require_once('header.php');
       <a href="join.php" class="button">회원가입</a>
     </p>
   </form>
-</div>
+</main>
 </body>
 </html>
