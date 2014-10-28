@@ -17,9 +17,9 @@ if (strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) === false) {
 }
 
 if ($_GET) {
-    if (isset($_GET['mode']) && isset($_GET['comment'])) {
+    if (isset($_GET['mode']) && isset($_GET['article'])) {
         if ($_GET['mode'] === 'exchange') {
-            $row = fetch_first_row('SELECT * FROM exchange_comment WHERE id = ?', 'i', $_GET['comment']);
+            $row = fetch_first_row('SELECT * FROM exchange_article WHERE id = ?', 'i', $_GET['article']);
             if ($row === false) {
                 header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
                 echo "<h1 style='color: red'>Error Processing SQL Query</h1>";
@@ -32,7 +32,7 @@ if ($_GET) {
                     exit;
                 }
                 else {
-                    execute_query('UPDATE exchange_comment SET visible = "0" WHERE ID = ?', 'i', $_GET['comment']);
+                    execute_query('DELETE FROM exchange_article WHERE ID = ?', 'i', $_GET['article']);
                     header('Location: ' . $_SERVER['HTTP_REFERER']);
                 }
             }
