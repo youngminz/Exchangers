@@ -154,6 +154,7 @@ function execute_query() {
         echo "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>";
         exit;
     }
+    $conn->query("SET time_zone = '+9:00'");
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
         $sliced = array_slice($args, 1);
@@ -174,4 +175,53 @@ function execute_query() {
     }
 }
 
+function time2str($ts) {
+    if (!ctype_digit($ts))
+        $ts = strtotime($ts);
 
+    $diff = time() - $ts;
+    if ($diff == 0) {
+        return '지금';
+    } else if($diff > 0) {
+        $day_diff = floor($diff / 86400);
+        if ($day_diff == 0) {
+            if ($diff < 60)
+                return '방금 전';
+            else if ($diff < 3600)
+                return floor($diff / 60) . '분 전';
+            else if ($diff < 86400)
+                return floor($diff / 3600) . '시간 전';
+        }
+        else if ($day_diff == 1)
+                return '어제';
+        else if ($day_diff < 10) 
+            return $day_diff . '일 전';
+        #else if($day_diff < 31)
+        #    return ceil($day_diff / 7) . '주 전';
+        #else if($day_diff < 60)
+        #    return '달 전';
+        else
+            return date('n월 j일 G시', $ts);
+    } else {
+        $diff = abs($diff);
+        $day_diff = floor($diff / 86400);
+        if ($day_diff == 0) {
+            if ($diff < 3600) 
+                return floor($diff / 60) . '분 후';
+            else if ($diff < 86400) 
+                return floor($diff / 3600) . '시간 후';
+        }
+        else if ($day_diff == 1) 
+            return '내일';
+        else if ($day_diff < 4) 
+            return date('l', $ts);
+        else if ($day_diff < 7 + (7 - date('w'))) 
+            return '다음 주';
+        #else
+        #    if (ceil($day_diff / 7) < 4) return 'in ' . ceil($day_diff / 7) . '주 후';
+        #else
+        #    if (date('n', $ts) == date('n') + 1) return '다음 달';
+        else return date('n월 j일 G시', $ts);
+    }
+    return "부엉이바위에서";
+}
