@@ -53,7 +53,7 @@ function recursive_comment($parent_article, $parent_id, $level) {
                 echo $row["content"];
                 echo " - <small>" .
                   fetch_first_row("SELECT user_nickname FROM users WHERE ID = ?",
-                                  "i", $row['author'])['user_nickname'] . "</small>";
+                                  "i", $row['author'])['user_nickname'] . "가 " . time2str($row['date']) . "에" . "</small>";
                 if ($row['author'] == $_SESSION['ID']) { ?>
                   <a href="/board/exchange_remove_comment.php?mode=exchange&comment=<?= $row['ID'] ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"

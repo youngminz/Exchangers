@@ -9,6 +9,7 @@ if (!isset($_SESSION["ID"]) || empty($_SESSION["ID"])) {
 
 $error = false;
 $reason = "";
+
 if ($_POST) {
     if (isset($_POST["title"]) && isset($_POST["contents"]) && isset($_POST["start_language"]) && 
         isset($_POST["end_language"]) && isset($_POST["category"]) &&
