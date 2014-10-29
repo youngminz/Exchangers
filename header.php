@@ -6,6 +6,7 @@ function href($uri){
     }
     return $r;
 }
+date_default_timezone_set("Asia/Seoul");
 //////////////////// HTML START ////////////////////
 ?>
 <!DOCTYPE html>
@@ -49,6 +50,13 @@ function href($uri){
                          4v18h8v-6H22z"/>
               </svg>
             </a>
+          </li>
+          <li class="no-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 24 23" class="icon left">
+              <circle cx="9" cy="9" r="8" fill="none" stroke="#000" stroke-width="2" /> 
+              <path d="M15,15l10,10z" stroke="#000" stroke-width="2" />
+            </svg>
+            <input type="search" class="float: left;" />
           </li>
           <li class="right">
             <a <?= href("/profile.php") ?>><?= $_SESSION['user_nickname'] ?></a>
