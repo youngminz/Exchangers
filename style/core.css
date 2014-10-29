@@ -1,8 +1,8 @@
 /* Elemental tags */
 * {
     box-sizing: border-box;
-    font-family: 'Segoe UI Light', 'Roboto Light', Meiryo, 'SeoulNamsan L', '서울남산체 L',
-                'Malgun Gothic', sans-serif;
+    font-family: 'Segoe UI', 'Roboto Light', Meiryo, 'SeoulNamsan L', '서울남산체 L',
+                'Malgun Gothic', 'Segoe UI', sans-serif;
 }
 body {
     margin: 0;
@@ -40,6 +40,7 @@ main.with-aside {
 }
 aside {
     width: 304px;
+    height: 100%;
     float: right;
 }
 .left.left {
@@ -131,11 +132,18 @@ nav ul {
     float: left;
 }
 
-nav li a {
+nav li a, nav li.no-link {
     padding: calc(1.5rem - 0.75em) 1rem;
     color: inherit;
     text-decoration: none;
     display: inline-block;
+}
+
+nav li input {
+    display: inline-block;
+    font-size: 1em;
+    height: 1.25em;
+    
 }
 
 nav li a:hover, .current-page {
@@ -204,36 +212,41 @@ nav .icon {
     padding-bottom: 0.25em;
     border-bottom: 0.0625em solid #999;
 }
-article .left {
+#article-view article {
+    margin-bottom: 2em;
+}
+#article-view article .left {
     line-height: 2em;
 }
-.vote.vote {
+#article-view .vote.vote {
     font-size: 1.25em;
     line-height: 1em;
     text-align: center;
 }
-.vote a:visited {
+#article-view .vote a:visited {
     color: #33f;
     fill: #33f;
 }
 
-article .left ~ section {
+#article-view article .left ~ section {
     margin-left: 3rem;
 }
-section.content {
+#article-view section.content {
     min-height: 6rem;
 }
-section.comment ul {
+#article-view section.comment ul {
     margin: 0;
     padding: 0;
+    max-height: 6em;
+    overflow-y: scroll;
 }
-section.comment li {
+#article-view section.comment li {
     list-style: none;
     padding: 0.25em 0;
     border-bottom: 1px solid #ccc;
 }
-section.comment input {
-    width: 90%;
+#article-view section.comment input {
+    width: 100%;
 }
 input[id^='toggle-visible-comment'] + form {
     height: 0;
@@ -242,4 +255,51 @@ input[id^='toggle-visible-comment'] + form {
 }
 input[id^='toggle-visible-comment']:checked + form {
     height: 2em;
+}
+/* Exchange List */
+#exchange-list article {
+    height: 4rem;
+}
+#exchange-list section.status {
+    width: 10.5rem;
+    display: inline-block;
+}
+#exchange-list section.question {
+    width: 47rem;
+    display: inline-block;
+}
+#exchange-list section big {
+    font-size: 1.5em;
+    display: block;
+}
+#exchange-list section .views, #exchange-list section .responds, #exchange-list section .votes {
+    display: inline-block;
+    width: 3rem;
+    text-align: center;
+    margin: 0.25rem;
+}
+#exchange-list section h3 {
+    margin: 0;
+}
+/* profile: Header */
+header {
+    background: #eee;
+    height: 17em;
+    padding: 1em;
+}
+header img {
+    float: left;
+    margin-right: 1em;
+}
+header > div {
+    float: left;
+    width: 42rem;
+}
+header h1 {
+    font-weight: 100;
+    margin: 0.25em;
+    display: inline-block;
+}
+header dl {
+    width: 50%;
 }
