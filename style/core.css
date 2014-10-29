@@ -3,10 +3,12 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', 'Roboto Light', Meiryo, 'SeoulNamsan L', '서울남산체 L',
                 'Malgun Gothic', 'Segoe UI', sans-serif;
+    font-weight: 200;
 }
-body {
+html, body {
     margin: 0;
-    padding-top: 3rem;
+    padding-bottom: 2rem;
+    padding-top: 1.5rem;
 }
 
 small {
@@ -30,7 +32,7 @@ main {
     padding: 0 32px;
 }
 main.narrow {
-    width: 512px;
+    width: 36rem;
 }
 main.with-aside {
     width: 720px;
@@ -139,11 +141,11 @@ nav li a, nav li.no-link {
     display: inline-block;
 }
 
-nav li input {
+nav li input[type='text'][type='text'] {
     display: inline-block;
     font-size: 1em;
-    height: 1.25em;
-    
+    padding: 0 0.125em 0.125em 0.125em;
+    margin-bottom: 0.125em;
 }
 
 nav li a:hover, .current-page {
@@ -154,6 +156,8 @@ nav li a:hover, .current-page {
 nav li.logo {
     color: #f60;
     font-size: 2em;
+    line-height: 1.25em;
+    vertical-align: top;
 }
 
 nav li.right {
@@ -177,11 +181,11 @@ nav .icon {
 .form-list input[type="password"], .form-list input[type="tel"],
 .form-list input[type="url"], .form-list input[type="text"], 
 .form-list input:not([type]), .form-list .input-field {
-    width: 60%;
+    width: 70%;
 }
 .form-list .form-line label, div.form-line p.form-line label {
     display: inline-block;
-    width: 40%;
+    width: 30%;
     font-weight: bold;
 }
 .form-list .form-line:last-child {
@@ -259,13 +263,16 @@ input[id^='toggle-visible-comment']:checked + form {
 /* Exchange List */
 #exchange-list article {
     height: 4rem;
+    margin-top: 1em;
 }
 #exchange-list section.status {
-    width: 10.5rem;
+    width: 13rem;
     display: inline-block;
+    float: left;
 }
 #exchange-list section.question {
-    width: 47rem;
+    width: 45rem;
+    height: 4em;
     display: inline-block;
 }
 #exchange-list section big {
@@ -274,12 +281,31 @@ input[id^='toggle-visible-comment']:checked + form {
 }
 #exchange-list section .views, #exchange-list section .responds, #exchange-list section .votes {
     display: inline-block;
-    width: 3rem;
+    width: 3.5rem;
     text-align: center;
     margin: 0.25rem;
+    background-color: #eee;
+}
+#exchange-list section .votes {
+    margin-right: 1em;
 }
 #exchange-list section h3 {
     margin: 0;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    vertical-align: top;
+    height: 2.5rem;
+}
+#exchange-list section h3 a {
+    color: #222;
+    text-decoration: none;
+}
+#exchange-list section .info {
+    font-size: 0.75em;
+    height: 1em;
+}
+#exchange-list section mark {
+    background-color: #9cf;
 }
 /* profile: Header */
 header {
@@ -301,5 +327,29 @@ header h1 {
     display: inline-block;
 }
 header dl {
+    display: block;
     width: 50%;
+    height: 100%;
+}
+header dd, header dt {
+    display: inline-block;
+}
+/* Paging */
+ul.pagination {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+ul.pagination li {
+    text-align: center;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    background-color: #666;
+}
+ul.pagination li a {
+    line-height: 2em;
+    vertical-align: center;
+    color: #fff;
 }

@@ -59,7 +59,7 @@ require_once("../header.php"); ?>
             <mark>
               <?= fetch_first_row('SELECT * FROM category WHERE category_code = ?',
                                   's', $row['category'])['korean'] ?><!--
-         --></mark> 
+         --></mark>,
           </span>
           <span class="lang">
             <mark>
@@ -69,10 +69,10 @@ require_once("../header.php"); ?>
             <mark>
               <?= fetch_first_row('SELECT * FROM language WHERE lang_code = ?',
                                   's', $row['lang_to'])['korean'] ?><!--
-         --></mark>로
+         --></mark>로,
           </span>
           <span>
-            <?= time2str($row['date']) ?>에
+            <?= time2str($row['date']) ?>
             <?php
               $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']); 
               echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?>가

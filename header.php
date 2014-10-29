@@ -1,7 +1,8 @@
 <?php
-function href($uri){
-    $r = ' href="' . $uri .'"';
-    if($uri == $_SERVER["REQUEST_URI"]){
+function href($uri, $href=true){
+    if($href) $r = ' href="' . $uri .'"';
+    else $r = '';
+    if(strpos($uri, $_SERVER["REQUEST_URI"]) === 0){
         $r .= ' class="current-page"';
     }
     return $r;
@@ -41,8 +42,19 @@ date_default_timezone_set("Asia/Seoul");
               </svg>
             </a>
           </li>
-          <?php } ?>
-          <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
+          <li class="no-link" <?= href("/board/exchange_search.php", 0) ?>>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 24 23" class="icon left">
+              <circle cx="9" cy="9" r="7.5" fill="none" stroke="#000" stroke-width="2" /> 
+              <path d="M15,15l10,10z" stroke="#000" stroke-width="2" />
+            </svg>
+            <form action="/board/exchange_search.php" method="GET" style="display: inline-block">
+              <input type="text" class="float: left;" name="q" placeholder="검색..." required <?php
+                if(!empty($q)){
+                  echo "value=\"$q\"";
+                }
+              ?> />
+            </form>
+          </li>
           <li class="right">
             <a <?= href("/logout.php") ?>>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="icon">
@@ -50,13 +62,6 @@ date_default_timezone_set("Asia/Seoul");
                          4v18h8v-6H22z"/>
               </svg>
             </a>
-          </li>
-          <li class="no-link">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 24 23" class="icon left">
-              <circle cx="9" cy="9" r="8" fill="none" stroke="#000" stroke-width="2" /> 
-              <path d="M15,15l10,10z" stroke="#000" stroke-width="2" />
-            </svg>
-            <input type="search" class="float: left;" />
           </li>
           <li class="right">
             <a <?= href("/profile.php") ?>><?= $_SESSION['user_nickname'] ?></a>

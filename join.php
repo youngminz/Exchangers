@@ -12,15 +12,12 @@ function check_email($email) {
 } 
 
 if ($_POST) {
-    if (isset($_POST["user_id"]) && isset($_POST["user_pass"]) && 
-        isset($_POST["user_pass_twice"]) && isset($_POST["user_nickname"]) && 
-        isset($_POST["user_email"]) && !empty($_POST["user_id"]) && !empty($_POST["user_pass"]) && 
-        !empty($_POST["user_pass_twice"]) && !empty($_POST["user_nickname"]) && 
-        !empty($_POST["user_email"])
-       ) {
+    if ($_POST["user_id"] !== "" && $_POST["user_pass"] !== "" && 
+        $_POST["user_pass_twice"] !== "" && $_POST["user_nickname"] !== "" && 
+        $_POST["user_email"] !== "") {
         $user_id = htmlspecialchars(trim($_POST["user_id"]));
-        $user_pass = trim($_POST["user_pass"]);
-        $user_pass_twice = trim($_POST["user_pass_twice"]);
+        $user_pass = hash('sha512', trim($_POST["user_pass"]));
+        $user_pass_twice = hash('sha512', trim($_POST["user_pass_twice"]));
         $user_nickname = htmlspecialchars(trim($_POST["user_nickname"]));
         $user_email = htmlspecialchars(trim($_POST["user_email"]));
 
@@ -49,8 +46,7 @@ if ($_POST) {
 
         if ($is_valid === true) {
             if (execute_query("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT)", 
-                              "ssss", $user_id, hash('sha512', $user_pass),
-                              $user_nickname, $user_email) === false
+                              "ssss", $user_id, $user_pass, $user_nickname, $user_email) === false
                ) {
                 $is_vaild = false;
                 $reason = "DB 삽입 오류!";
@@ -76,28 +72,32 @@ require_once("header.php");
 <main class="narrow">
   <form class="form-list" action="join.php" method="post">
     <h1>회원 가입</h1>
-    <?php if ($is_valid === false) { ?>
+    <?= $is_valid ?>
+    <?php if ($is_valid == false) { ?>
       <p class="message message-error"><?= $reason ?></p>
     <?php } ?>
     <p class="form-line">
       <label for="user_id">ID</label><!--
-      --><input type="text" name="user_id" required />
+      --><input type="text" name="user_id" required
+                value="<?= isset($_POST['user_id'])? $_POST['user_id'] : '' ?>" />
     </p>
     <p class="form-line">
       <label for="user_pass">비밀번호</label><!--
-      --><input type="password" name="user_pass" required  />
+      --><input type="password" name="user_pass" required />
     </p>
     <p class="form-line">
       <label for="user_pass_twice">비밀번호 재입력</label><!--
-      --><input type="password" name="user_pass_twice" required  />
+      --><input type="password" name="user_pass_twice" required />
     </p>
     <p class="form-line">
       <label for="user_nickname">닉네임</label><!--
-      --><input type="text" name="user_nickname" required  />
+      --><input type="text" name="user_nickname" required
+                value="<?= isset($_POST['user_nickname'])? $_POST['user_nickname'] : '' ?>" />
     </p>
     <p class="form-line">
       <label for="user_email">e-mail</label><!--
-      --><input type="email" name="user_email" required  />
+      --><input type="email" name="user_email" required
+                value="<?= isset($_POST['user_email'])? $_POST['user_email'] : '' ?>" />
     </p>
     <p class="form-line">
       <input type="submit" value="회원가입" class="button button-primary right" />

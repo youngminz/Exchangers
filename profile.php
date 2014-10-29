@@ -65,6 +65,14 @@ require_once('header.php');
         <dt>아이디</dt>
         <dd><?= $profile_data['user_id'] ?></dd>
       </dl>
+      <dl>
+        <dt>이메일</dt>
+        <dd><?= $profile_data['user_email'] ?></dd>
+      </dl>
+      <dl>
+        <dt>사용자 평판</dt>
+        <dd>(준비 중)</dd>
+      </dl>
     </div>
   </header>
   <?php if ($is_me === true) { ?>

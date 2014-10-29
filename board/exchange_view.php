@@ -50,10 +50,12 @@ function recursive_comment($parent_article, $parent_id, $level) {
         foreach ($result as $row) {
             echo '<li style="padding-left: ' . ($level * 1.5 - 1) . 'rem;">';
             if ($row['visible'] == 1) {
+                $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']); 
+              
                 echo $row["content"];
-                echo " - <small>" .
-                  fetch_first_row("SELECT user_nickname FROM users WHERE ID = ?",
-                                  "i", $row['author'])['user_nickname'] . "가 " . time2str($row['date']) . "에" . "</small>";
+                echo " - <small>" ;
+                echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>";
+                echo "가 " . time2str($row['date']) . "에" . "</small>";
                 if ($row['author'] == $_SESSION['ID']) { ?>
                   <a href="/board/exchange_remove_comment.php?mode=exchange&comment=<?= $row['ID'] ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"
@@ -94,13 +96,17 @@ require_once('../header.php');
   <article class="question">
     <aside>
       <section>
-        <b><?= fetch_first_row('SELECT * FROM users WHERE id = ?',
-                               'i', $question['author'])['user_nickname'] ?></b>가
-        <b><?= time2str($question['date']) ?></b>에 작성<br />
+        <?php $user = fetch_first_row('SELECT * FROM users WHERE id = ?', 'i', $question['author']); ?>
+        <img src="//www.gravatar.com/avatar/<?= hash('md5', $user['user_email']) ?>?d=identicon&size=56"
+             class="right" />
+        <b>
+          <?= time2str($question['date']) ?>,
+          <?php echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>"
+      ?></b><br />
         조회 <b><?= $question['board_hit'] ?></b>회<br />
-          <?php if ($question['author'] == $_SESSION['ID']) { ?>
-            <br />
-          <a href="/board/exchange_edit.php?id=<?= $question['ID'] ?>">[수정]</a> <a href="/board/exchange_remove.php?id=<?= $question['ID'] ?>">[삭제]</a>
+  <?php if ($question['author'] == $_SESSION['ID']) { ?><br />
+        <a href="/board/exchange_edit.php?id=<?= $question['ID'] ?>">수정</a>
+        <a href="/board/exchange_remove.php?id=<?= $question['ID'] ?>">삭제</a>
           <?php } ?>
       </section>
     </aside>
@@ -134,13 +140,17 @@ if (count($answer) != 0) {
   <article>
     <aside>
       <section>
-        <b><?= fetch_first_row('SELECT * FROM users WHERE id = ?',
-                               'i', $answer_row['author'])['user_nickname'] ?></b>가
-        <b><?= time2str($answer_row['date']) ?></b>에 작성<br />
+        <?php $user = fetch_first_row('SELECT * FROM users WHERE id = ?', 'i', $answer_row['author']); ?>
+        <img src="//www.gravatar.com/avatar/<?= hash('md5', $user['user_email']) ?>?d=identicon&size=56"
+             class="right" />
+        <b>
+          <?= time2str($answer_row['date']) ?>,
+          <?php echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>"
+      ?></b><br />
         <?php if ($answer_row['author'] == $_SESSION['ID']) { ?>
           <br />
-          <a href="/board/exchange_edit.php?id=<?= $answer_row['ID'] ?>">[수정]</a>
-          <a href="/board/exchange_remove.php?id=<?= $answer_row['ID'] ?>">[삭제]</a>
+          <a href="/board/exchange_edit.php?id=<?= $answer_row['ID'] ?>">수정</a>
+          <a href="/board/exchange_remove.php?id=<?= $answer_row['ID'] ?>">삭제</a>
         <?php } ?>
       </section>
     </aside>
