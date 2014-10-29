@@ -23,11 +23,6 @@ if ($_POST) {
         $user_pass_twice = trim($_POST["user_pass_twice"]);
         $user_nickname = htmlspecialchars(trim($_POST["user_nickname"]));
         $user_email = htmlspecialchars(trim($_POST["user_email"]));
-        
-        if (ctype_alnum($user_id) === false || !filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
-            $is_vaild = false;
-            $reason = "허용되지 않는 문자가 들어가 있습니다.";
-        }
 
         $is_valid = true;
         if ($user_pass == $user_pass_twice) {
@@ -53,7 +48,7 @@ if ($_POST) {
         }
 
         if ($is_valid === true) {
-            if (execute_query("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT)", 
+            if (execute_query("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT)", 
                               "ssss", $user_id, hash('sha512', $user_pass),
                               $user_nickname, $user_email) === false
                ) {
