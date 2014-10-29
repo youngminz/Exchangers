@@ -14,7 +14,7 @@ date_default_timezone_set("Asia/Seoul");
 <html>
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="/style/core.css" />
+    <link rel="stylesheet" href="http://shizuku.hibiya.moe/core.css" />
   </head>
   <body>
     <nav>
