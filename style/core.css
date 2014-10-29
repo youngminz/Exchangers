@@ -156,7 +156,7 @@ nav li a:hover, .current-page {
 nav li.logo {
     color: #f60;
     font-size: 2em;
-    line-height: 1.25em;
+    line-height: 1em;
     vertical-align: top;
 }
 
@@ -333,6 +333,15 @@ header dl {
 }
 header dd, header dt {
     display: inline-block;
+}
+header form.form-list.form-list {
+    float: right;
+    width: 45%;
+    padding-top: 4em;
+}
+header form .form-line {
+    margin-top: 0;
+    margin-bottom: 0.5em;
 }
 /* Paging */
 ul.pagination {
