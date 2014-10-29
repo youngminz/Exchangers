@@ -21,7 +21,7 @@ date_default_timezone_set("Asia/Seoul");
       <main>
         <ul class="nav">
           <li class="logo">
-            <a <?= href("/") ?>>Weirdorithm</a>
+            <a <?= href("/") ?>>Exchangers</a>
           </li>
           <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
 
