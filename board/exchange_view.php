@@ -55,7 +55,7 @@ function recursive_comment($parent_article, $parent_id, $level) {
                   fetch_first_row("SELECT user_nickname FROM users WHERE ID = ?",
                                   "i", $row['author'])['user_nickname'] . "</small>";
                 if ($row['author'] == $_SESSION['ID']) { ?>
-                  <a href="/board/remove_comment.php?mode=exchange&comment=<?= $row['ID'] ?>">
+                  <a href="/board/exchange_remove_comment.php?mode=exchange&comment=<?= $row['ID'] ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"
                          class="icon icon-small">
                       <path d="M0,1h3v-1h5v1h3v1h-12z" />
@@ -76,8 +76,8 @@ function recursive_comment($parent_article, $parent_id, $level) {
                     <input type="hidden" name="parent_id" value="<?= $row['ID'] ?>" />
                     <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
                   </form>
-  <?php
-    } else echo "<i>[삭제된 댓글입니다]</i>";
+      <?php
+        } else echo "<i>[삭제된 댓글입니다]</i>";
             recursive_comment($parent_article, $row['ID'], $level + 1);
         }
     }
@@ -90,18 +90,20 @@ require_once('../header.php');
 <main id="article-view">
   <h2>
     <?= $question['board_title'] ?>
-    <mark class="right">...</mark>
   </h2>
-  <aside>
-    <section>
-      <b><?= fetch_first_row('SELECT * FROM users WHERE id = ?', 'i', $question['author'])['user_nickname'] ?></b>가 작성
-      <br />
-      <br />
-      <b><?= time2str($question['date']) ?></b>에 올라옴<br />
-      <b><?= $question['board_hit'] ?></b> 조회<br />
-    </section>
-  </aside>
   <article class="question">
+    <aside>
+      <section>
+        <b><?= fetch_first_row('SELECT * FROM users WHERE id = ?',
+                               'i', $question['author'])['user_nickname'] ?></b>가
+        <b><?= time2str($question['date']) ?></b>에 작성<br />
+        조회 <b><?= $question['board_hit'] ?></b>회<br />
+          <?php if ($question['author'] == $_SESSION['ID']) { ?>
+            <br />
+          <a href="/board/exchange_edit.php?id=<?= $question['ID'] ?>">[수정]</a> <a href="/board/exchange_remove.php?id=<?= $question['ID'] ?>">[삭제]</a>
+          <?php } ?>
+      </section>
+    </aside>
     <div class="vote left">
       <a href="/board/exchange_vote.php?mode=exchange&type=up&article=<?= $question['ID'] ?>">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
@@ -116,7 +118,7 @@ require_once('../header.php');
       </a>
     </div>
     <section class="content">
-      <?= $question['contents'] ?>
+      <?= nl2br($question['contents']) ?>
     </section>
     <span class="left">댓글</span>
     <section class="comment">
@@ -125,12 +127,23 @@ require_once('../header.php');
   </article>
   
 <?php
-if (count($answer) == 0) {
-  echo "답변이 없습니다. ";
-} else {
+if (count($answer) != 0) {
   echo "<h2>답변 " . count($answer) . "개</h2>";
   foreach ($answer as $answer_row) { ?>
+  
   <article>
+    <aside>
+      <section>
+        <b><?= fetch_first_row('SELECT * FROM users WHERE id = ?',
+                               'i', $answer_row['author'])['user_nickname'] ?></b>가
+        <b><?= time2str($answer_row['date']) ?></b>에 작성<br />
+        <?php if ($answer_row['author'] == $_SESSION['ID']) { ?>
+          <br />
+          <a href="/board/exchange_edit.php?id=<?= $answer_row['ID'] ?>">[수정]</a>
+          <a href="/board/exchange_remove.php?id=<?= $answer_row['ID'] ?>">[삭제]</a>
+        <?php } ?>
+      </section>
+    </aside>
     <div class="vote left">
       <a href="/board/exchange_vote.php?mode=exchange&type=up&article=<?= $answer_row['ID'] ?>">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
@@ -145,18 +158,18 @@ if (count($answer) == 0) {
       </a>
     </div>
     <section class="content">
-      <?= $answer_row['contents'] ?>
+      <?= nl2br($answer_row['contents']) ?>
     </section>
     <span class="left">댓글</span>
     <section class="comment">
       <?php recursive_comment($answer_row['ID'], NULL, 1); ?>
     </section>
   </article>
-  <hr />
 <?php
   }
 }
 ?>
+  <h2>답변하기</h2>
   <form class="form-write" action="/board/exchange_view.php?id=<?= $article_id ?>" method="post">
     <textarea name="contents"></textarea>
     <p class="form-line">
