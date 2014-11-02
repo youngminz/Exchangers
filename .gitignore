@@ -2,5 +2,4 @@ config.php
 phpmyadmin
 diff.diff
 .idea
-messages.po
 phpinfo.php
