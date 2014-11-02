@@ -50,10 +50,10 @@ require_once("../header.php");
           $option = '<option value="">' . _("언어 선택") . '</option>';
           $all_languages = fetch_all_row("SELECT * FROM language");
           foreach ($all_languages as $language) {
-            $option .= '<option value="' . $language["lang_code"] . '">' . $language["lang_code"] . '</option>';
+            $option .= '<option value="' . $language["lang_code"] . '">' . _($language["lang_code"]) . '</option>';
           }
         ?>
-        <?= sprintf('<select name="start_language">%s</select>에서 <select>%s</select>으로', $option, $option) ?>
+        <?= sprintf('<select name="start_language">%s</select>에서 <select name="end_language">%s</select>으로', $option, $option) ?>
       </p>
       <p class="form-line">
         <label for="category"><?= _("카테고리") ?>:</label>
@@ -62,7 +62,7 @@ require_once("../header.php");
           <?php $all_categories = fetch_all_row("SELECT * FROM category");
           foreach ($all_categories as $category) { ?>
             <option value="<?= $category['category_code'] ?>">
-              <?= $category['category_code']; ?>
+              <?= _($category['category_code']) ?>
             </option>
           <?php } ?>
         </select>
