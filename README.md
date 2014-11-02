@@ -1,7 +1,7 @@
-Weirdorithm
+Exchangers
 ===========
 
-Digital Contents 2014 *Weirdorithm*'s project.
+Digital Contents 2014 *Weirdorithm* Team's project.
 
 License
 =======
