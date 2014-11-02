@@ -33,10 +33,6 @@ if ($_POST) {
         execute_query('UPDATE users SET user_nickname = ? WHERE ID = ?', 'si', htmlspecialchars($_POST['user_nickname']), $_SESSION['ID']);
         $modified = true;
     }
-    /*if (isset($_POST['user_email']) && !empty($_POST['user_email'])) {
-        execute_query('UPDATE users SET user_email = ? WHERE ID = ?', 'si', htmlspecialchars($_POST['user_email']), $_SESSION['ID']);
-        $modified = true;
-    }*/
     $my_data = fetch_first_row("SELECT * FROM users WHERE ID = ?", 'i', $_SESSION['ID']);
 
     $_SESSION['user_id'] = $my_data['user_id'];
@@ -49,54 +45,54 @@ $profile_data = fetch_first_row("SELECT * FROM users WHERE ID = ?", 'i', $id);
 //////////////////// HTML START ////////////////////
 
 require_once('header.php');
-?>  
+?>
 
 <main>
   <header>
     <img src="//www.gravatar.com/avatar/<?= hash('md5', $profile_data['user_email']) ?>?d=identicon&size=240" />
     <div>
       <h1><?= $profile_data['user_nickname'] ?></h1>
-      사용자 #<?= $id ?>
-      <form class="form-list" action="profile.php" method="post">
-        <?php if ($modified === true) { ?>
-          <p class="message message-success">정보 변경이 성공적으로 이루어졌습니다.</p>
-        <?php } if ($different_password === true) { ?>
-          <p class="message message-error">변경하려는 패스워드가 일치하지 않습니다!</p>
-        <?php } ?>
-        <p class="form-line">
-          <label for="user_pass">비밀번호</label><!--
-       --><input type="password" name="user_pass"  />
-        </p>
-        <p class="form-line">
-          <label for="user_pass_twice">재입력</label><!--
-       --><input type="password" name="user_pass_twice"  />
-        </p>
-        <p class="form-line">
-          <label for="user_nickname">닉네임</label><!--
-       --><input type="text" name="user_nickname" placeholder="<?= $profile_data['user_nickname'] ?>"  />
-        </p>
-        <p class="form-line">
-          <a href="/leave_ask.php" class="button">회원 탈퇴</a>
-          <input type="submit" value="프로필 업데이트" class="button button-primary right" />
-        </p>
-      </form>
+        <?= _("사용자 #") ?><?= $id ?>
+        <?php if ($is_me === true) { ?>
+          <form class="form-list" action="profile.php" method="post">
+          <?php if ($modified === true) { ?>
+            <p class="message message-success"><?= _("정보 변경이 성공적으로 이루어졌습니다.") ?></p>
+          <?php } if ($different_password === true) { ?>
+            <p class="message message-error"><?= _("변경하려는 비밀번호가 일치하지 않습니다!") ?></p>
+          <?php } ?>
+          <p class="form-line">
+            <label for="user_pass"><?= _("비밀번호") ?></label><!--
+         --><input type="password" name="user_pass"  />
+          </p>
+          <p class="form-line">
+            <label for="user_pass_twice"><?= _("재입력") ?></label><!--
+         --><input type="password" name="user_pass_twice"  />
+          </p>
+          <p class="form-line">
+            <label for="user_nickname"><?= _("닉네임") ?></label><!--
+         --><input type="text" name="user_nickname" placeholder="<?= $profile_data['user_nickname'] ?>"  />
+          </p>
+          <p class="form-line">
+            <a href="/leave_ask.php" class="button"><?= _("회원 탈퇴") ?></a>
+            <input type="submit" value="<?= _("프로필 업데이트") ?>" class="button button-primary right" />
+          </p>
+        </form>
+      <?php } ?>
+
       <dl>
-        <dt>아이디</dt>
+        <dt><?= _("아이디") ?></dt>
         <dd><?= $profile_data['user_id'] ?></dd>
       </dl>
       <dl>
-        <dt>이메일</dt>
+        <dt><?= _("이메일") ?></dt>
         <dd><?= $profile_data['user_email'] ?></dd>
       </dl>
       <dl>
-        <dt>사용자 평판</dt>
-        <dd>(준비 중)</dd>
+        <dt><?= _("사용자 평판") ?></dt>
+        <dd><?= _("(준비 중)") ?></dd>
       </dl>
     </div>
   </header>
-  <?php if ($is_me === true) { ?>
-      
-<?php } ?>  
 </main>
 </body>
 </html>

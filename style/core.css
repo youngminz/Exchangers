@@ -73,7 +73,7 @@ button, .button, .button-primary {
     color: inherit;
     background: #ccc;
     text-decoration: none;
-  
+
     border: solid #999;
     border-width: 0 0 0.1875em 0;
     border-radius: 0.125em;
@@ -144,7 +144,6 @@ nav li a, nav li.no-link {
 nav li input[type='text'][type='text'] {
     display: inline-block;
     font-size: 1em;
-    padding: 0 0.125em 0.125em 0.125em;
     margin-bottom: 0.125em;
 }
 
@@ -179,7 +178,7 @@ nav .icon {
 
 .form-list input[type="email"], .form-list input[type="number"],
 .form-list input[type="password"], .form-list input[type="tel"],
-.form-list input[type="url"], .form-list input[type="text"], 
+.form-list input[type="url"], .form-list input[type="text"],
 .form-list input:not([type]), .form-list .input-field {
     width: 70%;
 }

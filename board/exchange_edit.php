@@ -25,7 +25,7 @@ if ($_GET && isset($_GET['id']) && !empty($_GET['id'])) {
     $row = fetch_first_row("SELECT * FROM exchange_article WHERE ID = ?", "i", $_GET['id']);
     if ($row['author'] != $_SESSION['ID']) {
         header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-        echo "<h1 style='color: red'>ID Not Match</h1>";
+        echo "<h1 style='color: red'>" . _("글을 작성한 사람만이 삭제할 수 있습니다.") . "</h1>";
         exit;
     }
     if ($_POST) {
@@ -34,17 +34,17 @@ if ($_GET && isset($_GET['id']) && !empty($_GET['id'])) {
             $result = execute_query($query, "si", htmlspecialchars($_POST['contents']), $_GET['id']);
             if ($result === false) {
                 $error = true;
-                $reason = "SQL 쿼리를 실행하는 도중 오류가 발생했습니다.";
+                $reason = _("SQL 쿼리를 실행하는 도중 오류가 발생했습니다.");
             }
             else {
-                // Success! 
+                // Success!
                 header('Location: /board/exchange_view.php?id=' . find_root_article($_GET['id']));
                 exit;
             }
         }
         else {
             $error = true;
-            $reason = "파라미터가 올바르지 않습니다!";
+            $reason = _("파라미터가 올바르지 않습니다!");
         }
     }
 }
@@ -58,17 +58,17 @@ else {
 require_once("../header.php");
 ?>
 <main class="narrow">
-  <h1>글 수정하기</h1>
-<?php if ($error === true) { ?>
-  <div class="message message-error">
-    <?= $reason ?>
-  </div>
-<?php } ?>
+  <h1><?= _("글 수정하기") ?></h1>
+    <?php if ($error === true) { ?>
+      <div class="message message-error">
+      <?= $reason ?>
+      </div>
+    <?php } ?>
   <form class="form-write" action="/board/exchange_edit.php?id=<?= $_GET['id'] ?>" method="post">
     <textarea name="contents"><?= $row['contents'] ?></textarea>
     <p class="form-line">
-      <a href="/board/exchange.php" class="button">목록</a>
-      <input type="submit" value="작성" class="button-primary" />
+      <a href="/board/exchange.php" class="button"><?= _("목록") ?></a>
+      <input type="submit" value="<?= _("작성") ?>" class="button-primary" />
     </p>
   </form>
 </main>

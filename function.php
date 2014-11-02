@@ -29,7 +29,7 @@ function fatal_handler() {
         $errline = $error["line"];
         $errstr  = $error["message"];
 
-        echo format_error ($errno, $errstr, $errfile, $errline);
+        echo format_error($errno, $errstr, $errfile, $errline);
     }
 }
 
@@ -68,13 +68,12 @@ function fetch_first_row() {
     }
     else {
         $sql = $args[0];
-        $mode = $args[1];
     }
-    
+
     global $db_host, $db_user, $db_pass, $db_name;
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
     if ($conn->connect_errno) {
-        echo "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>";
+        echo _("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
         exit;
     }
     $stmt = $conn->prepare($sql);
@@ -107,13 +106,12 @@ function fetch_all_row() {
     }
     else {
         $sql = $args[0];
-        $mode = $args[1];
     }
-    
+
     global $db_host, $db_user, $db_pass, $db_name;
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
     if ($conn->connect_errno) {
-        echo "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>";
+        echo _("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
         exit;
     }
     $stmt = $conn->prepare($sql);
@@ -123,13 +121,13 @@ function fetch_all_row() {
     }
     $stmt->execute();
     $stmt->store_result();
-    
+
     bind_array($stmt, $row);
     $array = [];
     while ($stmt->fetch()) {
         array_push($array, clone_array($row));
     }
-    
+
     $stmt->close();
     $conn->close();
     return $array;
@@ -145,13 +143,12 @@ function execute_query() {
     }
     else {
         $sql = $args[0];
-        $mode = $args[1];
     }
-    
+
     global $db_host, $db_user, $db_pass, $db_name;
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
     if ($conn->connect_errno) {
-        echo "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>";
+        echo _("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
         exit;
     }
     $conn->query("SET time_zone = '+9:00'");
@@ -181,47 +178,24 @@ function time2str($ts) {
 
     $diff = time() - $ts;
     if ($diff == 0) {
-        return '지금';
-    } else if($diff > 0) {
+        return _('지금');
+    }
+    else if ($diff > 0) {
         $day_diff = floor($diff / 86400);
         if ($day_diff == 0) {
             if ($diff < 60)
-                return '방금 전';
+                return _('방금 전');
             else if ($diff < 3600)
-                return floor($diff / 60) . '분 전';
+                return sprintf(_('%d분 전'), floor($diff / 60));
             else if ($diff < 86400)
-                return floor($diff / 3600) . '시간 전';
+                return sprintf(_('%d시간 전'), floor($diff / 3600));
         }
         else if ($day_diff == 1)
-                return '어제';
-        else if ($day_diff < 10) 
-            return $day_diff . '일 전';
-        #else if($day_diff < 31)
-        #    return ceil($day_diff / 7) . '주 전';
-        #else if($day_diff < 60)
-        #    return '달 전';
+            return _('어제');
+        else if ($day_diff < 10)
+            return sprintf(_('%d일 전'), $day_diff);
         else
-            return date('n월 j일 G시', $ts);
-    } else {
-        $diff = abs($diff);
-        $day_diff = floor($diff / 86400);
-        if ($day_diff == 0) {
-            if ($diff < 3600) 
-                return floor($diff / 60) . '분 후';
-            else if ($diff < 86400) 
-                return floor($diff / 3600) . '시간 후';
-        }
-        else if ($day_diff == 1) 
-            return '내일';
-        else if ($day_diff < 4) 
-            return date('l', $ts);
-        else if ($day_diff < 7 + (7 - date('w'))) 
-            return '다음 주';
-        #else
-        #    if (ceil($day_diff / 7) < 4) return 'in ' . ceil($day_diff / 7) . '주 후';
-        #else
-        #    if (date('n', $ts) == date('n') + 1) return '다음 달';
-        else return date('n월 j일 G시', $ts);
+            return date(_('n월 j일 G시'), $ts);
     }
-    return "부엉이바위에서";
+    return _("알 수 없음");
 }
