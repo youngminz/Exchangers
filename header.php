@@ -11,11 +11,6 @@ function href($uri, $href=true) {
     }
     return $r;
 }
-date_default_timezone_set("Asia/Seoul");
-
-$language = 'ko-KR';
-putenv("LANG=$language");
-setlocale(LC_ALL, $language);
 
 //////////////////// HTML START ////////////////////
 ?>
