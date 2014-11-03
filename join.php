@@ -60,7 +60,6 @@ require_once("header.php");
 <main class="narrow">
   <form class="form-list" action="join.php" method="post">
     <h1><?= T_("회원 가입") ?></h1>
-    <?= $is_valid ?>
     <?php if ($is_valid == false) { ?>
       <p class="message message-error"><?= $reason ?></p>
     <?php } ?>

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Exchangers\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-02 06:05+0000\n"
-"PO-Revision-Date: 2014-11-02 17:48+0900\n"
+"PO-Revision-Date: 2014-11-03 21:53+0900\n"
 "Last-Translator: youngminz <youngminz.kr@gmail.com>\n"
 "Language-Team: Weirdorithm <youngminz.kr@gmail.com>\n"
 "Language: en_US\n"
@@ -20,338 +20,340 @@ msgstr ""
 
 #: login.php:14
 msgid "회원가입이 정상적으로 처리되었습니다. 가입하신 아이디로 로그인해주세요."
-msgstr ""
+msgstr "You joined our website successfully, "
 
 #: login.php:18
 msgid "성공적으로 로그아웃되었습니다."
-msgstr ""
+msgstr "Logout was completed."
 
 #: login.php:22
 msgid "세션이 만료되었습니다. 다시 로그인해주세요."
-msgstr ""
+msgstr "Session was expired. Please log in again."
 
 #: login.php:26
 msgid "정상적으로 회원 탈퇴되었습니다. 이용해 주셔서 감사합니다 :)"
-msgstr ""
+msgstr "Withdrawal was completed, thank you for using our website"
 
 #: login.php:37 login.php:41
 msgid "아이디 혹은 비밀번호가 일치하지 않습니다!"
-msgstr ""
+msgstr "Incorrect login"
 
 #: login.php:52
 msgid "입력하지 않은 칸이 있습니다!"
-msgstr ""
+msgstr "Check blank"
 
 #: login.php:67 login.php:82 header.php:85
 msgid "로그인"
-msgstr ""
+msgstr "Log In"
 
 #: login.php:74 profile.php:83 join.php:68
 msgid "아이디"
-msgstr ""
+msgstr "ID"
 
 #: login.php:78 profile.php:64 join.php:73
 msgid "비밀번호"
-msgstr ""
+msgstr "Password"
 
 #: login.php:83 join.php:62
 msgid "회원 가입"
-msgstr ""
+msgstr "Join"
 
 #: header.php:38 board/exchange_view.php:178 board/exchange_write.php:72
 #: board/exchange_edit.php:70
 msgid "목록"
-msgstr ""
+msgstr "List"
 
 #: header.php:48
 msgid "새 글"
-msgstr ""
+msgstr "New Article"
 
 #: header.php:61
 msgid "검색..."
-msgstr ""
+msgstr "Search..."
 
 #: header.php:74
 msgid "로그아웃"
-msgstr ""
+msgstr "Log Out"
 
 #: header.php:82 join.php:91
 msgid "회원가입"
-msgstr ""
+msgstr "Join"
 
 #: profile.php:55
 msgid "사용자 #"
-msgstr ""
+msgstr "User #"
 
 #: profile.php:59
 msgid "정보 변경이 성공적으로 이루어졌습니다."
-msgstr ""
+msgstr "You modified your information successfully."
 
 #: profile.php:61
 msgid "변경하려는 비밀번호가 일치하지 않습니다!"
-msgstr ""
+msgstr "Please enter the same password in both password fields."
 
 #: profile.php:68
 msgid "재입력"
-msgstr ""
+msgstr "Re-enter"
 
 #: profile.php:72 join.php:81
 msgid "닉네임"
-msgstr ""
+msgstr "Nickname"
 
 #: profile.php:76
 msgid "회원 탈퇴"
-msgstr ""
+msgstr "Withdrawal"
 
 #: profile.php:77
 msgid "프로필 업데이트"
-msgstr ""
+msgstr "Profile Update"
 
 #: profile.php:87
 msgid "이메일"
-msgstr ""
+msgstr "E-mail"
 
 #: profile.php:91
 msgid "사용자 평판"
-msgstr ""
+msgstr "User Reputation"
 
 #: profile.php:92
 msgid "(준비 중)"
-msgstr ""
+msgstr "(Preaparing)"
 
 #: function.php:76 function.php:114 function.php:151
 msgid "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>"
-msgstr ""
+msgstr "<h1>Database connect error</h1>"
 
 #: function.php:181
 msgid "지금"
-msgstr ""
+msgstr "Now"
 
 #: function.php:187
 msgid "방금 전"
-msgstr ""
+msgstr "Just now"
 
 #: function.php:189
 #, php-format
 msgid "%d분 전"
-msgstr ""
+msgstr "%d minutes ago"
 
 #: function.php:191
 #, php-format
 msgid "%d시간 전"
-msgstr ""
+msgstr "%d hours ago"
 
 #: function.php:194
 msgid "어제"
-msgstr ""
+msgstr "Yesterday"
 
 #: function.php:196
 #, php-format
 msgid "%d일 전"
-msgstr ""
+msgstr "%d days ago"
 
 #: function.php:198
 msgid "n월 j일 G시"
-msgstr ""
+msgstr "G, j, n"
 
 #: function.php:200
 msgid "알 수 없음"
-msgstr ""
+msgstr "Unknown"
 
 #: join.php:26
 msgid "이미 존재하는 아이디입니다. 다른 아이디를 사용해 주세요."
-msgstr ""
+msgstr "This ID already exists, please use another ID."
 
 #: join.php:34
 msgid "다른 사용자가 사용 중인 이메일입니다. 다른 이메일을 사용해 주세요."
-msgstr ""
+msgstr "This email is already used, please use another email."
 
 #: join.php:40
 msgid "입력하신 두 개의 비밀번호가 다릅니다. 비밀번호를 다시 입력하세요."
-msgstr ""
+msgstr "Please enter the same password in both password fields."
 
 #: join.php:51
 msgid "작성하지 않은 곳이 있습니다."
-msgstr ""
+msgstr "Check blank."
 
 #: join.php:77
 msgid "비밀번호 재입력"
-msgstr ""
+msgstr "Re-input password"
 
 #: join.php:92
 msgid "로그인으로 되돌아가기"
-msgstr ""
+msgstr "Return to login"
 
 #: leave_ask.php:16
 msgid "정말 탈퇴하시게요?"
-msgstr ""
+msgstr "Will you leave this website?"
 
 #: leave_ask.php:17
 msgid ""
 "탈퇴하시면, 다시는 해당하는 아이디로 아이디를 만드시거나 로그인을 하실 수 없"
 "습니다. 회원님이 작성하셨던 글은 삭제되지 않습니다."
 msgstr ""
+"If you leave this website, you can't register new ID or login by this ID. "
+"The articles you have produced will not be removed"
 
 #: leave_ask.php:18
 msgid "네, 그래도 회원탈퇴를 하겠습니다."
-msgstr ""
+msgstr "I will."
 
 #: leave_ask.php:19
 msgid "탈퇴하지 않고 그대로 있겠습니다."
-msgstr ""
+msgstr "I won't."
 
 #: board/exchange_view.php:43 board/exchange_view.php:76
 msgid "댓글을 입력하세요..."
-msgstr ""
+msgstr "Enter comment."
 
 #: board/exchange_view.php:82
 msgid "<i>[삭제된 댓글입니다]</i>"
-msgstr ""
+msgstr "<i>[It doesn't exist]</i>"
 
 #: board/exchange_view.php:102
 #, php-format
 msgid "조회 <b>%s</b>회"
-msgstr ""
+msgstr "Read <b>%s</b>times"
 
 #: board/exchange_view.php:104 board/exchange_view.php:145
 msgid "수정"
-msgstr ""
+msgstr "Modify"
 
 #: board/exchange_view.php:105 board/exchange_view.php:146
 msgid "삭제"
-msgstr ""
+msgstr "Delete"
 
 #: board/exchange_view.php:125 board/exchange_view.php:166
 msgid "댓글"
-msgstr ""
+msgstr "Comment"
 
 #: board/exchange_view.php:174
 msgid "답변하기"
-msgstr ""
+msgstr "Answer"
 
 #: board/exchange_view.php:179 board/exchange_write.php:73
 #: board/exchange_edit.php:71
 msgid "작성"
-msgstr ""
+msgstr "Write"
 
 #: board/write_comment.php:22 board/exchange_remove_comment.php:25
 msgid "SQL 쿼리를 실행하던 도중 오류가 발생했습니다."
-msgstr ""
+msgstr "SQL Query  error"
 
 #: board/write_comment.php:33 board/write_comment.php:39
 #: board/exchange_remove_comment.php:42
 msgid "지원되지 않는 모드입니다."
-msgstr ""
+msgstr "This mod is not supported."
 
 #: board/exchange.php:36 board/exchange_search.php:45
 msgid "조회"
-msgstr ""
+msgstr "Read"
 
 #: board/exchange.php:40 board/exchange_search.php:51
 msgid "답변"
-msgstr ""
+msgstr "Reply"
 
 #: board/exchange.php:45 board/exchange_search.php:55
 msgid "평가"
-msgstr ""
+msgstr "Assessment"
 
 #: board/exchange.php:58 board/exchange_write.php:59
 #: board/exchange_search.php:68
 msgid "카테고리"
-msgstr ""
+msgstr "Category"
 
 #: board/exchange.php:65 board/exchange_search.php:72
 #, php-format
 msgid "<mark>%s</mark>에서 <mark>%s</mark>로,"
-msgstr ""
+msgstr "from <mark>%s</mark> to <mark>%s</mark>,"
 
 #: board/exchange.php:73 board/exchange_search.php:78
 msgid "가"
-msgstr ""
+msgstr " "
 
 #: board/exchange_vote.php:21 board/exchange_remove.php:15
 #: board/exchange_edit.php:37
 msgid "SQL 쿼리를 실행하는 도중 오류가 발생했습니다."
-msgstr ""
+msgstr "SQL Query error"
 
 #: board/exchange_vote.php:31 board/exchange_vote.php:37
 #: board/exchange_remove.php:32 board/exchange_remove.php:37
 #: board/exchange_remove_comment.php:47 board/exchange_remove_comment.php:52
 #: board/exchange_edit.php:47
 msgid "파라미터가 올바르지 않습니다!"
-msgstr ""
+msgstr "Parameter error"
 
 #: board/exchange_remove.php:21 board/exchange_remove_comment.php:31
 msgid "댓글을 쓴 사용자만이 지울 수 있습니다."
-msgstr ""
+msgstr "User who wrote comment can remove this comment."
 
 #: board/exchange_remove_comment.php:12
 msgid "레퍼러가 존재하지 않습니다."
-msgstr ""
+msgstr "Referer doesn't exist."
 
 #: board/exchange_remove_comment.php:16
 msgid "올바르지 않은 레퍼러입니다."
-msgstr ""
+msgstr "Wrong referer."
 
 #: board/exchange_write.php:30
 msgid "비어 있는 칸이 있습니다."
-msgstr ""
+msgstr "Check blank"
 
 #: board/exchange_write.php:39
 msgid "새 글 쓰기"
-msgstr ""
+msgstr "Write new article"
 
 #: board/exchange_write.php:44
 msgid "글 제목"
-msgstr ""
+msgstr "Title"
 
 #: board/exchange_write.php:48
 msgid "언어:"
-msgstr ""
+msgstr "Language:"
 
 #: board/exchange_write.php:50
 msgid "언어 선택"
-msgstr ""
+msgstr "Language Select"
 
 #: board/exchange_write.php:61
 msgid "카테고리 선택"
-msgstr ""
+msgstr "Category Select"
 
 #: board/exchange_search.php:39
 #, php-format
 msgid "검색 결과 %d개 표시 중"
-msgstr ""
+msgstr "Showing %d searched results."
 
 #: board/exchange_edit.php:28
 msgid "글을 작성한 사람만이 삭제할 수 있습니다."
-msgstr ""
+msgstr "User who wrote article can remove this article."
 
 #: board/exchange_edit.php:61
 msgid "글 수정하기"
-msgstr ""
+msgstr "Modify article"
 
 # 카테고리
 msgid "general"
-msgstr ""
+msgstr "General"
 
 # 언어
 msgid "de_DE"
-msgstr ""
+msgstr "German"
 
 msgid "es_ES"
-msgstr ""
+msgstr "Spanish"
 
 msgid "en_US"
-msgstr ""
+msgstr "English"
 
 msgid "fr_FR"
-msgstr ""
+msgstr "French"
 
 msgid "ja_JP"
-msgstr ""
+msgstr "Japanese"
 
 msgid "ko_KR"
-msgstr ""
+msgstr "Korean"
 
 msgid "zh_CN"
-msgstr ""
+msgstr "Chinese"
