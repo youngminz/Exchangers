@@ -30,7 +30,7 @@ function href($uri, $href=true) {
       <?php if(isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
         <li>
           <a <?= href("/board/exchange.php") ?>>
-            <?= _("목록") ?>
+            <?= T_("목록") ?>
             <!--svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="icon">
               <path d="M2,6h4v4H2V6z M2,14h4v4H2V14z M2,22h4v4H2V22z M10,6h20v4H10V6z
                        M10,26h20v-4H10V26z M10,14v4h20v-4H10z M2,30h4v4H2V30z
@@ -40,7 +40,7 @@ function href($uri, $href=true) {
         </li>
         <li>
           <a <?= href("/board/exchange_write.php") ?>>
-            <?= _("새 글") ?>
+            <?= T_("새 글") ?>
             <!--svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="icon">
               <path d="M32,4l-2,2l-4-4l2-2L32,4z M11,17l-2,6l6-2L29,7l-4-4L11,17z
                        M24,15v13H4V8h13l4-4H0v28h28V11L24,15z" />
@@ -53,7 +53,7 @@ function href($uri, $href=true) {
             <path d="M15,15l10,10z" stroke="#000" stroke-width="2" />
           </svg-->
           <form action="/board/exchange_search.php" method="GET" style="display: inline-block">
-            <input type="text" class="float: left;" name="q" placeholder="<?= _("검색...") ?>" required <?php
+            <input type="text" class="float: left;" name="q" placeholder="<?= T_("검색...") ?>" required <?php
               if (!empty($q)) {
                 echo "value=\"$q\"";
               }
@@ -66,7 +66,7 @@ function href($uri, $href=true) {
               <path d="M24,20v-4H14v-4h10V8l6,6L24,20z M22,18v8H12v6L0,26V0h22v10h-2V2H4l8,
                        4v18h8v-6H22z"></path>
             </svg-->
-            <?= _("로그아웃") ?>
+            <?= T_("로그아웃") ?>
           </a>
         </li>
         <li class="right">
@@ -74,10 +74,10 @@ function href($uri, $href=true) {
         </li>
       <?php } else { ?>
         <li class="right">
-          <a <?= href("/join.php") ?>><?= _("회원가입") ?></a>
+          <a <?= href("/join.php") ?>><?= T_("회원가입") ?></a>
         </li>
         <li class="right">
-          <a <?= href("/login.php") ?>><?= _("로그인") ?></a>
+          <a <?= href("/login.php") ?>><?= T_("로그인") ?></a>
         </li>
       <?php } ?>
     </ul>

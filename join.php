@@ -23,7 +23,7 @@ if ($_POST) {
                                 "s", $user_id) !== false
                ) {
                 $is_valid = false;
-                $reason = _("이미 존재하는 아이디입니다. 다른 아이디를 사용해 주세요.");
+                $reason = T_("이미 존재하는 아이디입니다. 다른 아이디를 사용해 주세요.");
             }
 
             if ($is_valid == true) {
@@ -31,13 +31,13 @@ if ($_POST) {
                                     "s", $user_email) !== false
                    ) {
                     $is_valid = false;
-                    $reason = _("다른 사용자가 사용 중인 이메일입니다. 다른 이메일을 사용해 주세요.");
+                    $reason = T_("다른 사용자가 사용 중인 이메일입니다. 다른 이메일을 사용해 주세요.");
                 }
             }
         }
         else {
             $is_valid = false;
-            $reason = _("입력하신 두 개의 비밀번호가 다릅니다. 비밀번호를 다시 입력하세요.");
+            $reason = T_("입력하신 두 개의 비밀번호가 다릅니다. 비밀번호를 다시 입력하세요.");
         }
 
         if ($is_valid === true) {
@@ -48,7 +48,7 @@ if ($_POST) {
     }
     else {
         $is_valid = false;
-        $reason = _("작성하지 않은 곳이 있습니다.");
+        $reason = T_("작성하지 않은 곳이 있습니다.");
     }
 }
 
@@ -59,26 +59,26 @@ require_once("header.php");
 
 <main class="narrow">
   <form class="form-list" action="join.php" method="post">
-    <h1><?= _("회원 가입") ?></h1>
+    <h1><?= T_("회원 가입") ?></h1>
     <?= $is_valid ?>
     <?php if ($is_valid == false) { ?>
       <p class="message message-error"><?= $reason ?></p>
     <?php } ?>
     <p class="form-line">
-      <label for="user_id"><?= _("아이디") ?></label><!--
+      <label for="user_id"><?= T_("아이디") ?></label><!--
       --><input type="text" name="user_id" required
                 value="<?= isset($_POST['user_id']) ? $_POST['user_id'] : '' ?>" />
     </p>
     <p class="form-line">
-      <label for="user_pass"><?= _("비밀번호") ?></label><!--
+      <label for="user_pass"><?= T_("비밀번호") ?></label><!--
       --><input type="password" name="user_pass" required />
     </p>
     <p class="form-line">
-      <label for="user_pass_twice"><?= _("비밀번호 재입력") ?></label><!--
+      <label for="user_pass_twice"><?= T_("비밀번호 재입력") ?></label><!--
       --><input type="password" name="user_pass_twice" required />
     </p>
     <p class="form-line">
-      <label for="user_nickname"><?= _("닉네임") ?></label><!--
+      <label for="user_nickname"><?= T_("닉네임") ?></label><!--
       --><input type="text" name="user_nickname" required
                 value="<?= isset($_POST['user_nickname']) ? $_POST['user_nickname'] : '' ?>" />
     </p>
@@ -88,8 +88,8 @@ require_once("header.php");
                 value="<?= isset($_POST['user_email']) ? $_POST['user_email'] : '' ?>" />
     </p>
     <p class="form-line">
-      <input type="submit" value="<?= _("회원가입") ?>" class="button button-primary right" />
-      <a href="/login.php" class="button"><?= _("로그인으로 되돌아가기") ?></a>
+      <input type="submit" value="<?= T_("회원가입") ?>" class="button button-primary right" />
+      <a href="/login.php" class="button"><?= T_("로그인으로 되돌아가기") ?></a>
     </p>
   </form>
 </main>

@@ -73,7 +73,7 @@ function fetch_first_row() {
     global $db_host, $db_user, $db_pass, $db_name;
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
     if ($conn->connect_errno) {
-        echo _("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
+        echo T_("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
         exit;
     }
     $stmt = $conn->prepare($sql);
@@ -111,7 +111,7 @@ function fetch_all_row() {
     global $db_host, $db_user, $db_pass, $db_name;
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
     if ($conn->connect_errno) {
-        echo _("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
+        echo T_("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
         exit;
     }
     $stmt = $conn->prepare($sql);
@@ -148,7 +148,7 @@ function execute_query() {
     global $db_host, $db_user, $db_pass, $db_name;
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
     if ($conn->connect_errno) {
-        echo _("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
+        echo T_("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
         exit;
     }
     $conn->query("SET time_zone = '+9:00'");
@@ -178,24 +178,24 @@ function time2str($ts) {
 
     $diff = time() - $ts;
     if ($diff == 0) {
-        return _('지금');
+        return T_('지금');
     }
     else if ($diff > 0) {
         $day_diff = floor($diff / 86400);
         if ($day_diff == 0) {
             if ($diff < 60)
-                return _('방금 전');
+                return T_('방금 전');
             else if ($diff < 3600)
-                return sprintf(_('%d분 전'), floor($diff / 60));
+                return sprintf(T_('%d분 전'), floor($diff / 60));
             else if ($diff < 86400)
-                return sprintf(_('%d시간 전'), floor($diff / 3600));
+                return sprintf(T_('%d시간 전'), floor($diff / 3600));
         }
         else if ($day_diff == 1)
-            return _('어제');
+            return T_('어제');
         else if ($day_diff < 10)
-            return sprintf(_('%d일 전'), $day_diff);
+            return sprintf(T_('%d일 전'), $day_diff);
         else
-            return date(_('n월 j일 G시'), $ts);
+            return date(T_('n월 j일 G시'), $ts);
     }
-    return _("알 수 없음");
+    return T_("알 수 없음");
 }

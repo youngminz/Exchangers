@@ -33,16 +33,16 @@ require_once("../header.php"); ?>
         <section class="status">
           <span class="views">
             <big><?= $row['board_hit'] ?></big>
-              <?= _("조회") ?>
+              <?= T_("조회") ?>
           </span><!--
        --><span class="responds">
             <big><?= fetch_first_row("SELECT COUNT(*) FROM exchange_article WHERE parent_id = ?", "i", $row['ID'])['COUNT(*)']; ?></big>
-                <?= _("답변") ?>
+                <?= T_("답변") ?>
 
           </span><!--
        --><span class="votes">
             <big><?= $row['vote_up'] + $row['vote_down'] ?></big>
-              <?= _("평가") ?>
+              <?= T_("평가") ?>
           </span>
         </section><!--
      --><section class="question">
@@ -55,14 +55,14 @@ require_once("../header.php"); ?>
           </div>
           <div class="info">
             <span class="category">
-              <?= _("카테고리") ?>
+              <?= T_("카테고리") ?>
               <mark>
-                <?= _($row['category']) ?><!--
+                <?= T_($row['category']) ?><!--
            --></mark>,
             </span>
             <span class="lang">
             <?php
-              $str = sprintf(_('<mark>%s</mark>에서 <mark>%s</mark>로,'), _($row['lang_from']), _($row['lang_to']));
+              $str = sprintf(T_('<mark>%s</mark>에서 <mark>%s</mark>로,'), T_($row['lang_from']), T_($row['lang_to']));
               echo $str;
             ?>
             </span>
@@ -70,7 +70,7 @@ require_once("../header.php"); ?>
               <?= time2str($row['date']) ?>
               <?php
                 $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']);
-                echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?><?= _("가") ?>
+                echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?><?= T_("가") ?>
             </span>
           </div>
         </section>

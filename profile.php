@@ -52,44 +52,44 @@ require_once('header.php');
     <img src="//www.gravatar.com/avatar/<?= hash('md5', $profile_data['user_email']) ?>?d=identicon&size=240" />
     <div>
       <h1><?= $profile_data['user_nickname'] ?></h1>
-        <?= _("사용자 #") ?><?= $id ?>
+        <?= T_("사용자 #") ?><?= $id ?>
         <?php if ($is_me === true) { ?>
           <form class="form-list" action="profile.php" method="post">
           <?php if ($modified === true) { ?>
-            <p class="message message-success"><?= _("정보 변경이 성공적으로 이루어졌습니다.") ?></p>
+            <p class="message message-success"><?= T_("정보 변경이 성공적으로 이루어졌습니다.") ?></p>
           <?php } if ($different_password === true) { ?>
-            <p class="message message-error"><?= _("변경하려는 비밀번호가 일치하지 않습니다!") ?></p>
+            <p class="message message-error"><?= T_("변경하려는 비밀번호가 일치하지 않습니다!") ?></p>
           <?php } ?>
           <p class="form-line">
-            <label for="user_pass"><?= _("비밀번호") ?></label><!--
+            <label for="user_pass"><?= T_("비밀번호") ?></label><!--
          --><input type="password" name="user_pass"  />
           </p>
           <p class="form-line">
-            <label for="user_pass_twice"><?= _("재입력") ?></label><!--
+            <label for="user_pass_twice"><?= T_("재입력") ?></label><!--
          --><input type="password" name="user_pass_twice"  />
           </p>
           <p class="form-line">
-            <label for="user_nickname"><?= _("닉네임") ?></label><!--
+            <label for="user_nickname"><?= T_("닉네임") ?></label><!--
          --><input type="text" name="user_nickname" placeholder="<?= $profile_data['user_nickname'] ?>"  />
           </p>
           <p class="form-line">
-            <a href="/leave_ask.php" class="button"><?= _("회원 탈퇴") ?></a>
-            <input type="submit" value="<?= _("프로필 업데이트") ?>" class="button button-primary right" />
+            <a href="/leave_ask.php" class="button"><?= T_("회원 탈퇴") ?></a>
+            <input type="submit" value="<?= T_("프로필 업데이트") ?>" class="button button-primary right" />
           </p>
         </form>
       <?php } ?>
 
       <dl>
-        <dt><?= _("아이디") ?></dt>
+        <dt><?= T_("아이디") ?></dt>
         <dd><?= $profile_data['user_id'] ?></dd>
       </dl>
       <dl>
-        <dt><?= _("이메일") ?></dt>
+        <dt><?= T_("이메일") ?></dt>
         <dd><?= $profile_data['user_email'] ?></dd>
       </dl>
       <dl>
-        <dt><?= _("사용자 평판") ?></dt>
-        <dd><?= _("(준비 중)") ?></dd>
+        <dt><?= T_("사용자 평판") ?></dt>
+        <dd><?= T_("(준비 중)") ?></dd>
       </dl>
     </div>
   </header>

@@ -19,7 +19,7 @@ if ($_POST) {
                                 $_SESSION['ID'], $_POST['parent_id'], $_POST['parent_article']);
         if ($result === false) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-            echo "<h1 style='color: red'>" . _("SQL 쿼리를 실행하던 도중 오류가 발생했습니다.") . "</h1>";
+            echo "<h1 style='color: red'>" . T_("SQL 쿼리를 실행하던 도중 오류가 발생했습니다.") . "</h1>";
             exit;
         }
         else {
@@ -30,12 +30,12 @@ if ($_POST) {
     }
     else {
         header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-        echo "<h1 style='color: red'>" . _("지원되지 않는 모드입니다.") . "</h1>";
+        echo "<h1 style='color: red'>" . T_("지원되지 않는 모드입니다.") . "</h1>";
         exit;
     }
 }
 else {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-    echo "<h1 style='color: red'>" . _("지원되지 않는 모드입니다.") . "</h1>";
+    echo "<h1 style='color: red'>" . T_("지원되지 않는 모드입니다.") . "</h1>";
     exit;
 }

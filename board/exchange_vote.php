@@ -18,7 +18,7 @@ if ($_GET) {
         $result = execute_query($query, "i", $_GET['article']);
         if ($result === false) {
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-            echo "<h1 style='color: red'>" . _("SQL 쿼리를 실행하는 도중 오류가 발생했습니다.") . "</h1>";
+            echo "<h1 style='color: red'>" . T_("SQL 쿼리를 실행하는 도중 오류가 발생했습니다.") . "</h1>";
             exit;
         }
         else {
@@ -28,12 +28,12 @@ if ($_GET) {
     }
     else {
         header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-        echo _("파라미터가 올바르지 않습니다!");
+        echo T_("파라미터가 올바르지 않습니다!");
         exit;
     }
 }
 else {
     header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-    echo _("파라미터가 올바르지 않습니다!");
+    echo T_("파라미터가 올바르지 않습니다!");
     exit;
 }

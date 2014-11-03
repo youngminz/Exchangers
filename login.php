@@ -11,19 +11,19 @@ $reason_error = '';
 
 if (isset($_GET['join']) && $_GET['join'] === 'done') {
     $info = true;
-    $reason_info = _("회원가입이 정상적으로 처리되었습니다. 가입하신 아이디로 로그인해주세요.");
+    $reason_info = T_("회원가입이 정상적으로 처리되었습니다. 가입하신 아이디로 로그인해주세요.");
 }
 if (isset($_GET['logout']) && $_GET['logout'] === 'done') {
     $info = true;
-    $reason_info = _("성공적으로 로그아웃되었습니다.");
+    $reason_info = T_("성공적으로 로그아웃되었습니다.");
 }
 if (isset($_GET['error']) && $_GET['error'] == 'session') {
     $error = true;
-    $reason_error = _("세션이 만료되었습니다. 다시 로그인해주세요.");
+    $reason_error = T_("세션이 만료되었습니다. 다시 로그인해주세요.");
 }
 if (isset($_GET['leave']) && $_GET['leave'] === 'done') {
     $info = true;
-    $reason_info = _("정상적으로 회원 탈퇴되었습니다. 이용해 주셔서 감사합니다 :)");
+    $reason_info = T_("정상적으로 회원 탈퇴되었습니다. 이용해 주셔서 감사합니다 :)");
 }
 
 if ($_POST) {
@@ -34,11 +34,11 @@ if ($_POST) {
                                hash('sha512', $_POST['user_pass']));
         if ($row === false) {
             $error = true;
-            $reason_error = _("아이디 혹은 비밀번호가 일치하지 않습니다!");
+            $reason_error = T_("아이디 혹은 비밀번호가 일치하지 않습니다!");
         }
         else if ($row['enabled'] == 0) {
             $error = true;
-            $reason_error = _("아이디 혹은 비밀번호가 일치하지 않습니다!");
+            $reason_error = T_("아이디 혹은 비밀번호가 일치하지 않습니다!");
         }
         else {
             $_SESSION['ID'] = $row['ID'];
@@ -49,7 +49,7 @@ if ($_POST) {
     }
     else {
         $error = true;
-        $reason_error = _("입력하지 않은 칸이 있습니다!");
+        $reason_error = T_("입력하지 않은 칸이 있습니다!");
     }
 }
 
@@ -64,23 +64,23 @@ require_once('header.php');
 ?>
 <main class="narrow">
   <form class="form-list" action="login.php" method="post">
-    <h1><?= _("로그인") ?></h1>
+    <h1><?= T_("로그인") ?></h1>
     <?php if ($info === true) { ?>
       <p class="message message-success"><?= $reason_info ?></p>
     <?php } if ($error === true) { ?>
       <p class="message message-error"><?= $reason_error ?></p>
     <?php } ?>
     <p class="form-line">
-      <label for="user_id"><?= _("아이디") ?></label><!--
+      <label for="user_id"><?= T_("아이디") ?></label><!--
       --><input type="text" name="user_id" required />
     </p>
     <p class="form-line">
-      <label for="user_pass"><?= _("비밀번호") ?></label><!--
+      <label for="user_pass"><?= T_("비밀번호") ?></label><!--
       --><input type="password" name="user_pass" required />
     </p>
     <p class="form-line">
-      <input type="submit" value="<?= _("로그인") ?>" class="button button-primary right" />
-      <a href="join.php" class="button"><?= _("회원 가입") ?></a>
+      <input type="submit" value="<?= T_("로그인") ?>" class="button button-primary right" />
+      <a href="join.php" class="button"><?= T_("회원 가입") ?></a>
     </p>
   </form>
 </main>

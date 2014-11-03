@@ -40,7 +40,7 @@ function recursive_comment($parent_article, $parent_id, $level) {
 
     if ($parent_id === NULL) { ?>
         <form method="post" action="/board/write_comment.php">
-            <input type="text" name="text" placeholder="<?= _("댓글을 입력하세요...") ?>" />
+            <input type="text" name="text" placeholder="<?= T_("댓글을 입력하세요...") ?>" />
             <input type="hidden" name="mode" value="exchange" />
             <input type="hidden" name="parent_id" value="NULL" />
             <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
@@ -73,13 +73,13 @@ function recursive_comment($parent_article, $parent_id, $level) {
                 <input type="checkbox" style="display: none;"
                        id="toggle-visible-comment-<?= $row['ID'] ?>" />
                 <form method="post" action="/board/write_comment.php">
-                    <input type="text" name="text" placeholder="<?= _("댓글을 입력하세요...") ?>" />
+                    <input type="text" name="text" placeholder="<?= T_("댓글을 입력하세요...") ?>" />
                     <input type="hidden" name="mode" value="exchange" />
                     <input type="hidden" name="parent_id" value="<?= $row['ID'] ?>" />
                     <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
                 </form>
             <?php } else {
-                echo _("<i>[삭제된 댓글입니다]</i>");
+                echo T_("<i>[삭제된 댓글입니다]</i>");
             }
             recursive_comment($parent_article, $row['ID'], $level + 1);
         }
@@ -99,10 +99,10 @@ require_once('../header.php');
       <section>
         <img src="//www.gravatar.com/avatar/<?= hash('md5', $user['user_email']) ?>?d=identicon&size=56" class="right" />
         <b><?= time2str($question['date']) . ', ' . "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?></b><br />
-        <?= sprintf(_("조회 <b>%s</b>회"), $question['board_hit'])?><br />
+        <?= sprintf(T_("조회 <b>%s</b>회"), $question['board_hit'])?><br />
         <?php if ($question['author'] == $_SESSION['ID']) { ?><br />
-          <a href="/board/exchange_edit.php?id=<?= $question['ID'] ?>"><?= _("수정") ?></a>
-          <a href="/board/exchange_remove.php?id=<?= $question['ID'] ?>"><?= _("삭제") ?></a>
+          <a href="/board/exchange_edit.php?id=<?= $question['ID'] ?>"><?= T_("수정") ?></a>
+          <a href="/board/exchange_remove.php?id=<?= $question['ID'] ?>"><?= T_("삭제") ?></a>
         <?php } ?>
       </section>
     </aside>
@@ -122,7 +122,7 @@ require_once('../header.php');
     <section class="content">
       <?= nl2br($question['contents']) ?>
     </section>
-    <span class="left"><?= _("댓글") ?></span>
+    <span class="left"><?= T_("댓글") ?></span>
     <section class="comment">
       <?php recursive_comment($question['ID'], NULL, 1); ?>
     </section>
@@ -142,8 +142,8 @@ require_once('../header.php');
             </b><br />
             <?php if ($answer_row['author'] == $_SESSION['ID']) { ?>
               <br />
-              <a href="/board/exchange_edit.php?id=<?= $answer_row['ID'] ?>"><?= _("수정") ?></a>
-              <a href="/board/exchange_remove.php?id=<?= $answer_row['ID'] ?>"><?= _("삭제") ?></a>
+              <a href="/board/exchange_edit.php?id=<?= $answer_row['ID'] ?>"><?= T_("수정") ?></a>
+              <a href="/board/exchange_remove.php?id=<?= $answer_row['ID'] ?>"><?= T_("삭제") ?></a>
             <?php } ?>
           </section>
         </aside>
@@ -163,7 +163,7 @@ require_once('../header.php');
         <section class="content">
           <?= nl2br($answer_row['contents']) ?>
         </section>
-        <span class="left"><?= _("댓글") ?></span>
+        <span class="left"><?= T_("댓글") ?></span>
         <section class="comment">
           <?php recursive_comment($answer_row['ID'], NULL, 1); ?>
         </section>
@@ -171,12 +171,12 @@ require_once('../header.php');
       <?php }
     }
   ?>
-  <h2><?= _("답변하기") ?></h2>
+  <h2><?= T_("답변하기") ?></h2>
   <form class="form-write" action="/board/exchange_view.php?id=<?= $article_id ?>" method="post">
     <textarea name="contents"></textarea>
     <p class="form-line">
-      <a href="/board/exchange.php" class="button"><?= _("목록") ?></a>
-      <input type="submit" value="<?= _("작성") ?>" class="button-primary" />
+      <a href="/board/exchange.php" class="button"><?= T_("목록") ?></a>
+      <input type="submit" value="<?= T_("작성") ?>" class="button-primary" />
     </p>
   </form>
 </main>
