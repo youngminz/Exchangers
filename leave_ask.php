@@ -18,3 +18,4 @@ require_once('header.php');
   <a class="button" href="/leave.php"><?= T_("네, 그래도 회원탈퇴를 하겠습니다.") ?></a>
   <input type="button" class="button" value="<?= T_("탈퇴하지 않고 그대로 있겠습니다.") ?>" onclick="history.go(-1);">
 </main>
+<?php require_once("footer.php");

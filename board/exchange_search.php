@@ -92,5 +92,4 @@ require_once("../header.php"); ?>
     <?php } ?>
   </ul>
 </main>
-</body>
-</html>
+<?php require_once("../footer.php");

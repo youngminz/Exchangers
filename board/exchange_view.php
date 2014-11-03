@@ -180,5 +180,4 @@ require_once('../header.php');
     </p>
   </form>
 </main>
-</body>
-</html>
+<?php require_once("../footer.php");

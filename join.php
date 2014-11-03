@@ -93,5 +93,4 @@ require_once("header.php");
   </form>
 </main>
 
-</body>
-</html>
+<?php require_once("footer.php");
