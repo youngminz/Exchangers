@@ -255,7 +255,7 @@ msgstr "Reply"
 
 #: board/exchange.php:45 board/exchange_search.php:55
 msgid "평가"
-msgstr "Assessment"
+msgstr "Vote"
 
 #: board/exchange.php:58 board/exchange_write.php:59
 #: board/exchange_search.php:68
