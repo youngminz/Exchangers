@@ -76,6 +76,7 @@ function fetch_first_row() {
         echo T_("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
         exit;
     }
+    $conn->query("SET time_zone = '+9:00'");
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
         $sliced = array_slice($args, 1);
@@ -114,6 +115,7 @@ function fetch_all_row() {
         echo T_("<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>");
         exit;
     }
+    $conn->query("SET time_zone = '+9:00'");
     $stmt = $conn->prepare($sql);
     if ($args_count != 1) {
         $sliced = array_slice($args, 1);
