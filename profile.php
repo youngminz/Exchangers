@@ -3,10 +3,10 @@ session_start();
 require_once("config.php");
 require_once("function.php");
 if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
-    header('Location: /login.php?error=session');
-    exit;
+    $is_me = false;
+} else {
+    $is_me = true;
 }
-$is_me = true;
 if (isset($_GET["id"]) && $_GET['id'] != $_SESSION['ID']) {
     $is_me = false;
     $id = (int) $_GET['id'];
@@ -198,7 +198,7 @@ require_once('header.php');
             <span>
               <?php
               $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $root['author']);
-              echo sprintf("%s <a href='/profile.php?id=%s'>%s</a>가 질문함, ", time2str($root['date']), $user['ID'], $user['user_nickname']);
+              echo sprintf(T_("%s <a href='/profile.php?id=%s'>%s</a>가 질문함, "), time2str($root['date']), $user['ID'], $user['user_nickname']);
               $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']);
               echo sprintf(T_("%s에 답변함"), time2str($row['date']));
               ?>

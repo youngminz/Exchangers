@@ -2,10 +2,6 @@
 session_start();
 require_once("../config.php");
 require_once("../function.php");
-if (!isset($_SESSION["ID"]) || empty($_SESSION["ID"])) {
-    header('Location: /login.php?error=session');
-    exit;
-}
 
 $first_row = fetch_first_row("SELECT COUNT(*) FROM exchange_article WHERE parent_id IS NULL");
 $number_of_row = $first_row["COUNT(*)"];

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Exchangers\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-02 06:05+0000\n"
-"PO-Revision-Date: 2014-11-03 21:53+0900\n"
+"PO-Revision-Date: 2014-11-05 00:15+0900\n"
 "Last-Translator: youngminz <youngminz.kr@gmail.com>\n"
 "Language-Team: Weirdorithm <youngminz.kr@gmail.com>\n"
 "Language: en_US\n"
@@ -366,3 +366,37 @@ msgstr "Korean"
 
 msgid "zh_CN"
 msgstr "Chinese"
+
+#: profile.php:146
+#, php-format
+msgid "<mark>%s</mark>에서 <mark>%s</mark>로"
+msgstr "from <mark>%s</mark> to <mark>%s</mark>"
+
+#: profile.php:174
+msgid "시작"
+msgstr "Start"
+
+#: profile.php:179
+msgid "도착"
+msgstr "Arrival"
+
+#: profile.php:203
+#, php-format
+msgid "%s에 답변함"
+msgstr "It was answered at %s"
+
+msgid "권한이 없습니다."
+msgstr "No permission."
+
+#: board/exchange_write.php:56
+#, php-format
+msgid ""
+"<select name=\"start_language\">%s</select>에서 <select name=\"end_language"
+"\">%s</select>으로"
+msgstr ""
+"from <select name=\"start_language\">%s</select> to <select name="
+"\"end_language\">%s</select>"
+
+msgid "%s <a href='/profile.php?id=%s'>%s</a>가 질문함, "
+msgstr "%s <a href='/profile.php?id=%s'>%s</a> asked and "
+

@@ -2,10 +2,6 @@
 session_start();
 require_once("../config.php");
 require_once("../function.php");
-if (!isset($_SESSION["ID"]) || empty($_SESSION["ID"])) {
-    header('Location: /login.php?error=session');
-    exit;
-}
 
 if (!$_GET || !isset($_GET['q']) || empty($_GET['q'])) {
     echo "<script>history.back();</script>";

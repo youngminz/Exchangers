@@ -2,10 +2,6 @@
 session_start();
 require_once("../config.php");
 require_once("../function.php");
-if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
-    header('Location: /login.php?error=session');
-    exit;
-}
 
 $article_id = 1;
 if (isset($_GET['id'])) {
@@ -37,10 +33,17 @@ function recursive_comment($parent_article, $parent_id, $level) {
                             "WHERE parent_article = ? " .
                             "AND (IF (ISNULL(?), parent_id IS NULL, parent_id = ?))",
                             "iii", $parent_article, $parent_id, $parent_id);
-
-    if ($parent_id === NULL) { ?>
+   
+    if ($parent_id === NULL && isset($_SESSION['ID'])) { ?>
         <form method="post" action="/board/write_comment.php">
             <input type="text" name="text" placeholder="<?= T_("댓글을 입력하세요...") ?>" />
+            <input type="hidden" name="mode" value="exchange" />
+            <input type="hidden" name="parent_id" value="NULL" />
+            <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
+        </form>
+    <?php } else if ($parent_id === NULL) { ?>
+        <form>
+            <input type="text" name="text" placeholder="<?= T_("권한이 없습니다.") ?> "disabled />
             <input type="hidden" name="mode" value="exchange" />
             <input type="hidden" name="parent_id" value="NULL" />
             <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
@@ -56,7 +59,7 @@ function recursive_comment($parent_article, $parent_id, $level) {
                 echo " - <small>";
                 echo sprintf("<a href='/profile.php?id=%s'>%s</a>가 %s에", $user['ID'], $user['user_nickname'], time2str($row['date']));
                 echo "</small>";
-                if ($row['author'] == $_SESSION['ID']) { ?>
+                if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $row['author'] == $_SESSION['ID']) { ?>
                     <a href="/board/exchange_remove_comment.php?mode=exchange&comment=<?= $row['ID'] ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" class="icon icon-small">
                             <path d="M0,1h3v-1h5v1h3v1h-12z" />
@@ -70,14 +73,16 @@ function recursive_comment($parent_article, $parent_id, $level) {
                         <path d="M1,4v7h7m-7,0L11,1z" stroke-width="2" stroke="#000" fill="none" />
                     </svg>
                 </label>
-                <input type="checkbox" style="display: none;"
-                       id="toggle-visible-comment-<?= $row['ID'] ?>" />
-                <form method="post" action="/board/write_comment.php">
-                    <input type="text" name="text" placeholder="<?= T_("댓글을 입력하세요...") ?>" />
-                    <input type="hidden" name="mode" value="exchange" />
-                    <input type="hidden" name="parent_id" value="<?= $row['ID'] ?>" />
-                    <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
-                </form>
+                <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
+                    <input type="checkbox" style="display: none;"
+                           id="toggle-visible-comment-<?= $row['ID'] ?>" />
+                        <form method="post" action="/board/write_comment.php">
+                        <input type="text" name="text" placeholder="<?= T_("댓글을 입력하세요...") ?>" />
+                        <input type="hidden" name="mode" value="exchange" />
+                        <input type="hidden" name="parent_id" value="<?= $row['ID'] ?>" />
+                        <input type="hidden" name="parent_article" value="<?= $parent_article ?>" />
+                    </form>
+                <?php } ?>
             <?php } else {
                 echo T_("<i>[삭제된 댓글입니다]</i>");
             }
@@ -100,24 +105,40 @@ require_once('../header.php');
         <img src="//www.gravatar.com/avatar/<?= hash('md5', $user['user_email']) ?>?d=identicon&size=56" class="right" />
         <b><?= time2str($question['date']) . ', ' . "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?></b><br />
         <?= sprintf(T_("조회 <b>%s</b>회"), $question['board_hit'])?><br />
-        <?php if ($question['author'] == $_SESSION['ID']) { ?><br />
+        <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $question['author'] == $_SESSION['ID']) { ?><br />
           <a href="/board/exchange_edit.php?id=<?= $question['ID'] ?>"><?= T_("수정") ?></a>
           <a href="/board/exchange_remove.php?id=<?= $question['ID'] ?>"><?= T_("삭제") ?></a>
         <?php } ?>
       </section>
     </aside>
     <div class="vote left">
-      <a href="/board/exchange_vote.php?mode=exchange&type=up&article=<?= $question['ID'] ?>">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
-	        <polygon points="12,0 24,12 23,13 12,1.41423 1,13 0,12 "/>
-        </svg>
-      </a>
+      <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $question['author'] != $_SESSION['ID']) { ?>
+        <a href="/board/exchange_vote.php?mode=exchange&type=up&article=<?= $question['ID'] ?>">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
+            <polygon points="12,0 24,12 23,13 12,1.41423 1,13 0,12 "/>
+          </svg>
+        </a>
+      <?php } else { ?>
+        <a>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
+            <polygon points="12,0 24,12 23,13 12,1.41423 1,13 0,12 "/>
+          </svg>
+        </a>  
+      <?php } ?>
       <?= $question['vote_up'] + $question['vote_down'] ?>
+      <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $question['author'] != $_SESSION['ID']) { ?>
       <a href="/board/exchange_vote.php?mode=exchange&type=down&article=<?= $question['ID'] ?>">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
 	        <polygon points="12,12 24,0 23,-1 12,10.58577 1,-1 0,0 "/>
         </svg>
       </a>
+      <?php } else { ?>
+      <a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
+	        <polygon points="12,12 24,0 23,-1 12,10.58577 1,-1 0,0 "/>
+        </svg>
+      </a>
+      <?php } ?>
     </div>
     <section class="content">
       <?= nl2br($question['contents']) ?>
@@ -140,7 +161,7 @@ require_once('../header.php');
             <b>
               <?= time2str($answer_row['date']) . ', ' . "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?>
             </b><br />
-            <?php if ($answer_row['author'] == $_SESSION['ID']) { ?>
+            <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $answer_row['author'] == $_SESSION['ID']) { ?>
               <br />
               <a href="/board/exchange_edit.php?id=<?= $answer_row['ID'] ?>"><?= T_("수정") ?></a>
               <a href="/board/exchange_remove.php?id=<?= $answer_row['ID'] ?>"><?= T_("삭제") ?></a>
@@ -148,17 +169,33 @@ require_once('../header.php');
           </section>
         </aside>
         <div class="vote left">
-          <a href="/board/exchange_vote.php?mode=exchange&type=up&article=<?= $answer_row['ID'] ?>">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
-    	        <polygon points="12,0 24,12 23,13 12,1.41423 1,13 0,12 "/>
-            </svg>
-          </a>
-          <?= $answer_row['vote_up'] + $answer_row['vote_down'] ?>
-          <a href="/board/exchange_vote.php?mode=exchange&type=down&article=<?= $answer_row['ID'] ?>">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
-    	        <polygon points="12,12 24,0 23,-1 12,10.58577 1,-1 0,0 "/>
-            </svg>
-          </a>
+          <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $answer_row['author'] != $_SESSION['ID']) { ?>
+        <a href="/board/exchange_vote.php?mode=exchange&type=up&article=<?= $answer_row['ID'] ?>">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
+            <polygon points="12,0 24,12 23,13 12,1.41423 1,13 0,12 "/>
+          </svg>
+        </a>
+      <?php } else { ?>
+        <a>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
+            <polygon points="12,0 24,12 23,13 12,1.41423 1,13 0,12 "/>
+          </svg>
+        </a>  
+      <?php } ?>
+      <?= $answer_row['vote_up'] + $answer_row['vote_down'] ?>
+      <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $answer_row['author'] != $_SESSION['ID']) { ?>
+      <a href="/board/exchange_vote.php?mode=exchange&type=down&article=<?= $answer_row['ID'] ?>">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
+	        <polygon points="12,12 24,0 23,-1 12,10.58577 1,-1 0,0 "/>
+        </svg>
+      </a>
+      <?php } else { ?>
+      <a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
+	        <polygon points="12,12 24,0 23,-1 12,10.58577 1,-1 0,0 "/>
+        </svg>
+      </a>
+      <?php } ?>
         </div>
         <section class="content">
           <?= nl2br($answer_row['contents']) ?>
@@ -171,6 +208,7 @@ require_once('../header.php');
       <?php }
     }
   ?>
+    <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
   <h2><?= T_("답변하기") ?></h2>
   <form class="form-write" action="/board/exchange_view.php?id=<?= $article_id ?>" method="post">
     <textarea name="contents"></textarea>
@@ -179,5 +217,6 @@ require_once('../header.php');
       <input type="submit" value="<?= T_("작성") ?>" class="button-primary" />
     </p>
   </form>
+    <?php } ?>
 </main>
 <?php require_once("../footer.php");
