@@ -44,6 +44,16 @@ $profile_data = fetch_first_row("SELECT * FROM users WHERE ID = ?", 'i', $id);
 $recent_question = fetch_all_row("SELECT * FROM exchange_article WHERE author = ? AND parent_id IS NULL ORDER BY date DESC LIMIT 10", 'i', $id);
 $recent_answer = fetch_all_row("SELECT * FROM exchange_article WHERE author = ? AND parent_id IS NOT NULL ORDER BY date DESC LIMIT 10", 'i', $id);
 
+function find_root_article($article_id) {
+    $result = fetch_first_row("SELECT * FROM exchange_article WHERE ID = ?", 'i', $article_id);
+    if ($result['parent_id'] == NULL) {
+        return $result;
+    }
+    else {
+        return find_root_article($result['parent_id']);
+    }
+}
+
 //////////////////// HTML START ////////////////////
 
 require_once('header.php');
@@ -154,37 +164,38 @@ require_once('header.php');
   최근 답변
   <div>
     <?php foreach ($recent_answer as $row) { ?>
+      <?php $root = find_root_article($row['ID']); ?>
       <article>
         <section class="status"><!--
        --><span class="votes">
-            <big><?= $row['vote_up'] + $row['vote_down'] ?></big>
+            <big><?= $root['vote_up'] + $root['vote_down'] ?></big>
             <?= T_("평가") ?>
           </span>
         </section><!--
      --><section class="question">
           <div class="summary">
-              <a href="/board/exchange_view.php?id=<?= $row["ID"] ?>">
-                <?= /*$row['board_title']*/ "recursive..." ?>
+            <h3>
+              <a href="/board/exchange_view.php?id=<?= $root["ID"] ?>">
+                <?= $root['board_title'] ?>
               </a>
+            </h3>
+              <p><?= $row['contents'] ?></p>
           </div>
           <div class="info">
             <span class="category">
               <?= T_("카테고리") ?>
               <mark>
-                <?= /*T_($row['category'])*/ "category..recursive" ?><!--
+                <?= T_($root['category']) ?><!--
            --></mark>,
             </span>
             <span class="lang">
-            <?php
-            $str = "category..recursive"; #sprintf(T_('<mark>%s</mark>에서 <mark>%s</mark>로,'), T_($row['lang_from']), T_($row['lang_to']));
-            echo $str;
-            ?>
+            <?= sprintf(T_('<mark>%s</mark>에서 <mark>%s</mark>로,'), T_($root['lang_from']), T_($root['lang_to'])); ?>
             </span>
             <span>
-              <?= time2str($row['date']) ?>
+              <?= time2str($root['date']) ?>
               <?php
-              $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']);
-              echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?><?= T_("가") ?>
+              $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $root['author']);
+              echo "<a href='/profile.php?id=" . $root['ID'] . "'>" . $user['user_nickname'] . "</a>" ?><?= T_("가"); ?>
             </span>
           </div>
         </section>
