@@ -8,7 +8,7 @@
 html, body {
     margin: 0;
     padding-bottom: 2rem;
-    padding-top: 1.5rem;
+    padding-top: 2.5rem;
 }
 
 small {
@@ -104,9 +104,9 @@ button, .button, .button-primary {
 nav {
     position: fixed;
     top: 0;
-    height: 2.5rem;
+    height: 5.5rem;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 127, 0, 0.875);
     border-bottom: 1px solid #f60;
 }
 
@@ -144,19 +144,25 @@ nav li a, nav li.no-link {
 nav li input[type='text'][type='text'] {
     display: inline-block;
     font-size: 1em;
-    margin-bottom: 0.125em;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: transparent;
+    border: none;
 }
 
 nav li a:hover, .current-page {
-    color: #f60;
-    fill: #f60;
+    color: #fff;
+    text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.75);
 }
 
 nav li.logo {
-    color: #f60;
+    color: #fff;
     font-size: 2em;
     line-height: 1em;
     vertical-align: top;
+    display: block;
+    float: none;
 }
 
 nav li.right {
@@ -336,7 +342,6 @@ header dd, header dt {
 header form.form-list.form-list {
     float: right;
     width: 45%;
-    padding-top: 4em;
 }
 header form .form-line {
     margin-top: 0;

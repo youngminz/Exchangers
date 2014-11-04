@@ -101,14 +101,17 @@ require_once('header.php');
       </dl>
       <dl>
         <dt><?= T_("사용자 평판") ?></dt>
-        <dd><?= T_("(준비 중)") ?></dd>
+        <dd><?= $profile_data['user_reputation'] ?></dd>
       </dl>
     </div>
   </header>
 </main>
   <main id="exchange-list">
-    최근 질문
+    <?= T_("최근 질문") ?>
     <div>
+        <?php if (count($recent_question) == 0) {
+            echo T_("<p>글이 없습니다.</p>");
+        } ?>
       <?php foreach ($recent_question as $row) { ?>
         <article>
           <section class="status">
@@ -161,8 +164,12 @@ require_once('header.php');
   </main>
 
   <main id="exchange-list">
-  최근 답변
+  <?= T_("최근 답변") ?>
   <div>
+      
+        <?php if (count($recent_answer) == 0) {
+            echo T_("<p>글이 없습니다.</p>");
+        } ?>
     <?php foreach ($recent_answer as $row) { ?>
       <?php $root = find_root_article($row['ID']); ?>
       <article>

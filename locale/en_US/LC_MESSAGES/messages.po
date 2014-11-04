@@ -336,6 +336,15 @@ msgstr "Modify article"
 msgid "general"
 msgstr "General"
 
+msgid "<p>글이 없습니다.</p>"
+msgstr "<p>No article found.</p>"
+
+msgid "최근 질문"
+msgstr "Recent question"
+
+msgid "최근 답변"
+msgstr "Recent answer"
+
 # 언어
 msgid "de_DE"
 msgstr "German"
