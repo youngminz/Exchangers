@@ -106,7 +106,7 @@ nav {
     top: 0;
     height: 5.5rem;
     width: 100%;
-    background-color: rgba(255, 127, 0, 0.875);
+    background-color: rgba(255, 127, 0, 0.95);
     border-bottom: 1px solid #f60;
 }
 
@@ -149,6 +149,14 @@ nav li input[type='text'][type='text'] {
     padding-bottom: 0;
     background-color: transparent;
     border: none;
+    filter: brightness(0%);
+    -webkit-filter: brightness(0%);
+    -ms-filter: progid:DXImageTransform.Microsoft.Chroma(color=black);
+}
+  
+nav input::-webkit-input-placeholder, nav input:-moz-placeholder,
+nav input::-moz-placeholder, nav input:-ms-input-placeholder {
+    color: #fff;
 }
 
 nav li a:hover, .current-page {
@@ -310,7 +318,9 @@ input[id^='toggle-visible-comment']:checked + form {
     height: 1em;
 }
 #exchange-list section mark {
-    background-color: #9cf;
+    /* background-color: #9cf; */
+    background-color: #A32;
+    color: white;
 }
 /* profile: Header */
 header {

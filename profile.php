@@ -122,14 +122,13 @@ require_once('header.php');
        --><span class="responds">
             <big><?= fetch_first_row("SELECT COUNT(*) FROM exchange_article WHERE parent_id = ?", "i", $row['ID'])['COUNT(*)']; ?></big>
               <?= T_("답변") ?>
-
           </span><!--
        --><span class="votes">
             <big><?= $row['vote_up'] + $row['vote_down'] ?></big>
               <?= T_("평가") ?>
           </span>
           </section><!--
-     --><section class="question">
+       --><section class="question">
             <div class="summary">
               <h3>
                 <a href="/board/exchange_view.php?id=<?= $row["ID"] ?>">
@@ -140,21 +139,13 @@ require_once('header.php');
             <div class="info">
             <span class="category">
               <?= T_("카테고리") ?>
-              <mark>
-                <?= T_($row['category']) ?><!--
-           --></mark>,
+              <mark><?= T_($row['category']) ?></mark>,
             </span>
             <span class="lang">
             <?php
-            $str = sprintf(T_('<mark>%s</mark>에서 <mark>%s</mark>로,'), T_($row['lang_from']), T_($row['lang_to']));
+            $str = sprintf(T_('<mark>%s</mark>에서 <mark>%s</mark>로'), T_($row['lang_from']), T_($row['lang_to']));
             echo $str;
             ?>
-            </span>
-            <span>
-              <?= time2str($row['date']) ?>
-              <?php
-              $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']);
-              echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?><?= T_("가") ?>
             </span>
             </div>
           </section>
@@ -167,16 +158,25 @@ require_once('header.php');
   <?= T_("최근 답변") ?>
   <div>
       
-        <?php if (count($recent_answer) == 0) {
-            echo T_("<p>글이 없습니다.</p>");
-        } ?>
+  <?php if (count($recent_answer) == 0) {
+    echo T_("<p>글이 없습니다.</p>");
+  } ?>
     <?php foreach ($recent_answer as $row) { ?>
       <?php $root = find_root_article($row['ID']); ?>
       <article>
         <section class="status"><!--
-       --><span class="votes">
-            <big><?= $root['vote_up'] + $root['vote_down'] ?></big>
+       --><span class="views">
+            <big><?= $row['vote_up'] + $row['vote_down'] ?></big>
             <?= T_("평가") ?>
+          </span><!--
+       --><span class="responds">
+            <big title="<?= T_($root['lang_from']) ?>"><?= substr($root['lang_from'], 0, 2) ?></big>
+              <?= T_("시작") ?>
+
+          </span><!--
+       --><span class="votes">
+            <big title="<?= T_($root['lang_to']) ?>"><?= substr($root['lang_to'], 0, 2) ?></big>
+              <?= T_("도착") ?>
           </span>
         </section><!--
      --><section class="question">
@@ -186,7 +186,6 @@ require_once('header.php');
                 <?= $root['board_title'] ?>
               </a>
             </h3>
-              <p><?= $row['contents'] ?></p>
           </div>
           <div class="info">
             <span class="category">
@@ -195,14 +194,14 @@ require_once('header.php');
                 <?= T_($root['category']) ?><!--
            --></mark>,
             </span>
-            <span class="lang">
-            <?= sprintf(T_('<mark>%s</mark>에서 <mark>%s</mark>로,'), T_($root['lang_from']), T_($root['lang_to'])); ?>
-            </span>
+            
             <span>
-              <?= time2str($root['date']) ?>
               <?php
               $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $root['author']);
-              echo "<a href='/profile.php?id=" . $root['ID'] . "'>" . $user['user_nickname'] . "</a>" ?><?= T_("가"); ?>
+              echo sprintf("%s <a href='/profile.php?id=%s'>%s</a>가 질문함, ", time2str($root['date']), $user['ID'], $user['user_nickname']);
+              $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']);
+              echo sprintf(T_("%s에 답변함"), time2str($row['date']));
+              ?>
             </span>
           </div>
         </section>

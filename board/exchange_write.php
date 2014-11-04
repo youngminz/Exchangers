@@ -53,7 +53,7 @@ require_once("../header.php");
             $option .= '<option value="' . $language["lang_code"] . '">' . T_($language["lang_code"]) . '</option>';
           }
         ?>
-        <?= sprintf('<select name="start_language">%s</select>에서 <select name="end_language">%s</select>으로', $option, $option) ?>
+        <?= sprintf(T_('<select name="start_language">%s</select>에서 <select name="end_language">%s</select>으로'), $option, $option) ?>
       </p>
       <p class="form-line">
         <label for="category"><?= T_("카테고리") ?>:</label>

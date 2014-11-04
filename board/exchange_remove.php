@@ -18,11 +18,12 @@ if ($_GET) {
         else {
             if ($row['author'] != $_SESSION['ID']) {
                 header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-                echo "<h1 style='color: red'>" . T_("댓글을 쓴 사용자만이 지울 수 있습니다.") . "</h1>";
+                echo "<h1 style='color: red'>" . T_("글을 쓴 사용자만이 지울 수 있습니다.") . "</h1>";
                 exit;
             }
             else {
                 execute_query('DELETE FROM exchange_article WHERE ID = ?', 'i', $_GET['id']);
+                require('../calculate_reputation.php');
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
             }
         }
