@@ -54,6 +54,7 @@ function find_root_article($article_id) {
     }
 }
 
+
 //////////////////// HTML START ////////////////////
 
 require_once('header.php');
@@ -103,11 +104,15 @@ require_once('header.php');
         <dt><?= T_("사용자 평판") ?></dt>
         <dd><?= $profile_data['user_reputation'] ?></dd>
       </dl>
+      <?php if ($is_me === true) { ?>
+        <dt><?= T_("포인트") ?></dt>
+        <dd><?= $profile_data['user_point'] ?></dd>
+      <?php } ?>
     </div>
   </header>
 </main>
   <main id="exchange-list">
-    <?= T_("최근 질문") ?>
+    <h2><?= T_("최근 질문") ?></h2>
     <div>
         <?php if (count($recent_question) == 0) {
             echo T_("<p>글이 없습니다.</p>");
@@ -155,9 +160,9 @@ require_once('header.php');
   </main>
 
   <main id="exchange-list">
-  <?= T_("최근 답변") ?>
+  <h2><?= T_("최근 답변") ?></h2>
   <div>
-      
+
   <?php if (count($recent_answer) == 0) {
     echo T_("<p>글이 없습니다.</p>");
   } ?>
@@ -194,7 +199,7 @@ require_once('header.php');
                 <?= T_($root['category']) ?><!--
            --></mark>,
             </span>
-            
+
             <span>
               <?php
               $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $root['author']);

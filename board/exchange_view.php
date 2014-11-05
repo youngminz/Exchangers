@@ -13,6 +13,11 @@ if ($_POST) {
         $query = "INSERT INTO exchange_article " .
                  "VALUES (NULL, ?, NULL, NULL, NULL, NULL, ?, DEFAULT, DEFAULT, DEFAULT, DEFAULT, ?)";
         execute_query($query, "isi", $article_id, htmlspecialchars($_POST['contents']), $_SESSION['ID']);
+
+        $root = fetch_first_row("SELECT * FROM exchange_article WHERE ID = ?", 'i', $article_id);
+
+        execute_query("UPDATE users SET user_point = user_point + ? WHERE ID = ?",
+                      "ii", (int) (str_word_count(htmlspecialchars($root["contents"])) * 1.3), $_SESSION["ID"]);
     }
     header('Location: /board/exchange_view.php?id=' . $article_id);
     exit;
@@ -33,7 +38,7 @@ function recursive_comment($parent_article, $parent_id, $level) {
                             "WHERE parent_article = ? " .
                             "AND (IF (ISNULL(?), parent_id IS NULL, parent_id = ?))",
                             "iii", $parent_article, $parent_id, $parent_id);
-   
+
     if ($parent_id === NULL && isset($_SESSION['ID'])) { ?>
         <form method="post" action="/board/write_comment.php">
             <input type="text" name="text" placeholder="<?= T_("댓글을 입력하세요...") ?>" />
@@ -54,7 +59,6 @@ function recursive_comment($parent_article, $parent_id, $level) {
             echo '<li style="padding-left: ' . ($level * 1.5 - 1) . 'rem;">';
             if ($row['visible'] == 1) {
                 $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']);
-
                 echo $row["content"];
                 echo " - <small>";
                 echo sprintf("<a href='/profile.php?id=%s'>%s</a>가 %s에", $user['ID'], $user['user_nickname'], time2str($row['date']));
@@ -92,6 +96,7 @@ function recursive_comment($parent_article, $parent_id, $level) {
 }
 
 $user = fetch_first_row('SELECT * FROM users WHERE id = ?', 'i', $question['author']);
+$answered = false;
 
 //////////////////// HTML START ////////////////////
 
@@ -108,6 +113,7 @@ require_once('../header.php');
         <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $question['author'] == $_SESSION['ID']) { ?><br />
           <a href="/board/exchange_edit.php?id=<?= $question['ID'] ?>"><?= T_("수정") ?></a>
           <a href="/board/exchange_remove.php?id=<?= $question['ID'] ?>"><?= T_("삭제") ?></a>
+          <?php $answered = true; ?>
         <?php } ?>
       </section>
     </aside>
@@ -123,7 +129,7 @@ require_once('../header.php');
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
             <polygon points="12,0 24,12 23,13 12,1.41423 1,13 0,12 "/>
           </svg>
-        </a>  
+        </a>
       <?php } ?>
       <?= $question['vote_up'] + $question['vote_down'] ?>
       <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $question['author'] != $_SESSION['ID']) { ?>
@@ -159,12 +165,13 @@ require_once('../header.php');
           <section>
             <img src="//www.gravatar.com/avatar/<?= hash('md5', $user['user_email']) ?>?d=identicon&size=56" class="right" />
             <b>
-              <?= time2str($answer_row['date']) . ', ' . "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?>
+              <?= time2str($answer_row['date']) . ', ' . "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . " (" . $user['user_reputation'] . ")". "</a>" ?>
             </b><br />
             <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $answer_row['author'] == $_SESSION['ID']) { ?>
               <br />
               <a href="/board/exchange_edit.php?id=<?= $answer_row['ID'] ?>"><?= T_("수정") ?></a>
               <a href="/board/exchange_remove.php?id=<?= $answer_row['ID'] ?>"><?= T_("삭제") ?></a>
+              <?php $answered = true; ?>
             <?php } ?>
           </section>
         </aside>
@@ -180,7 +187,7 @@ require_once('../header.php');
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 12" class="icon">
             <polygon points="12,0 24,12 23,13 12,1.41423 1,13 0,12 "/>
           </svg>
-        </a>  
+        </a>
       <?php } ?>
       <?= $answer_row['vote_up'] + $answer_row['vote_down'] ?>
       <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $answer_row['author'] != $_SESSION['ID']) { ?>
@@ -208,7 +215,7 @@ require_once('../header.php');
       <?php }
     }
   ?>
-    <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
+    <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID']) && $answered === false) { ?>
   <h2><?= T_("답변하기") ?></h2>
   <form class="form-write" action="/board/exchange_view.php?id=<?= $article_id ?>" method="post">
     <textarea name="contents"></textarea>

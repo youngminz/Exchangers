@@ -358,3 +358,15 @@ msgstr "한국어"
 
 msgid "zh_CN"
 msgstr "중국어"
+
+msgid "fi_FI"
+msgstr "핀란드어"
+
+msgid "ru_RU"
+msgstr "러시아어"
+
+msgid "sp_SP"
+msgstr "스페인어"
+
+msgid "tu_TU"
+msgstr "터키어"

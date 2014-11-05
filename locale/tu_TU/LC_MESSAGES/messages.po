@@ -8,43 +8,45 @@ msgstr ""
 "Project-Id-Version: Exchangers\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-02 06:05+0000\n"
-"PO-Revision-Date: 2014-11-05 00:15+0900\n"
+"PO-Revision-Date: 2014-11-05 17:30+0900\n"
 "Last-Translator: youngminz <youngminz.kr@gmail.com>\n"
 "Language-Team: Weirdorithm <youngminz.kr@gmail.com>\n"
-"Language: en_US\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: login.php:14
 msgid "회원가입이 정상적으로 처리되었습니다. 가입하신 아이디로 로그인해주세요."
-msgstr "You joined our website successfully, "
+msgstr ""
+"Siteye başarılı şekilde katıldınız.You joined our website successfully, "
 
 #: login.php:18
 msgid "성공적으로 로그아웃되었습니다."
-msgstr "Logout was completed."
+msgstr "Çıkış tamamlandı."
 
 #: login.php:22
 msgid "세션이 만료되었습니다. 다시 로그인해주세요."
-msgstr "Session was expired. Please log in again."
+msgstr "Tekrar giriniz. "
 
 #: login.php:26
 msgid "정상적으로 회원 탈퇴되었습니다. 이용해 주셔서 감사합니다 :)"
-msgstr "Withdrawal was completed, thank you for using our website"
+msgstr "Websitemizi kullandığınız için teşekkürler. "
 
 #: login.php:37 login.php:41
 msgid "아이디 혹은 비밀번호가 일치하지 않습니다!"
-msgstr "Incorrect login"
+msgstr "Yanlış giriş. "
 
 #: login.php:52
 msgid "입력하지 않은 칸이 있습니다!"
-msgstr "Check blank"
+msgstr "Kontrol ediniz. "
 
 #: login.php:67 login.php:82 header.php:85
 msgid "로그인"
-msgstr "Log In"
+msgstr "Login"
 
 #: login.php:74 profile.php:83 join.php:68
 msgid "아이디"
@@ -52,32 +54,32 @@ msgstr "ID"
 
 #: login.php:78 profile.php:64 join.php:73
 msgid "비밀번호"
-msgstr "Password"
+msgstr "Şifre"
 
 #: login.php:83 join.php:62
 msgid "회원 가입"
-msgstr "Join"
+msgstr "Katıl"
 
 #: header.php:38 board/exchange_view.php:178 board/exchange_write.php:72
 #: board/exchange_edit.php:70
 msgid "목록"
-msgstr "List"
+msgstr "Liste"
 
 #: header.php:48
 msgid "새 글"
-msgstr "New Article"
+msgstr "Yeni yazı"
 
 #: header.php:61
 msgid "검색..."
-msgstr "Search..."
+msgstr "Ara"
 
 #: header.php:74
 msgid "로그아웃"
-msgstr "Log Out"
+msgstr "Kullanıcı"
 
 #: header.php:82 join.php:91
 msgid "회원가입"
-msgstr "Join"
+msgstr "Katıl"
 
 #: profile.php:55
 msgid "사용자 #"
@@ -85,11 +87,11 @@ msgstr "User #"
 
 #: profile.php:59
 msgid "정보 변경이 성공적으로 이루어졌습니다."
-msgstr "You modified your information successfully."
+msgstr "Bilginizi başarılı şekilde tamamladınız"
 
 #: profile.php:61
 msgid "변경하려는 비밀번호가 일치하지 않습니다!"
-msgstr "Please enter the same password in both password fields."
+msgstr "Şifreyi tekrar giriniz"
 
 #: profile.php:68
 msgid "재입력"
@@ -97,15 +99,15 @@ msgstr "Re-enter"
 
 #: profile.php:72 join.php:81
 msgid "닉네임"
-msgstr "Nickname"
+msgstr "Kullanıcı adı"
 
 #: profile.php:76
 msgid "회원 탈퇴"
-msgstr "Withdrawal"
+msgstr "Vazgeç"
 
 #: profile.php:77
 msgid "프로필 업데이트"
-msgstr "Profile Update"
+msgstr "Profil güncelleme"
 
 #: profile.php:87
 msgid "이메일"
@@ -113,42 +115,42 @@ msgstr "E-mail"
 
 #: profile.php:91
 msgid "사용자 평판"
-msgstr "User Reputation"
+msgstr "kullanıcı itibar"
 
 #: profile.php:92
 msgid "(준비 중)"
-msgstr "(Preaparing)"
+msgstr "hazırlanması"
 
 #: function.php:76 function.php:114 function.php:151
 msgid "<h1>데이터베이스에 연결하던 도중 오류가 발생했습니다.</h1>"
-msgstr "<h1>Database connect error</h1>"
+msgstr "Veritabanı error veriyor"
 
 #: function.php:181
 msgid "지금"
-msgstr "Now"
+msgstr "Şimdi"
 
 #: function.php:187
 msgid "방금 전"
-msgstr "Just now"
+msgstr "Hemen Şimdi"
 
 #: function.php:189
 #, php-format
 msgid "%d분 전"
-msgstr "%d minutes ago"
+msgstr "%d dakika önce"
 
 #: function.php:191
 #, php-format
 msgid "%d시간 전"
-msgstr "%d hours ago"
+msgstr "%d saat önce"
 
 #: function.php:194
 msgid "어제"
-msgstr "Yesterday"
+msgstr "Dün"
 
 #: function.php:196
 #, php-format
 msgid "%d일 전"
-msgstr "%d days ago"
+msgstr "%d gün önce"
 
 #: function.php:198
 msgid "n월 j일 G시"
@@ -156,68 +158,66 @@ msgstr "G, j, n"
 
 #: function.php:200
 msgid "알 수 없음"
-msgstr "Unknown"
+msgstr "Bilmiyor"
 
 #: join.php:26
 msgid "이미 존재하는 아이디입니다. 다른 아이디를 사용해 주세요."
-msgstr "This ID already exists, please use another ID."
+msgstr "Bu id zaten var başka id kullaniniz"
 
 #: join.php:34
 msgid "다른 사용자가 사용 중인 이메일입니다. 다른 이메일을 사용해 주세요."
-msgstr "This email is already used, please use another email."
+msgstr "Bu e mail adresi zaten kullanıldı. Başka e mail kullaniniz"
 
 #: join.php:40
 msgid "입력하신 두 개의 비밀번호가 다릅니다. 비밀번호를 다시 입력하세요."
-msgstr "Please enter the same password in both password fields."
+msgstr "Lütfen aynı şifreyi giriniz"
 
 #: join.php:51
 msgid "작성하지 않은 곳이 있습니다."
-msgstr "Check blank."
+msgstr "Kontrol ediniz"
 
 #: join.php:77
 msgid "비밀번호 재입력"
-msgstr "Re-input password"
+msgstr "Şifre yeniden giriş"
 
 #: join.php:92
 msgid "로그인으로 되돌아가기"
-msgstr "Return to login"
+msgstr "Girişe dön"
 
 #: leave_ask.php:16
 msgid "정말 탈퇴하시게요?"
-msgstr "Will you leave this website?"
+msgstr "Bu sayfadan ayrılacak misiniz?"
 
 #: leave_ask.php:17
 msgid ""
 "탈퇴하시면, 다시는 해당하는 아이디로 아이디를 만드시거나 로그인을 하실 수 없"
 "습니다. 회원님이 작성하셨던 글은 삭제되지 않습니다."
-msgstr ""
-"If you leave this website, you can't register new ID or login by this ID. "
-"The articles you have produced will not be removed"
+msgstr "Eğer ayrılacaksanız yeni id kaydedemez yada bu id ile giremezsiniz"
 
 #: leave_ask.php:18
 msgid "네, 그래도 회원탈퇴를 하겠습니다."
-msgstr "I will."
+msgstr "Yapacağım"
 
 #: leave_ask.php:19
 msgid "탈퇴하지 않고 그대로 있겠습니다."
-msgstr "I won't."
+msgstr "Yapmayacağım"
 
 #: board/exchange_view.php:43 board/exchange_view.php:76
 msgid "댓글을 입력하세요..."
-msgstr "Enter comment."
+msgstr "Yoruma tıkla"
 
 #: board/exchange_view.php:82
 msgid "<i>[삭제된 댓글입니다]</i>"
-msgstr "<i>[It doesn't exist]</i>"
+msgstr "<i>Bu yok </i>"
 
 #: board/exchange_view.php:102
 #, php-format
 msgid "조회 <b>%s</b>회"
-msgstr "Read <b>%s</b> times"
+msgstr "Oku <b>%s</b> kere"
 
 #: board/exchange_view.php:104 board/exchange_view.php:145
 msgid "수정"
-msgstr "Modify"
+msgstr "Değiştir"
 
 #: board/exchange_view.php:105 board/exchange_view.php:146
 msgid "삭제"
@@ -229,7 +229,7 @@ msgstr "Comment"
 
 #: board/exchange_view.php:174
 msgid "답변하기"
-msgstr "Answer"
+msgstr "Cevapla"
 
 #: board/exchange_view.php:179 board/exchange_write.php:73
 #: board/exchange_edit.php:71
@@ -243,11 +243,11 @@ msgstr "SQL Query  error"
 #: board/write_comment.php:33 board/write_comment.php:39
 #: board/exchange_remove_comment.php:42
 msgid "지원되지 않는 모드입니다."
-msgstr "This mod is not supported."
+msgstr "Bu desteklenmiyor."
 
 #: board/exchange.php:36 board/exchange_search.php:45
 msgid "조회"
-msgstr "Read"
+msgstr "Oku"
 
 #: board/exchange.php:40 board/exchange_search.php:51
 msgid "답변"
@@ -255,12 +255,12 @@ msgstr "Reply"
 
 #: board/exchange.php:45 board/exchange_search.php:55
 msgid "평가"
-msgstr "Vote"
+msgstr "Oyla"
 
 #: board/exchange.php:58 board/exchange_write.php:59
 #: board/exchange_search.php:68
 msgid "카테고리"
-msgstr "Category"
+msgstr "Kategori"
 
 #: board/exchange.php:65 board/exchange_search.php:72
 #, php-format
@@ -285,65 +285,65 @@ msgstr "Parameter error"
 
 #: board/exchange_remove.php:21 board/exchange_remove_comment.php:31
 msgid "댓글을 쓴 사용자만이 지울 수 있습니다."
-msgstr "User who wrote comment can remove this comment."
+msgstr "Yazan kullanıcı yorumu kaldırabilir."
 
 #: board/exchange_remove_comment.php:12
 msgid "레퍼러가 존재하지 않습니다."
-msgstr "Referer doesn't exist."
+msgstr "Başvuran yok"
 
 #: board/exchange_remove_comment.php:16
 msgid "올바르지 않은 레퍼러입니다."
-msgstr "Wrong referer."
+msgstr "Yanlış başvuran"
 
 #: board/exchange_write.php:30
 msgid "비어 있는 칸이 있습니다."
-msgstr "Check blank"
+msgstr "Kontrol et"
 
 #: board/exchange_write.php:39
 msgid "새 글 쓰기"
-msgstr "Write new article"
+msgstr "Yeni metni yaz"
 
 #: board/exchange_write.php:44
 msgid "글 제목"
-msgstr "Title"
+msgstr "Başlık"
 
 #: board/exchange_write.php:48
 msgid "언어:"
-msgstr "Language:"
+msgstr "Dil "
 
 #: board/exchange_write.php:50
 msgid "언어 선택"
-msgstr "Language Select"
+msgstr "Dil seç"
 
 #: board/exchange_write.php:61
 msgid "카테고리 선택"
-msgstr "Category Select"
+msgstr "Kategori seç"
 
 #: board/exchange_search.php:39
 #, php-format
 msgid "검색 결과 %d개 표시 중"
-msgstr "Showing %d searched results."
+msgstr "%d sonuç gösteriyor"
 
 #: board/exchange_edit.php:28
 msgid "글을 작성한 사람만이 삭제할 수 있습니다."
-msgstr "User who wrote article can remove this article."
+msgstr "Metni yazan bunu tekrar kaldırabilir."
 
 #: board/exchange_edit.php:61
 msgid "글 수정하기"
-msgstr "Modify article"
+msgstr "Metni değiştir"
 
 # 카테고리
 msgid "general"
 msgstr "General"
 
 msgid "<p>글이 없습니다.</p>"
-msgstr "<p>No article found.</p>"
+msgstr "<p>Metin bulunamadı</p>"
 
 msgid "최근 질문"
-msgstr "Recent question"
+msgstr "Son soru"
 
 msgid "최근 답변"
-msgstr "Recent answer"
+msgstr "Son cevap"
 
 # 언어
 msgid "de_DE"
@@ -374,16 +374,16 @@ msgstr "from <mark>%s</mark> to <mark>%s</mark>"
 
 #: profile.php:174
 msgid "시작"
-msgstr "Start"
+msgstr "Ayrılış"
 
 #: profile.php:179
 msgid "도착"
-msgstr "Arrival"
+msgstr "Geliş"
 
 #: profile.php:203
 #, php-format
 msgid "%s에 답변함"
-msgstr "It was answered at %s"
+msgstr "cevaplandıIt was answered at %s"
 
 msgid "권한이 없습니다."
 msgstr "No permission."

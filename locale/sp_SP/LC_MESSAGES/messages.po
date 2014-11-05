@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: Exchangers\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-02 06:05+0000\n"
-"PO-Revision-Date: 2014-11-05 00:15+0900\n"
+"PO-Revision-Date: 2014-11-05 18:10+0900\n"
 "Last-Translator: youngminz <youngminz.kr@gmail.com>\n"
 "Language-Team: Weirdorithm <youngminz.kr@gmail.com>\n"
-"Language: en_US\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: login.php:14
 msgid "회원가입이 정상적으로 처리되었습니다. 가입하신 아이디로 로그인해주세요."
@@ -156,11 +157,11 @@ msgstr "G, j, n"
 
 #: function.php:200
 msgid "알 수 없음"
-msgstr "Unknown"
+msgstr "desconocido"
 
 #: join.php:26
 msgid "이미 존재하는 아이디입니다. 다른 아이디를 사용해 주세요."
-msgstr "This ID already exists, please use another ID."
+msgstr "Este id ya existe, por favor utiliza otro id."
 
 #: join.php:34
 msgid "다른 사용자가 사용 중인 이메일입니다. 다른 이메일을 사용해 주세요."
@@ -168,73 +169,74 @@ msgstr "This email is already used, please use another email."
 
 #: join.php:40
 msgid "입력하신 두 개의 비밀번호가 다릅니다. 비밀번호를 다시 입력하세요."
-msgstr "Please enter the same password in both password fields."
+msgstr ""
+"Por favor, introduzca la misma contraseña en ambos campos de contraseña."
 
 #: join.php:51
 msgid "작성하지 않은 곳이 있습니다."
-msgstr "Check blank."
+msgstr "Cheque en blanco"
 
 #: join.php:77
 msgid "비밀번호 재입력"
-msgstr "Re-input password"
+msgstr "Vuelva a ingresar la contraseña"
 
 #: join.php:92
 msgid "로그인으로 되돌아가기"
-msgstr "Return to login"
+msgstr "Volver a inician sesión"
 
 #: leave_ask.php:16
 msgid "정말 탈퇴하시게요?"
-msgstr "Will you leave this website?"
+msgstr "¿Va a dejar este sitio web?"
 
 #: leave_ask.php:17
 msgid ""
 "탈퇴하시면, 다시는 해당하는 아이디로 아이디를 만드시거나 로그인을 하실 수 없"
 "습니다. 회원님이 작성하셨던 글은 삭제되지 않습니다."
 msgstr ""
-"If you leave this website, you can't register new ID or login by this ID. "
-"The articles you have produced will not be removed"
+"Si deja este sitio web, usted no puede registrar nuevo ID o login por este "
+"ID. Los artículos que usted ha producido no se eliminarán"
 
 #: leave_ask.php:18
 msgid "네, 그래도 회원탈퇴를 하겠습니다."
-msgstr "I will."
+msgstr "lo haré"
 
 #: leave_ask.php:19
 msgid "탈퇴하지 않고 그대로 있겠습니다."
-msgstr "I won't."
+msgstr "No haré"
 
 #: board/exchange_view.php:43 board/exchange_view.php:76
 msgid "댓글을 입력하세요..."
-msgstr "Enter comment."
+msgstr "Escribir un comentario"
 
 #: board/exchange_view.php:82
 msgid "<i>[삭제된 댓글입니다]</i>"
-msgstr "<i>[It doesn't exist]</i>"
+msgstr "<i>[No existe]</i>"
 
 #: board/exchange_view.php:102
 #, php-format
 msgid "조회 <b>%s</b>회"
-msgstr "Read <b>%s</b> times"
+msgstr "leer <b>%s</b>veces"
 
 #: board/exchange_view.php:104 board/exchange_view.php:145
 msgid "수정"
-msgstr "Modify"
+msgstr "Modificar"
 
 #: board/exchange_view.php:105 board/exchange_view.php:146
 msgid "삭제"
-msgstr "Delete"
+msgstr "Borrar"
 
 #: board/exchange_view.php:125 board/exchange_view.php:166
 msgid "댓글"
-msgstr "Comment"
+msgstr "Comentario"
 
 #: board/exchange_view.php:174
 msgid "답변하기"
-msgstr "Answer"
+msgstr "Responder"
 
 #: board/exchange_view.php:179 board/exchange_write.php:73
 #: board/exchange_edit.php:71
 msgid "작성"
-msgstr "Write"
+msgstr "Escribir"
 
 #: board/write_comment.php:22 board/exchange_remove_comment.php:25
 msgid "SQL 쿼리를 실행하던 도중 오류가 발생했습니다."
@@ -243,11 +245,11 @@ msgstr "SQL Query  error"
 #: board/write_comment.php:33 board/write_comment.php:39
 #: board/exchange_remove_comment.php:42
 msgid "지원되지 않는 모드입니다."
-msgstr "This mod is not supported."
+msgstr "Este mod no se admite"
 
 #: board/exchange.php:36 board/exchange_search.php:45
 msgid "조회"
-msgstr "Read"
+msgstr "Views"
 
 #: board/exchange.php:40 board/exchange_search.php:51
 msgid "답변"
@@ -260,7 +262,7 @@ msgstr "Vote"
 #: board/exchange.php:58 board/exchange_write.php:59
 #: board/exchange_search.php:68
 msgid "카테고리"
-msgstr "Category"
+msgstr "categoría"
 
 #: board/exchange.php:65 board/exchange_search.php:72
 #, php-format
@@ -297,40 +299,40 @@ msgstr "Wrong referer."
 
 #: board/exchange_write.php:30
 msgid "비어 있는 칸이 있습니다."
-msgstr "Check blank"
+msgstr "Cheque en blanco"
 
 #: board/exchange_write.php:39
 msgid "새 글 쓰기"
-msgstr "Write new article"
+msgstr "Escribir nuevo artículo"
 
 #: board/exchange_write.php:44
 msgid "글 제목"
-msgstr "Title"
+msgstr "Título"
 
 #: board/exchange_write.php:48
 msgid "언어:"
-msgstr "Language:"
+msgstr "Idioma"
 
 #: board/exchange_write.php:50
 msgid "언어 선택"
-msgstr "Language Select"
+msgstr "Seleccione el idioma"
 
 #: board/exchange_write.php:61
 msgid "카테고리 선택"
-msgstr "Category Select"
+msgstr "Categoría seleccione"
 
 #: board/exchange_search.php:39
 #, php-format
 msgid "검색 결과 %d개 표시 중"
-msgstr "Showing %d searched results."
+msgstr "Mostrando %d resultados buscado"
 
 #: board/exchange_edit.php:28
 msgid "글을 작성한 사람만이 삭제할 수 있습니다."
-msgstr "User who wrote article can remove this article."
+msgstr "Mostrando 5 Resultados Buscado"
 
 #: board/exchange_edit.php:61
 msgid "글 수정하기"
-msgstr "Modify article"
+msgstr "Modificar el artículo"
 
 # 카테고리
 msgid "general"
@@ -340,10 +342,10 @@ msgid "<p>글이 없습니다.</p>"
 msgstr "<p>No article found.</p>"
 
 msgid "최근 질문"
-msgstr "Recent question"
+msgstr "pregunta recientes"
 
 msgid "최근 답변"
-msgstr "Recent answer"
+msgstr "respuesta recientes"
 
 # 언어
 msgid "de_DE"
@@ -374,7 +376,7 @@ msgstr "from <mark>%s</mark> to <mark>%s</mark>"
 
 #: profile.php:174
 msgid "시작"
-msgstr "Start"
+msgstr "Departure"
 
 #: profile.php:179
 msgid "도착"
@@ -383,10 +385,7 @@ msgstr "Arrival"
 #: profile.php:203
 #, php-format
 msgid "%s에 답변함"
-msgstr "It was answered at %s"
-
-msgid "권한이 없습니다."
-msgstr "No permission."
+msgstr "Se respondió a las %s"
 
 #: board/exchange_write.php:56
 #, php-format
@@ -397,11 +396,8 @@ msgstr ""
 "from <select name=\"start_language\">%s</select> to <select name="
 "\"end_language\">%s</select>"
 
-msgid "%s <a href='/profile.php?id=%s'>%s</a>가 질문함, "
-msgstr "%s <a href='/profile.php?id=%s'>%s</a> asked and "
-
 msgid "포인트"
-msgstr "Point"
+msgstr "Punto"
 
 msgid "fi_FI"
 msgstr "Finnish"

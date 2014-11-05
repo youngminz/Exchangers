@@ -66,7 +66,7 @@ require_once("../header.php"); ?>
               <?= time2str($row['date']) ?>
               <?php
                 $user = fetch_first_row('SELECT * FROM users WHERE ID = ?', 'i', $row['author']);
-                echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?><?= T_("가") ?>
+                echo "<a href='/profile.php?id=" . $user['ID'] . "'>" . $user['user_nickname'] . "</a>" ?>
             </span>
           </div>
         </section>

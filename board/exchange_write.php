@@ -20,6 +20,7 @@ if ($_POST) {
                                       "sssssi", htmlspecialchars($_POST["title"]), htmlspecialchars($_POST["category"]),
                                       htmlspecialchars($_POST["start_language"]), htmlspecialchars($_POST["end_language"]),
                                       htmlspecialchars($_POST["contents"]), $_SESSION["ID"]);
+        execute_query("UPDATE users SET user_point = user_point - ? WHERE ID = ?", "ii", str_word_count(htmlspecialchars($_POST["contents"])), $_SESSION["ID"]);
         if ($query_result === true) {
             header('Location: /board/exchange.php');
             exit;
@@ -77,9 +78,5 @@ require_once("../header.php");
       <input id="submit" type="submit" onclick="c()" value="<?= T_("작성") ?>" class="button-primary" />
     </p>
   </form>
-  <?php
-    $user_info = fetch_first_row("SELECT * FROM users WHERE ID = ?", "i", $_SESSION["ID"]);
-    echo $user_info["user_point"];
-  ?>
 </main>
 <?php require_once("../footer.php");
