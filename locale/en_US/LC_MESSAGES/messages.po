@@ -213,7 +213,7 @@ msgstr "<i>[It doesn't exist]</i>"
 #: board/exchange_view.php:102
 #, php-format
 msgid "조회 <b>%s</b>회"
-msgstr "Read <b>%s</b>times"
+msgstr "Read <b>%s</b> times"
 
 #: board/exchange_view.php:104 board/exchange_view.php:145
 msgid "수정"

@@ -67,13 +67,13 @@ function recursive_comment($parent_article, $parent_id, $level) {
                         </svg>
                     </a>
                 <?php } ?>
-                <label for="toggle-visible-comment-<?= $row['ID'] ?>">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"
-                         class="icon icon-small">
-                        <path d="M1,4v7h7m-7,0L11,1z" stroke-width="2" stroke="#000" fill="none" />
-                    </svg>
-                </label>
                 <?php if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
+                    <label for="toggle-visible-comment-<?= $row['ID'] ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"
+                             class="icon icon-small">
+                            <path d="M1,4v7h7m-7,0L11,1z" stroke-width="2" stroke="#000" fill="none" />
+                        </svg>
+                    </label>
                     <input type="checkbox" style="display: none;"
                            id="toggle-visible-comment-<?= $row['ID'] ?>" />
                         <form method="post" action="/board/write_comment.php">

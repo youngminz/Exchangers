@@ -7,7 +7,7 @@ if (!isset($_SESSION['ID']) || empty($_SESSION['ID'])) {
 } else {
     $is_me = true;
 }
-if (isset($_GET["id"]) && $_GET['id'] != $_SESSION['ID']) {
+if (isset($_GET["id"]) && !empty($_GET["id"])) {
     $is_me = false;
     $id = (int) $_GET['id'];
 }
