@@ -25,7 +25,7 @@ if ($_POST) {
                 $is_valid = false;
                 $reason = T_("이미 존재하는 아이디입니다. 다른 아이디를 사용해 주세요.");
             }
-
+        
             if ($is_valid == true) {
                 if (fetch_first_row("SELECT user_id FROM users WHERE user_email = ?",
                                     "s", $user_email) !== false
@@ -41,7 +41,8 @@ if ($_POST) {
         }
 
         if ($is_valid === true) {
-            execute_query("INSERT INTO users VALUES(NULL, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT)",
+            execute_query("INSERT INTO users (ID, user_id, user_pass, user_nickname, user_email) " .
+                          "VALUES(NULL, ?, ?, ?, ?)",
                           "ssss", $user_id, $user_pass, $user_nickname, $user_email);
             header('Location: /login.php?join=done');
         }
