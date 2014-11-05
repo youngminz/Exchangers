@@ -43,6 +43,10 @@ require_once("../header.php");
   <form class="form-write" action="/board/exchange_write.php" method="post">
     <input type="text" placeholder="<?= T_("글 제목") ?>" name="title" id="title" />
     <textarea name="contents"></textarea>
+      
+        <div class="word_count right">
+            Word count: <span></span>
+            </div> 
     <div class="form-line" style="float: left; width: 70%;">
       <p class="form-line">
         <label for="start_language"><?= T_("언어:") ?></label>
@@ -74,4 +78,30 @@ require_once("../header.php");
     </p>
   </form>
 </main>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var maxWords = 10;
+    jQuery('textarea').keypress(function() {
+        console.log("Key Pressed");
+        var $this, wordcount;
+        $this = $(this);
+        wordcount = $this.val().split(/\b[\s,\.-:;]*/).length;
+        if (wordcount > maxWords) {
+            jQuery(".word_count span").text("" + maxWords);
+            alert("You've reached the maximum allowed words.");
+            return false;
+        } else {
+            return jQuery(".word_count span").text(wordcount);
+        }
+    });
+
+    jQuery('textarea').on('change', function() {
+        console.log("Textarea Changed");
+        var words = $(this).val().split(/\b[\s,\.-:;]*/);
+        if (words.length > maxWords) {
+            words.splice(maxWords);
+            $(this).val(words.join(""));
+        }
+    });
+</script>
 <?php require_once("../footer.php");

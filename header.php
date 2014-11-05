@@ -23,8 +23,9 @@ function href($uri, $href=true) {
   <nav>
     <main>
       <ul class="nav">
-        <li class="logo">
-          <a <?= href("/") ?>>Exchangers</a>
+        <li>
+          <a class="logo" <?= href("/") ?>>Exchangers</a>
+          <a class="right" href="/switch_lang.php">Switch Language</a>
         </li>
         <?php if(isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
           <li>

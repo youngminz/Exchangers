@@ -106,8 +106,8 @@ nav {
     top: 0;
     height: 5.5rem;
     width: 100%;
-    background-color: rgba(255, 127, 0, 0.95);
-    border-bottom: 1px solid #f60;
+    background-color: #ff8800;
+    border-bottom: 0.125rem solid #E61;
     padding-top: 0.25em;
 }
 
@@ -136,7 +136,7 @@ nav ul {
 }
 
 nav li a, nav li.no-link {
-    padding: calc(1.5rem - 0.75em) 1rem;
+    padding: calc(1.5rem - 0.75em) 1rem 0 1rem;
     color: inherit;
     text-decoration: none;
     display: inline-block;
@@ -150,8 +150,8 @@ nav li input[type='text'][type='text'] {
     padding-bottom: 0;
     background-color: transparent;
     border: none;
-    filter: brightness(0%);
-    -webkit-filter: brightness(0%);
+    filter: brightness(25%);
+    -webkit-filter: brightness(25%);
     -ms-filter: progid:DXImageTransform.Microsoft.Chroma(color=black);
 }
   
@@ -165,16 +165,18 @@ nav li a:hover, .current-page {
     text-shadow: 0 0 0.125em rgba(255, 255, 255, 0.75);
 }
 
-nav li.logo {
+nav li:first-child {
+    display: block;
+    float: none;
+}
+nav li .logo {
     color: #fff;
     font-size: 2em;
     line-height: 1em;
     vertical-align: top;
-    display: block;
-    float: none;
 }
 
-nav li.right {
+nav li.right, nav li a.right {
     font-size: 0.75em;
 }
 
@@ -215,7 +217,7 @@ nav .icon {
     width: 100%;
     height: 16em;
     border: solid #f60;
-    border-width: 0 0 0.0625em 0.0625em;
+    border-width: 0 0.0625em 0.0625em 0.0625em;
     resize: none;
 }
 .form-write > .form-line:last-child {
@@ -278,6 +280,7 @@ input[id^='toggle-visible-comment']:checked + form {
 #exchange-list article {
     height: 4rem;
     margin-top: 1em;
+    border-bottom: 1px solid #eee;
 }
 #exchange-list section.status {
     width: 13rem;
@@ -292,6 +295,7 @@ input[id^='toggle-visible-comment']:checked + form {
 #exchange-list section big {
     font-size: 1.5em;
     display: block;
+    font-weight: 300;
 }
 #exchange-list section .views, #exchange-list section .responds, #exchange-list section .votes {
     display: inline-block;
