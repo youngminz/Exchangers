@@ -9,6 +9,7 @@ html, body {
     margin: 0;
     padding-bottom: 2rem;
     padding-top: 2.5rem;
+    background-color: #fed;
 }
 
 small {
@@ -44,6 +45,12 @@ aside {
     width: 304px;
     height: 100%;
     float: right;
+}
+aside > section {
+    text-align: right;
+}
+aside > section img {
+    margin-left: 0.5em;
 }
 .left.left {
     float: left;
@@ -109,6 +116,7 @@ nav {
     background-color: #ff8800;
     border-bottom: 0.125rem solid #E61;
     padding-top: 0.25em;
+    z-index: 99999;
 }
 
 nav h1 {
@@ -211,6 +219,20 @@ nav .icon {
 .form-write input[name='title'] {
     font-size: 1.125em;
     width: 100%;
+    margin-bottom: 0;
+    
+}
+.form-write .textarea-bg {
+    background: #fff;
+    width: 100%;
+    height: 0;
+    margin: 0;
+    z-index: 1;
+    color: #999;
+    text-align: right;
+    position: relative;
+    top: -3rem;
+    padding-right: 0.125em;
 }
 .form-write textarea {
     font: inherit;
@@ -219,6 +241,10 @@ nav .icon {
     border: solid #f60;
     border-width: 0 0.0625em 0.0625em 0.0625em;
     resize: none;
+    z-index: 2;
+    background: transparent;
+    position: relative;
+    top: 0rem;
 }
 .form-write > .form-line:last-child {
     float: right;
@@ -231,6 +257,9 @@ nav .icon {
 #article-view h2 {
     padding-bottom: 0.25em;
     border-bottom: 0.0625em solid #999;
+}
+#article-view h2:nth-last-child(2) {
+    margin-bottom: 0;
 }
 #article-view article {
     margin-bottom: 2em;
@@ -302,7 +331,7 @@ input[id^='toggle-visible-comment']:checked + form {
     width: 3.5rem;
     text-align: center;
     margin: 0.25rem;
-    background-color: #eee;
+    background-color: rgba(0, 0, 0, 0.125);
 }
 #exchange-list section .votes {
     margin-right: 1em;
@@ -319,13 +348,15 @@ input[id^='toggle-visible-comment']:checked + form {
     text-decoration: none;
 }
 #exchange-list section .info {
-    font-size: 0.75em;
+    font-size: 0.875em;
     height: 1em;
 }
 #exchange-list section mark {
     /* background-color: #9cf; */
     background-color: #A32;
     color: white;
+    display: inline-block;
+    padding: 0.125em 0.25em;
 }
 /* profile: Header */
 header {

@@ -31,10 +31,13 @@ if ($_POST) {
     }
 }
 
+$user = fetch_first_row("SELECT * FROM users WHERE ID = ?", "i", $_SESSION["ID"]);
+
 //////////////////// HTML START ////////////////////
 
 require_once("../header.php");
 ?>
+<script>m=<?=$user["user_point"]?>;c=function(e){o=document.getElementById('contents');n=m-((o.value.match(/\S+/g)||'').length);document.getElementById('textarea-bg').innerHTML=n;s=document.getElementById('submit');if(n<0){s.className='button disabled';s.type='button'}else{s.className='button-primary';s.type='submit'};};onload=c</script>
 <main class="narrow">
   <h1><?= T_("새 글 쓰기") ?></h1>
   <?php if ($error === true) { ?>
@@ -42,7 +45,8 @@ require_once("../header.php");
   <?php } ?>
   <form class="form-write" action="/board/exchange_write.php" method="post">
     <input type="text" placeholder="<?= T_("글 제목") ?>" name="title" id="title" />
-    <textarea name="contents"></textarea>
+    <textarea id="contents" name="contents" onkeyup="c()" onchange="c()" value="<?= (!empty($_POST['contents']))?$_POST['contents']:'' ?>"></textarea>
+    <h1 class="textarea-bg" id="textarea-bg">...</h1>
     <div class="form-line" style="float: left; width: 70%;">
       <p class="form-line">
         <label for="start_language"><?= T_("언어:") ?></label>
@@ -70,8 +74,12 @@ require_once("../header.php");
     </div>
     <p class="form-line">
       <a href="/board/exchange.php" class="button"><?= T_("목록") ?></a>
-      <input type="submit" value="<?= T_("작성") ?>" class="button-primary" />
+      <input id="submit" type="submit" onclick="c()" value="<?= T_("작성") ?>" class="button-primary" />
     </p>
   </form>
+  <?php
+    $user_info = fetch_first_row("SELECT * FROM users WHERE ID = ?", "i", $_SESSION["ID"]);
+    echo $user_info["user_point"];
+  ?>
 </main>
 <?php require_once("../footer.php");
